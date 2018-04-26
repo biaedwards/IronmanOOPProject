@@ -18,6 +18,7 @@ public abstract class Hero {
     int level=1;
     int defence=0;
     int stat=1;
+    int gold = 0;
     Stat primaryStat;
     String name;
     Weapon weapon;

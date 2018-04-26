@@ -1,6 +1,7 @@
 package Game;
 
 import Game.Enemy.Enemy;
+import Game.Exceptions.NoSuchHero;
 import Game.Hero.Archer;
 import Game.Hero.Hero;
 import Game.Hero.Mage;
@@ -8,7 +9,6 @@ import Game.Hero.Warrior;
 import Game.Items.Item;
 
 import java.util.HashSet;
-
 public class Engine {
     HashSet<Skill> allSkills = new HashSet<>();
     HashSet<Item> allItems = new HashSet<>();
@@ -24,27 +24,40 @@ public class Engine {
 
     public void addHero(String name, PlayerType type){
         if(type==PlayerType.WARRIOR){
-            heroes.add(new Warrior(name));
+            currentHero = new Warrior(name);
+            heroes.add(currentHero);
         } else if(type==PlayerType.MAGE){
-            heroes.add(new Mage(name));
+            currentHero = new Mage(name);
+            heroes.add(currentHero);
         } else if(type==PlayerType.ARCHER){
-            heroes.add(new Archer(name));
+            currentHero = new Archer(name);
+            heroes.add(currentHero);
         }
     }
 
     public void showMyHeroes(){
+        if(heroes.isEmpty()){
+            System.out.println("You have no heroes. Create one now.");
+            return;
+        }
         heroes.forEach(System.out::println);
     }
 
     public void chooseCurrentHero(String name){
-        for (Hero hero:heroes){
-            if(hero.getName().equals(name)){
-                currentHero = hero;
-                System.out.printf("Hero is set to %s", hero);
+        try{
+            for (Hero hero:heroes){
+                if(hero.getName().equals(name)){
+                    currentHero = hero;
+                    System.out.printf("Hero is set to %s", hero);
+                }
+                else {
+                    throw new NoSuchHero();
+                }
             }
-            else{
-                System.out.println("You don't have this hero.");
-            }
+        }
+        catch (NoSuchHero ex){
+            System.out.println("You don't have this hero. Either create it or choose one of the above: ");
+            showMyHeroes();
         }
     }
 
