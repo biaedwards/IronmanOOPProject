@@ -7,6 +7,6 @@ public class Mage extends Hero {
     }
 
     public String toString(){
-        return String.format("%s, Level %d Warrior", name, level);
+        return String.format("%s, Level %d Mage", name, level);
     }
 }

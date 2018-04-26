@@ -6,7 +6,7 @@ public class Archer extends Hero {
         super(name);
     }
 
-    public String toString(){
-        return String.format("%s, Level %d Warrior", name, level);
+    public String toString() {
+        return String.format("%s, Level %d Archer", name, level);
     }
 }
