@@ -1,4 +1,4 @@
-package Items;
+package Game.Items;
 
 public class TombOfLevels extends Item implements Usable {
     @Override

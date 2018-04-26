@@ -1,4 +1,4 @@
-package Items;
+package Game.Items;
 
 public abstract class Item {
     int cost;

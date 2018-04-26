@@ -1,4 +1,4 @@
-package Enemy;
+package Game.Enemy;
 
 public class Enemy {
 

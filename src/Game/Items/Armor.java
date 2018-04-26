@@ -1,4 +1,4 @@
-package Items;
+package Game.Items;
 
 public class Armor extends Item implements Equipabble {
     Type type;

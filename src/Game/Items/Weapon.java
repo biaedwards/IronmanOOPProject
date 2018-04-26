@@ -1,10 +1,9 @@
-package Items;
+package Game.Items;
 
-
-import java.awt.*;
+import Game.PlayerType;
 
 public class Weapon extends Item implements Equipabble {
-    Window.Type type;
+    PlayerType type;
     String name;
     int damage;
 
