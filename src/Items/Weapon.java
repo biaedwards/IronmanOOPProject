@@ -1,9 +1,10 @@
 package Items;
 
-import java.lang.reflect.Type;
+
+import java.awt.*;
 
 public class Weapon extends Item implements Equipabble {
-    Type type;
+    Window.Type type;
     String name;
     int damage;
 
