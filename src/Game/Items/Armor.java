@@ -2,7 +2,7 @@ package Game.Items;
 
 import Game.PlayerType;
 
-public class Armor extends Item  {
+public abstract class Armor extends Item  {
     PlayerType type;
     int defence;
 
