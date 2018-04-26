@@ -42,6 +42,9 @@ public class Engine {
                 currentHero = hero;
                 System.out.printf("Hero is set to %s", hero);
             }
+            else{
+                System.out.println("You don't have this hero.");
+            }
         }
     }
 
