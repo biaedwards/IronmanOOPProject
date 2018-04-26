@@ -230,5 +230,6 @@ public abstract class Hero {
         allSkills.add(earthquake);
 
 
+
     }
 }
