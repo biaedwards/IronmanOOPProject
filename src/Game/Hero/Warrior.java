@@ -40,7 +40,7 @@ public class Warrior extends Hero {
     }
 
     public int bash(){
-        System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n",getDamage()+10);
-        return getDamage()+10;
+        System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n",attack()+10);
+        return attack()+10;
     }
 }
