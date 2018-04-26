@@ -37,8 +37,11 @@ public class Engine {
     }
 
     public void chooseCurrentHero(String name){
-        try{
-
+        for (Hero hero:heroes){
+            if(hero.getName().equals(name)){
+                currentHero = hero;
+                System.out.printf("Hero is set to %s", hero);
+            }
         }
     }
 
