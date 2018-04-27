@@ -17,11 +17,11 @@ public class Engine {
     HashSet<Skill> allSkills = new HashSet<>();
     HashSet<Item> allItems = new HashSet<>();
     HashSet<Enemy> allEnemies = new HashSet<>();
+    Scanner in = new Scanner(System.in);
     private HashSet<Hero> heroes = new HashSet<>();
     private Hero currentHero;
-    Scanner in = new Scanner(System.in);
 
-    Engine(){
+    Engine() {
         start();
     }
 

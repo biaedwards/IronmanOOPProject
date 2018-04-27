@@ -41,17 +41,15 @@ public class Mage extends Hero {
         }
     }
 
-    public void spell(){
+    public void spell() {
         changeCurrentHP(30);
-        setStat(getStat()+1);
+        setStat(getStat() + 1);
         System.out.println("You cast a defensive spell which increases your HP by 30 and your primary stat by 1");
     }
 
-    public void multicast(){
+    public void multicast() {
         System.out.println("You can cast 2 spells this turn");
     }
-
-
 
 
 }

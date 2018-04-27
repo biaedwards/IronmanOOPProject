@@ -8,9 +8,9 @@ import Game.Items.Weapon;
 import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
-    Scanner in = new Scanner(System.in);
-    Engine engine = new Engine();
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Engine engine = new Engine();
 
 //    System.out.println("Hello and welcome to Team IRONMAN's video game!\n \nTo start a new game you must first choose a name for your hero by typing it here: ");
 //    String name = in.nextLine();
@@ -31,7 +31,7 @@ public class Main {
 //    System.out.println("\nNow it's time for the real fun to begin. You don't have any gold yet, so let's go to a dungeon to win some.\nThis time we will start with an easy one but from now on you will be able to choose the difficulty yourself!\n");
 
 
-    //go to easy dungeon - create fight method in engine
-  }
+        //go to easy dungeon - create fight method in engine
+    }
 
 }

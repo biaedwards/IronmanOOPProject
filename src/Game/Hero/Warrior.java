@@ -16,7 +16,7 @@ public class Warrior extends Hero {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%s, Level %d Warrior", getName(), getLevel());
     }
 
@@ -36,20 +36,20 @@ public class Warrior extends Hero {
             setXp(getXp() - getXpUntilNextlevel());
             setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
             setMaxHP(getMaxHP() + 25);
-            setDefence(getDefence()+1);
+            setDefence(getDefence() + 1);
             setStat(getStat() + 3);
         }
     }
 
-    public void buff(){
-        setDefence(getDefence()+1);
+    public void buff() {
+        setDefence(getDefence() + 1);
         changeCurrentHP(20);
         System.out.println("You have buffed yourself and received +1 defence and +20 HP");
 
     }
 
-    public int bash(){
-        System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n",attack()+10);
-        return attack()+10;
+    public int bash() {
+        System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n", attack() + 10);
+        return attack() + 10;
     }
 }

@@ -41,19 +41,19 @@ public class Archer extends Hero {
         }
     }
 
-    public boolean execute(Enemy enemy){
-        if(enemy.getCurrentHP()*100/enemy.getMaxHP()<=15){
+    public boolean execute(Enemy enemy) {
+        if (enemy.getCurrentHP() * 100 / enemy.getMaxHP() <= 15) {
             System.out.printf("You have executed %s!!!!\n", enemy.getName());
             return true;
-        }
-        else{
+        } else {
             System.out.println("You failed the execution");
             return false;
         }
 
     }
-    public void focus(){
-        setStat(getStat()+2);
+
+    public void focus() {
+        setStat(getStat() + 2);
         System.out.println("You increased your primary stat by +2");
     }
 

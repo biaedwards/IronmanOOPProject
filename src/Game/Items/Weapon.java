@@ -18,11 +18,12 @@ public class Weapon extends Item implements Equippable {
         this.damage = damage;
         this.type = type;
     }
-    public Weapon(){
+
+    public Weapon() {
         generateRandomWeapon();
     }
 
-    public void generateRandomWeapon(){
+    public void generateRandomWeapon() {
         firstPart.add("Wooden");
         firstPart.add("Copper");
         firstPart.add("Silver");
@@ -54,15 +55,13 @@ public class Weapon extends Item implements Equippable {
         int firstIndex = ThreadLocalRandom.current().nextInt(0, firstPart.size());
         int secondIndex = ThreadLocalRandom.current().nextInt(0, secondPart.size());
         int thirdIndex = ThreadLocalRandom.current().nextInt(0, thirdPart.size());
-        String result = firstPart.get(firstIndex)  + secondPart.get(secondIndex) + thirdPart.get(thirdIndex);
+        String result = firstPart.get(firstIndex) + secondPart.get(secondIndex) + thirdPart.get(thirdIndex);
         setName(result);
-        if(secondIndex==0){
+        if (secondIndex == 0) {
             setType(PlayerType.WARRIOR);
-        }
-        else if(secondIndex==1){
+        } else if (secondIndex == 1) {
             setType(PlayerType.ARCHER);
-        }
-        else if(secondIndex==2){
+        } else if (secondIndex == 2) {
             setType(PlayerType.MAGE);
         }
         int damage = firstIndex * 5 + secondIndex * 4 + 5;
@@ -72,7 +71,7 @@ public class Weapon extends Item implements Equippable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%s. Damage %d. Cost %d.", getName(), getDamage(), getCost());
     }
 
@@ -80,12 +79,12 @@ public class Weapon extends Item implements Equippable {
         return type;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
     public void setType(PlayerType type) {
         this.type = type;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void setDamage(int damage) {

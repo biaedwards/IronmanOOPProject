@@ -33,8 +33,8 @@ public abstract class Hero implements Attack {
 
     Hero(String name) {
         setName(name);
-        currentHP = maxHP;
         maxHP = 100;
+        currentHP = maxHP;
         xp = 0;
         level = 1;
         defence = 0;
@@ -47,21 +47,20 @@ public abstract class Hero implements Attack {
 
     public abstract void createDefaultInventory();
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
     public PlayerType getType() {
         return type;
     }
 
+    public void setType(PlayerType type) {
+        this.type = type;
+    }
 
     public double getXp() {
         return xp;
     }
 
-    public void setType(PlayerType type) {
-        this.type = type;
+    public void setXp(double xp) {
+        this.xp += xp;
     }
 
     public int getMaxHP() {
@@ -77,20 +76,8 @@ public abstract class Hero implements Attack {
     }
 
     public void changeCurrentHP(int hp) {
-        currentHP+=hp;
+        currentHP += hp;
         currentHP = Math.min(currentHP, maxHP);
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    public void setStat(int stat) {
-        this.stat = stat;
     }
 
     public double getXpUntilNextlevel() {
@@ -105,19 +92,18 @@ public abstract class Hero implements Attack {
         return primaryStat;
     }
 
-
     public void setPrimaryStat(Stat primaryStat) {
         this.primaryStat = primaryStat;
 
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getDamage() {
         damage = stat + weapon.getDamage();
         return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public Helmet getHelmet() {
@@ -145,29 +131,37 @@ public abstract class Hero implements Attack {
         }
     }
 
-    public void setSkills(HashSet<Skill> skills) {
-        this.skills = skills;
-    }
-
-    public void setXp(double xp) {
-        this.xp += xp;
-    }
-
     public int getLevel() {
         return level;
     }
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public int getDefence() {
-        defence = helmet.getDefence()+vest.getDefence();
+        defence = helmet.getDefence() + vest.getDefence();
         return defence;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
     }
 
     public int getStat() {
         return stat;
     }
 
+    public void setStat(int stat) {
+        this.stat = stat;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Weapon getWeapon() {
@@ -186,7 +180,6 @@ public abstract class Hero implements Attack {
         this.gold += gold;
     }
 
-
     public HashMap<Item, Integer> getInventory() {
         return inventory;
     }
@@ -195,15 +188,18 @@ public abstract class Hero implements Attack {
         return skills;
     }
 
+    public void setSkills(HashSet<Skill> skills) {
+        this.skills = skills;
+    }
+
     void learnSkill(Skill skill) {
         skills.add(skill);
     }
 
     public int castSkill(Skill skill) {
-        if (skill.isUsesWeapon()){
+        if (skill.isUsesWeapon()) {
             return skill.getDamage() + getDamage();
-        }
-        else{
+        } else {
             return skill.getDamage();
         }
 
