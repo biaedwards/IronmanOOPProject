@@ -6,9 +6,14 @@ import Game.PlayerType;
 public class Vest extends Armor {
     int HPBonus;
 
-    Vest(String name, int cost, int defence, int HPBonus, PlayerType type) {
+    public Vest(String name, int cost, int defence, int HPBonus, PlayerType type) {
         super(name, cost, defence, type);
         this.HPBonus = HPBonus;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Vest %s. HP Bonus %d. Defence %d. Type %s. Cost %d.", getName(), HPBonus, defence, getType(), getCost());
     }
 
     public int getHPBonus() {

@@ -13,6 +13,11 @@ public abstract class Armor extends Item implements Equippable {
         this.type = type;
     }
 
+    @Override
+    public String toString(){
+        return String.format("Armor %s. Defence %d. Type %s. Cost %d.", getName(), defence, getType(), getCost());
+    }
+
     public PlayerType getType() {
         return type;
     }

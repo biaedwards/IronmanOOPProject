@@ -6,14 +6,14 @@ import Game.PlayerType;
 public class Helmet extends Armor {
     int statBonus;
 
-    Helmet(String name, int cost, int defence, int statBonus, PlayerType type) {
+    public Helmet(String name, int cost, int defence, int statBonus, PlayerType type) {
         super(name, cost, defence, type);
         this.statBonus = statBonus;
     }
 
     @Override
     public String toString(){
-        return String.format("Helmet %s with stat bonus %d.", this.getName(), statBonus);
+        return String.format("Helmet %s. Stat bonus %d. Defence %d. Type %s. Cost %d.", this.getName(), statBonus, getDefence(), getType(), getCost());
     }
 
     public int getStatBonus() {

@@ -15,8 +15,7 @@ public class Main {
             case 3:engine.addHero(name, PlayerType.ARCHER); break;
         }
         System.out.println("That's an awesome choice! Here are your current stats, which you can improve on as you play.\n");
-//        engine.showMyStats();
+        engine.showMyStats();
         System.out.println("\n Now it's time for the real fun to begin. You don't have any gold yet, so let's go to a dungeon to win some.\n  This time we will start with an easy one but from now on you will be able to choose the difficulty yourself!\n");
-
     }
 }

@@ -1,15 +1,29 @@
 package Game.Hero;
 
+import Game.Items.Helmet;
+import Game.Items.Vest;
+import Game.Items.Weapon;
 import Game.PlayerType;
 import Game.Stat;
 
 public class Mage extends Hero {
 
+
     public Mage(String name) {
         super(name);
         setType(PlayerType.MAGE);
         setPrimaryStat(Stat.INTELLIGENCE);
+        createDefaultInventory();
+    }
 
+    @Override
+    public void createDefaultInventory() {
+        this.setWeapon(new Weapon("Default", 0, 20, super.getType()));
+        this.setHelmet(new Helmet("Default", 0, 10, 3, super.getType()));
+        this.setVest(new Vest("Default", 0, 30, 15, super.getType()));
+        addToInventory(getWeapon());
+        addToInventory(getHelmet());
+        addToInventory(getVest());
     }
 
     public String toString() {
