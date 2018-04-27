@@ -77,7 +77,7 @@ public class Weapon extends Item implements Equippable {
 
     @Override
     public String toString(){
-        return String.format("Weapon %s. Damage %d. Type %s. Cost %d.", getName(), getDamage(), getType(), getCost());
+        return String.format("%s. Damage %d. Cost %d.", getName(), getDamage(), getCost());
     }
 
     public PlayerType getType() {
