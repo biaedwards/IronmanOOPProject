@@ -1,4 +1,4 @@
-package Game.Enemy;
+package Game.Location;
 
 import Game.Items.Item;
 import Game.Stat;
@@ -14,7 +14,8 @@ public class Enemy {
     private String name;
     private int maxHP;
     private int currentHP;
-    private int damage;
+    private double damage;
+    private int gold;
     private Item item;
     private Stat stat;
 
@@ -22,12 +23,12 @@ public class Enemy {
     private ArrayList<String> allNames = new ArrayList<>();
 
 
-    Enemy(int damage) {
+    public Enemy(double damage) {
         generateNames();
         this.name = getRandomName();
         maxHP = HP_DEFAULT;
-
         this.damage = damage;
+        this.gold = (int)damage/10;
         // generateItems();
         // this.item = getRandomItem();
         Stat stat;
