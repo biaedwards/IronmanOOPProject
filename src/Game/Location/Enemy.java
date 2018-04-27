@@ -1,5 +1,6 @@
 package Game.Location;
 
+import Game.Attack;
 import Game.Items.Helmet;
 import Game.Items.Item;
 import Game.Items.Vest;
@@ -9,7 +10,7 @@ import Game.Stat;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Enemy {
+public class Enemy implements Attack {
 
   private int maxHP;
   static final int HP_DEFAULT = 100;
@@ -18,6 +19,7 @@ public class Enemy {
   private double damage;
   private int gold;
   private Item item;
+  private int XP;
   private Stat stat;
 
   private ArrayList<String> allNames = new ArrayList<>();
@@ -29,7 +31,8 @@ public class Enemy {
     maxHP = HP_DEFAULT;
     this.damage = getRandomDamage();
     this.gold = (int) damage * 10;
-    item = getRandomItem();
+    this.item = getRandomItem();
+    this.XP = (int)damage*2;
     Stat stat;
   }
 
@@ -50,6 +53,14 @@ public class Enemy {
     return gold;
   }
 
+  public int getXP() {
+    return XP;
+  }
+
+  public int getMaxHP() {
+    return maxHP;
+  }
+
   public Item getItem() {
     return item;
   }
@@ -63,8 +74,7 @@ public class Enemy {
   }
 
   private int getRandomDamage() {
-    int damage = ThreadLocalRandom.current().nextInt(50, 100);
-    return damage;
+    return ThreadLocalRandom.current().nextInt(50, 100);
   }
 
   private void generateNames() {
@@ -104,6 +114,9 @@ public class Enemy {
     allNames.add("Yana");
     allNames.add("Yani");
     allNames.add("Yasen");
+  }
+  public int attack(){
+    return (int)damage ;
   }
 
   private String getRandomName() {
