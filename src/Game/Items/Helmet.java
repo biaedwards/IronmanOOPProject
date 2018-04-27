@@ -1,31 +1,62 @@
 package Game.Items;
 
 import Game.Hero.Hero;
-import Game.PlayerType;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Helmet extends Armor {
-    int statBonus;
+  int statBonus;
 
-    public Helmet(String name, int cost, int defence, int statBonus, PlayerType type) {
-        super(name, cost, defence, type);
-        this.statBonus = statBonus;
-    }
+  public Helmet() {
+    generateRandomHelmet();
+  }
 
-    @Override
-    public String toString(){
-        return String.format("Helmet %s. Stat bonus %d. Defence %d. Type %s. Cost %d.", this.getName(), statBonus, getDefence(), getType(), getCost());
-    }
+  public void generateRandomHelmet() {
+    firstPart.add("Paper");
+    firstPart.add("Cloth");
+    firstPart.add("Leather");
+    firstPart.add("Wooden");
+    firstPart.add("Chain");
+    firstPart.add("Copper");
+    firstPart.add("Silver");
+    firstPart.add("Gold");
+    firstPart.add("Titanium");
 
-    public int getStatBonus() {
-        return statBonus;
-    }
+    secondPart.add("Weaklings");
+    secondPart.add("Juniours");
+    secondPart.add("Nobles");
+    secondPart.add("Barons");
+    secondPart.add("Warlords");
+    secondPart.add("Demigods");
 
-    public void setStatBonus(int statBonus) {
-        this.statBonus = statBonus;
-    }
+    int firstIndex = ThreadLocalRandom.current().nextInt(0, firstPart.size());
+    int secondIndex = ThreadLocalRandom.current().nextInt(0, secondPart.size());
+    String result = firstPart.get(firstIndex) + " Helmet of " + secondPart.get(secondIndex);
+    this.setName(result);
+    int stat = firstIndex + secondIndex * 2;
+    int defence = (int) (firstIndex * 1.5 + secondIndex * 3);
+    this.setDefence(defence);
+    this.setStatBonus(stat);
+    int cost = stat * 30 + defence * 50;
+    this.setCost(cost);
+  }
 
-    @Override
-    public void equip(Hero hero){
-        hero.setHelmet(this);
-    }
+
+  @Override
+  public String toString() {
+    return String.format("Helmet %s. Stat bonus %d. Defence %d. Cost %d.", this.getName(), statBonus, getDefence(), getCost());
+  }
+
+  public int getStatBonus() {
+    return statBonus;
+  }
+
+  public void setStatBonus(int statBonus) {
+    this.statBonus = statBonus;
+  }
+
+  @Override
+  public void equip(Hero hero) {
+    hero.setHelmet(this);
+  }
 }

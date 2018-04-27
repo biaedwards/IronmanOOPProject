@@ -1,30 +1,58 @@
 package Game.Items;
 
 import Game.Hero.Hero;
-import Game.PlayerType;
+
+import java.util.ArrayList;
 
 public abstract class Armor extends Item implements Equippable {
-    PlayerType type;
-    int defence;
+  int defence;
+  ArrayList<String> firstPart = new ArrayList<>();
+  ArrayList<String> secondPart = new ArrayList<>();
 
-    Armor(String name, int cost, int defence, PlayerType type){
-        super(name, cost);
-        this.defence = defence;
-        this.type = type;
-    }
 
-    @Override
-    public String toString(){
-        return String.format("Armor %s. Defence %d. Type %s. Cost %d.", getName(), defence, getType(), getCost());
-    }
+  Armor(String name, int cost, int defence) {
+    super(name, cost);
+    setDefence(defence);
+  }
+  Armor(){
 
-    public PlayerType getType() {
-        return type;
-    }
+  }
 
-    public int getDefence() {
-        return defence;
-    }
 
-    public abstract void equip(Hero hero);
+  public void generateRandomName() {
+
+  }
+
+
+  @Override
+  public String toString() {
+    return String.format("Armor %s. Defence %d. Cost %d.", getName(), defence, getCost());
+  }
+
+
+  public int getDefence() {
+    return defence;
+  }
+
+  public abstract void equip(Hero hero);
+
+  public void setDefence(int defence) {
+    this.defence = defence;
+  }
+
+  public ArrayList<String> getFirstPart() {
+    return firstPart;
+  }
+
+  public void setFirstPart(ArrayList<String> firstPart) {
+    this.firstPart = firstPart;
+  }
+
+  public ArrayList<String> getSecondPart() {
+    return secondPart;
+  }
+
+  public void setSecondPart(ArrayList<String> secondPart) {
+    this.secondPart = secondPart;
+  }
 }

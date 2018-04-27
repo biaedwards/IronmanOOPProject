@@ -8,6 +8,9 @@ public abstract class Item {
         this.name = name;
         this.cost = cost;
     }
+    Item(){
+
+    }
 
     public int getCost() {
         return cost;
@@ -15,5 +18,13 @@ public abstract class Item {
 
     public String getName() {
         return name;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
