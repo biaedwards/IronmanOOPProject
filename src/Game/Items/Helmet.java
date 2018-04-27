@@ -42,8 +42,8 @@ public class Helmet extends Armor {
     int secondIndex = ThreadLocalRandom.current().nextInt(0, secondPart.size());
     String result = firstPart.get(firstIndex) + " Helmet of " + secondPart.get(secondIndex);
     this.setName(result);
-    int stat = firstIndex + secondIndex * 2;
-    int defence = (int) (firstIndex * 1.5 + secondIndex * 3);
+    int stat = firstIndex + secondIndex * 2 + 1;
+    int defence = (int) (firstIndex * 1.5 + secondIndex * 3+2);
     this.setDefence(defence);
     this.setStatBonus(stat);
     int cost = stat * 30 + defence * 50;

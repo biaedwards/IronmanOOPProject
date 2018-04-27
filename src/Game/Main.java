@@ -3,6 +3,7 @@ package Game;
 import Game.Items.Helmet;
 import Game.Items.Item;
 import Game.Items.Vest;
+import Game.Items.Weapon;
 
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class Main {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     Engine engine = new Engine();
+
     System.out.println("Hello and welcome to Team IRONMAN's video game!\n \n To start a new game you must first choose a name for your hero by typing it here: ");
     String name = in.nextLine();
     System.out.println("Great! Now choose the type of your hero by pressing 1 for Warrior, 2 for Mage or 3 for Archer.");
