@@ -1,6 +1,9 @@
 package Game.Location;
 
+import Game.Items.Helmet;
 import Game.Items.Item;
+import Game.Items.Vest;
+import Game.Items.Weapon;
 import Game.Stat;
 
 import java.util.ArrayList;
@@ -8,76 +11,61 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Enemy {
 
-
-  static final int HP_DEFAULT = 100;
-
-
-  private String name;
   private int maxHP;
+  static final int HP_DEFAULT = 100;
+  private String name;
   private int currentHP;
   private double damage;
   private int gold;
   private Item item;
   private Stat stat;
 
-  private ArrayList<String> allItems = new ArrayList<>();
   private ArrayList<String> allNames = new ArrayList<>();
 
 
-  public Enemy(double damage) {
+  public Enemy() {
     generateNames();
     this.name = getRandomName();
     maxHP = HP_DEFAULT;
-    this.damage = damage;
-    this.gold = (int) damage / 10;
-    // generateItems();
-    // this.item = getRandomItem();
+    this.damage = getRandomDamage();
+    this.gold = (int) damage * 10;
+    item = getRandomItem();
     Stat stat;
-
-
   }
 
-  //  void drop() {
-  //   System.out.printf("%s dropped item: %s\n", getName(), getItem().getName());
-  // } TODO void drop
+  public Item dropItem() {
+    System.out.printf("%s dropped item: %s\n", getName(), getItem().getName());
+    return item;
+  }
+
+  public double getDamage() {
+    return damage;
+  }
+
+  public void setDamage(double damage) {
+    this.damage = damage;
+  }
+
+  public int getGold() {
+    return gold;
+  }
+
+  public Item getItem() {
+    return item;
+  }
 
   public String getName() {
     return name;
-  }
-
-  // private Item getItem() {
-  //  return item; TODO getItem
-  //}
-
-  //private Item getRandomItem() {
-  // int index = getName().hashCode() % itemsArrayList.size();
-  //  item = itemsArrayList.get(index);
-  //  return item; TODO getRandomItem
-  //}
-
-  // private void generateItems() {
-//TODO SET ARRAY LIST OF ITEMS
-// }
-  public int getMaxHP() {
-    return maxHP;
-  }
-
-  public void setMaxHP(int HP) {
-    this.maxHP = HP;
   }
 
   public int getCurrentHP() {
     return currentHP;
   }
 
-  public void setCurrentHP(int currentHP) {
-    this.currentHP = currentHP;
+  private int getRandomDamage() {
+    int damage = ThreadLocalRandom.current().nextInt(50, 100);
+    return damage;
   }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
 
   private void generateNames() {
     allNames.add("Adrian");
@@ -116,8 +104,6 @@ public class Enemy {
     allNames.add("Yana");
     allNames.add("Yani");
     allNames.add("Yasen");
-
-
   }
 
   private String getRandomName() {
@@ -126,8 +112,23 @@ public class Enemy {
     return name;
   }
 
-
-
-
+  private Item getRandomItem() {
+    int index = ThreadLocalRandom.current().nextInt(0, 3);
+    Item item;
+    switch (index) {
+      case 0:
+        item = new Weapon();
+        break;
+      case 1:
+        item = new Vest();
+        break;
+      case 2:
+        item = new Helmet();
+        break;
+        default: item = null;
+          break;
+    }
+    return item;
+  }
 }
 

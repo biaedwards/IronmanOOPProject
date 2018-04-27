@@ -69,10 +69,6 @@ public class Weapon extends Item implements Equippable {
         setDamage(damage);
         int cost = damage * 25;
         setCost(cost);
-
-
-
-
     }
 
     @Override
