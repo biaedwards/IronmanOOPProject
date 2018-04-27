@@ -1,5 +1,6 @@
 package Game.Hero;
 
+import Game.Attack;
 import Game.Items.*;
 import Game.PlayerType;
 import Game.Skill;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public abstract class Hero {
+public abstract class Hero implements Attack {
     private PlayerType type;
     private int maxHP = 100;
     private int currentHP;
@@ -198,7 +199,13 @@ public abstract class Hero {
         skills.add(skill);
     }
 
-    void castSkill(Skill skill) {
+    public int castSkill(Skill skill) {
+        if (skill.isUsesWeapon()){
+            return skill.getDamage() + getDamage();
+        }
+        else{
+            return skill.getDamage();
+        }
 
     }
 
