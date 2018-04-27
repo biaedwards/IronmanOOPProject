@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Dungeon extends Location {
 
-  double coefficient;
-  int enemiesNumbers;
-  int gold;
-  int XP;
+  private double coefficient;
+  private int enemiesNumbers;
+  private int gold;
+  private int XP;
 
- private ArrayList<Enemy> enemies = new ArrayList<>();
+  private ArrayList enemies = new ArrayList<>();
 
   public Dungeon(Difficulty difficulty) {
 
@@ -58,6 +58,7 @@ public class Dungeon extends Location {
   private ArrayList generateEnemies() {
     for (int i = 0; i < enemiesNumbers; i++) {
       enemies.add(new Enemy((int) coefficient));
-    }return enemies;
+    }
+    return enemies;
   }
 }
