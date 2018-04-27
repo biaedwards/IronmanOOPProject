@@ -17,6 +17,7 @@ public class Archer extends Hero {
         createDefaultInventory();
     }
 
+
     public String toString() {
         return String.format("%s, Level %d Archer", this.getName(), this.getLevel());
     }
