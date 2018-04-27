@@ -24,7 +24,6 @@ public class Enemy implements Attack {
 
   private ArrayList<String> allNames = new ArrayList<>();
 
-
   public Enemy() {
     generateNames();
     this.name = getRandomName();
