@@ -19,8 +19,8 @@ public class Mage extends Hero {
     @Override
     public void createDefaultInventory() {
         this.setWeapon(new Weapon("Default", 0, 20, super.getType()));
-        this.setHelmet(new Helmet("Default", 0, 10, 3, super.getType()));
-        this.setVest(new Vest("Default", 0, 30, 15, super.getType()));
+        this.setHelmet(new Helmet("Default", 0, 10, 3));
+        this.setVest(new Vest("Default", 0, 30, 15));
         addToInventory(getWeapon());
         addToInventory(getHelmet());
         addToInventory(getVest());

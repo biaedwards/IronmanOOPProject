@@ -23,8 +23,8 @@ public class Archer extends Hero {
 
     public void createDefaultInventory() {
         this.setWeapon(new Weapon("Default", 0, 20, getType()));
-        this.setHelmet(new Helmet("Default", 0, 10, 3, getType()));
-        this.setVest(new Vest("Default", 0, 30, 15, getType()));
+        this.setHelmet(new Helmet("Default", 0, 10, 3));
+        this.setVest(new Vest("Default", 0, 30, 15));
         addToInventory(getWeapon());
         addToInventory(getHelmet());
         addToInventory(getVest());

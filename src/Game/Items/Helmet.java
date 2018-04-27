@@ -1,6 +1,7 @@
 package Game.Items;
 
 import Game.Hero.Hero;
+import Game.PlayerType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,6 +10,14 @@ public class Helmet extends Armor {
 
   public Helmet() {
     generateRandomHelmet();
+  }
+
+  public Helmet(String name, int cost, int defence, int statBonus) {
+    setName(name);
+    setCost(cost);
+    setDefence(defence);
+    setStatBonus(statBonus);
+
   }
 
   public void generateRandomHelmet() {
