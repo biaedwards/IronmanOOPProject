@@ -26,7 +26,6 @@ public class Helmet extends Armor {
 
     @Override
     public void equip(Hero hero){
-        hero.setDefence(hero.getDefence()+defence);
-        hero.setStat(hero.getStat()+statBonus);
+        hero.setHelmet(this);
     }
 }

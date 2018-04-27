@@ -26,7 +26,5 @@ public abstract class Armor extends Item implements Equippable {
         return defence;
     }
 
-    public void equip(Hero hero){
-        hero.setDefence(hero.getDefence()+defence);
-    }
+    public abstract void equip(Hero hero);
 }

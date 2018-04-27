@@ -29,6 +29,6 @@ public class Weapon extends Item implements Equippable {
 
     @Override
     public void equip(Hero hero) {
-        hero.setDamage(hero.getDamage() + damage);
+        hero.setWeapon(this);
     }
 }
