@@ -25,6 +25,11 @@ public abstract class Hero {
     private Weapon weapon;
     private Helmet helmet;
     private Vest vest;
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     private HashMap<Item, Integer> inventory;
     private HashSet<Skill> skills;
     private ArrayList<Skill> allSkills = new ArrayList<>();

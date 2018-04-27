@@ -8,6 +8,7 @@ import Game.Hero.Mage;
 import Game.Hero.Warrior;
 import Game.Items.Item;
 
+import java.util.HashMap;
 import java.util.HashSet;
 public class Engine {
     HashSet<Skill> allSkills = new HashSet<>();
@@ -36,29 +37,35 @@ public class Engine {
     }
 
     public void showMyHeroes(){
-        if(heroes.isEmpty()){
-            System.out.println("You have no heroes. Create one now.");
-            return;
-        }
         heroes.forEach(System.out::println);
     }
 
-    public void chooseCurrentHero(String name){
-        try{
+    public void chooseCurrentHero(String name) throws NoSuchHero{
             for (Hero hero:heroes){
                 if(hero.getName().equals(name)){
                     currentHero = hero;
                     System.out.printf("Hero is set to %s", hero);
-                }
-                else {
-                    throw new NoSuchHero();
+                    return;
                 }
             }
-        }
-        catch (NoSuchHero ex){
-            System.out.println("You don't have this hero. Either create it or choose one of the above: ");
-            showMyHeroes();
-        }
+            throw new NoSuchHero();
+    }
+
+    public void showMyStats(){
+        System.out.println("HP: "+currentHero.getCurrentHP());
+        System.out.println("XP: "+ currentHero.getXp());
+        System.out.println("Level: "+ currentHero.getLevel());
+        System.out.println("XP until next level: "+ currentHero.getXpUntilNextlevel());
+        System.out.println("Defence: "+ currentHero.getDefence());
+        System.out.println("Damage: "+ currentHero.getDamage());
+        System.out.println("Gold: "+ currentHero.getGold());
+        System.out.println("Weapon: "+ currentHero.getWeapon().toString());
+        System.out.println("Helmet: "+ currentHero.getHelmet().toString());
+        System.out.println("Vest: "+ currentHero.getVest().toString());
+    }
+
+    public void showMyInventory(){
+        currentHero.getInventory().entrySet().forEach(System.out::println);
     }
 
     private void generateAllSkills(){

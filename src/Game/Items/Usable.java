@@ -1,8 +1,7 @@
 package Game.Items;
 
-import Game.Usables;
+import Game.Hero.Hero;
 
-public class Usable extends Item {
-    int value;
-    Usables type;
+public interface Usable {
+    void use(Hero hero);
 }
