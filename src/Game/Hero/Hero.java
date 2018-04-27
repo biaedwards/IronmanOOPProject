@@ -12,15 +12,15 @@ import java.util.HashSet;
 
 public abstract class Hero implements Attack {
     private PlayerType type;
-    private int maxHP = 100;
+    private int maxHP;
     private int currentHP;
-    private double xp = 0;
-    private int level = 1;
-    private int defence = 0;
-    private int stat = 1;
-    private int gold = 0;
+    private double xp;
+    private int level;
+    private int defence;
+    private int stat;
+    private int gold;
     private int damage;
-    private double xpUntilNextlevel = 1000;
+    private double xpUntilNextlevel;
     private Stat primaryStat;
     private String name;
     private Weapon weapon;
