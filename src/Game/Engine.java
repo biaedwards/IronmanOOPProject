@@ -14,12 +14,9 @@ import java.util.Scanner;
 import static Game.Message.*;
 
 public class Engine {
-    HashSet<Skill> allSkills = new HashSet<>();
-    HashSet<Item> allItems = new HashSet<>();
-    HashSet<Enemy> allEnemies = new HashSet<>();
-    Scanner in = new Scanner(System.in);
     private HashSet<Hero> heroes = new HashSet<>();
     private Hero currentHero;
+    private Scanner in = new Scanner(System.in);
 
     Engine() {
         start();
