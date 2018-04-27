@@ -20,19 +20,21 @@ public class Enemy implements Attack {
   private int gold;
   private Item item;
   private int XP;
+  private int coefficient;
   private Stat stat;
 
   private ArrayList<String> allNames = new ArrayList<>();
 
-  public Enemy() {
+  public Enemy(int coefficient) {
     generateNames();
     this.name = getRandomName();
     maxHP = HP_DEFAULT;
-    this.damage = getRandomDamage();
-    this.gold = (int) damage * 10;
+    this.damage = getRandomDamage()*coefficient;
+    this.gold = (int) damage*10*coefficient;
     this.item = getRandomItem();
-    this.XP = (int)damage*2;
+    this.XP = (int)damage*2*coefficient;
     Stat stat;
+
   }
 
   public Item dropItem() {

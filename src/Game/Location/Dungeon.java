@@ -39,7 +39,7 @@ public class Dungeon extends Location {
 
   void generateEnemies() {
     for (int i = 0; i < enemiesNumbers; i++) {
-      enemies.add(new Enemy());
+      enemies.add(new Enemy((int)coefficient));
 
     }
   }
