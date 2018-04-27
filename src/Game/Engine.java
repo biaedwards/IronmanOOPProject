@@ -8,7 +8,6 @@ import Game.Hero.Mage;
 import Game.Hero.Warrior;
 import Game.Items.Item;
 
-import java.util.HashMap;
 import java.util.HashSet;
 public class Engine {
     HashSet<Skill> allSkills = new HashSet<>();
