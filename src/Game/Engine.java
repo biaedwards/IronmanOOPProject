@@ -17,10 +17,8 @@ public class Engine {
     Hero currentHero;
 
     Engine(){
-        generateAllEnemies();
-        generateAllItems();
-        generateAllSkills();
-    }
+
+    };
 
     public void addHero(String name, PlayerType type){
         if(type==PlayerType.WARRIOR){
@@ -65,22 +63,5 @@ public class Engine {
 
     public void showMyInventory(){
         currentHero.getInventory().entrySet().forEach(System.out::println);
-    }
-
-    private void generateAllSkills(){
-
-
-
-    }
-
-    private void generateAllItems(){
-
-
-
-    }
-
-    private void generateAllEnemies(){
-
-
     }
 }
