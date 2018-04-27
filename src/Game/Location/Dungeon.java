@@ -1,11 +1,8 @@
 package Game.Location;
 
-import Game.Location.Difficulty;
-import Game.Location.Location;
-
 import java.util.ArrayList;
 
-public class Dungeon extends Location {
+public class Dungeon {
 
   private double coefficient;
   private int enemiesNumbers;

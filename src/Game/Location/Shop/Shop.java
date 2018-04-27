@@ -1,11 +1,10 @@
 package Game.Location.Shop;
 
 import Game.Items.Item;
-import Game.Location.Location;
 
 import java.util.ArrayList;
 
-public class Shop extends Location {
+public class Shop {
     ArrayList<Item> inventory;
 
 
