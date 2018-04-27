@@ -1,6 +1,7 @@
 package Game.Hero;
 
-import Game.Enemy.Enemy;
+
+import Game.Location.Enemy;
 import Game.PlayerType;
 import Game.Stat;
 

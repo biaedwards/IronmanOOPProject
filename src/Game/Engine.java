@@ -1,12 +1,12 @@
 package Game;
 
-import Game.Enemy.Enemy;
 import Game.Exceptions.NoSuchHero;
 import Game.Hero.Archer;
 import Game.Hero.Hero;
 import Game.Hero.Mage;
 import Game.Hero.Warrior;
 import Game.Items.Item;
+import Game.Location.Enemy;
 
 import java.util.HashSet;
 public class Engine {
