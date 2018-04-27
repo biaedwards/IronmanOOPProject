@@ -157,6 +157,7 @@ public abstract class Hero {
     }
 
     public int getDefence() {
+        defence = helmet.getDefence()+vest.getDefence();
         return defence;
     }
 
