@@ -12,6 +12,6 @@ public class HPPotion extends Item implements Usable {
 
     @Override
     public void use(Hero hero) {
-        hero.setCurrentHP(hero.getCurrentHP()+value);
+        hero.changeCurrentHP(hero.getCurrentHP()+value);
     }
 }

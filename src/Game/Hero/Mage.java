@@ -42,7 +42,7 @@ public class Mage extends Hero {
     }
 
     public void spell(){
-        setCurrentHP(getCurrentHP()+30);
+        changeCurrentHP(30);
         setStat(getStat()+1);
         System.out.println("You cast a defensive spell which increases your HP by 30 and your primary stat by 1");
     }

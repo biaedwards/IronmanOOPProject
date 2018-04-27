@@ -75,8 +75,9 @@ public abstract class Hero {
         return currentHP;
     }
 
-    public void setCurrentHP(int currentHP) {
-        this.currentHP = currentHP;
+    public void changeCurrentHP(int hp) {
+        currentHP+=hp;
+        currentHP = Math.min(currentHP, maxHP);
     }
 
     public void setLevel(int level) {
@@ -125,7 +126,6 @@ public abstract class Hero {
 
     public void setHelmet(Helmet helmet) {
         this.helmet = helmet;
-        helmet.equip(this);
     }
 
     public Vest getVest() {
@@ -134,7 +134,6 @@ public abstract class Hero {
 
     public void setVest(Vest vest) {
         this.vest = vest;
-        vest.equip(this);
     }
 
     public void addToInventory(Item item) {
@@ -175,7 +174,6 @@ public abstract class Hero {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
-        weapon.equip(this);
     }
 
     public int getGold() {
@@ -218,7 +216,7 @@ public abstract class Hero {
     }
 
     public int attack() {
-        return weapon.getDamage();
+        return damage;
     }
 
     private void generateAllSkills() {

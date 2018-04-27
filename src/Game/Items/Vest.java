@@ -27,6 +27,6 @@ public class Vest extends Armor {
     @Override
     public void equip(Hero hero){
         hero.setDefence(hero.getDefence()+defence);
-        hero.setCurrentHP(hero.getCurrentHP()+HPBonus);
+        hero.changeCurrentHP(hero.getCurrentHP()+HPBonus);
     }
 }

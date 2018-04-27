@@ -4,7 +4,6 @@ import Game.Items.Helmet;
 import Game.Items.Vest;
 import Game.Items.Weapon;
 import Game.PlayerType;
-import Game.Skill;
 import Game.Stat;
 
 public class Warrior extends Hero {
@@ -44,10 +43,7 @@ public class Warrior extends Hero {
 
     public void buff(){
         setDefence(getDefence()+1);
-        setCurrentHP(getCurrentHP()+20);
-        if (getCurrentHP()>getMaxHP()){
-            setCurrentHP(getMaxHP());
-        }
+        changeCurrentHP(20);
         System.out.println("You have buffed yourself and received +1 defence and +20 HP");
 
     }
