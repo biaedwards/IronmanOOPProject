@@ -28,11 +28,17 @@ public abstract class Hero implements Attack {
     private Vest vest;
     private HashMap<Item, Integer> inventory;
     private HashSet<Skill> skills;
+
+    public ArrayList<Skill> getAllSkills() {
+        return allSkills;
+    }
+
     private ArrayList<Skill> allSkills = new ArrayList<>();
 
 
     Hero(String name) {
         setName(name);
+        generateAllSkills();
         maxHP = 100;
         currentHP = maxHP;
         xp = 0;
@@ -198,7 +204,7 @@ public abstract class Hero implements Attack {
 
     public int castSkill(Skill skill) {
         if (skill.isUsesWeapon()) {
-            return skill.getDamage() + getDamage();
+            return (skill.getDamage() + getDamage());
         } else {
             return skill.getDamage();
         }
@@ -215,8 +221,12 @@ public abstract class Hero implements Attack {
 
     }
 
-    void level() {
+    public void level() {
 
+    }
+
+    public void takeDamage(int damage) {
+        currentHP -= damage-defence;
     }
 
     public int attack() {

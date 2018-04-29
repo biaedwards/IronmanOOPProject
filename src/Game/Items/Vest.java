@@ -27,9 +27,15 @@ public class Vest extends Armor {
         firstPart.add("Wooden");
         firstPart.add("Chain");
         firstPart.add("Copper");
+        firstPart.add("Steel");
         firstPart.add("Silver");
         firstPart.add("Gold");
         firstPart.add("Titanium");
+        firstPart.add("Diamond");
+        firstPart.add("Epic");
+        firstPart.add("Godly");
+        firstPart.add("Legendary");
+
 
         secondPart.add("Weaklings");
         secondPart.add("Juniours");

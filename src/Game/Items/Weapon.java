@@ -32,8 +32,10 @@ public class Weapon extends Item implements Equippable {
         firstPart.add("Frozen");
         firstPart.add("Burning");
         firstPart.add("Frostfire");
+        firstPart.add("Epic");
+        firstPart.add("Legendary");
         firstPart.add("Unholy");
-        firstPart.add("Godly");
+        firstPart.add("Divine");
         firstPart.add("Otherworldly");
         firstPart.add("Absurd");
 
@@ -50,6 +52,7 @@ public class Weapon extends Item implements Equippable {
         thirdPart.add("Archangels");
         thirdPart.add("Demigods");
         thirdPart.add("Beasts");
+        thirdPart.add("The Dark Ones");
         thirdPart.add("The Gods");
 
         int firstIndex = ThreadLocalRandom.current().nextInt(0, firstPart.size());

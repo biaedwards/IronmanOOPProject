@@ -16,19 +16,19 @@ public class Dungeon {
     switch (difficulty) {
       case EASY:
         coefficient = 0.8;
-        enemiesNumbers = 5;
+        enemiesNumbers = 2;
         gold = 100;
         XP = 50;
         break;
       case MEDIUM:
         coefficient = 1.0;
-        enemiesNumbers = 10;
+        enemiesNumbers = 5;
         gold = 300;
         XP = 200;
         break;
       case HARD:
         coefficient = 1.2;
-        enemiesNumbers = 20;
+        enemiesNumbers = 10;
         gold = 500;
         XP = 300;
         break;
@@ -54,7 +54,7 @@ public class Dungeon {
 
   private ArrayList generateEnemies() {
     for (int i = 0; i < enemiesNumbers; i++) {
-      enemies.add(new Enemy((int) coefficient));
+      enemies.add(new Enemy(coefficient));
     }
     return enemies;
   }
