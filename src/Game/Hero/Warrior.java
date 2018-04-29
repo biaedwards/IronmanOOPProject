@@ -25,9 +25,6 @@ public class Warrior extends Hero {
         this.setWeapon(new Weapon("Default", 0, 20, this.getType()));
         this.setHelmet(new Helmet("Default", 0, 5, 3));
         this.setVest(new Vest("Default", 0, 5, 15));
-        addToInventory(getWeapon());
-        addToInventory(getHelmet());
-        addToInventory(getVest());
     }
 
     @Override

@@ -21,18 +21,15 @@ public abstract class Hero implements Attack {
     private int gold;
     private int damage;
     private double xpUntilNextlevel;
+
     private Stat primaryStat;
     private String name;
     private Weapon weapon;
     private Helmet helmet;
     private Vest vest;
+
     private HashMap<Item, Integer> inventory;
     private HashSet<Skill> skills;
-
-    public ArrayList<Skill> getAllSkills() {
-        return allSkills;
-    }
-
     private ArrayList<Skill> allSkills = new ArrayList<>();
 
 
@@ -211,26 +208,162 @@ public abstract class Hero implements Attack {
 
     }
 
-    void getUsables() {
+    public void printUsables() {
+        int counter = 1;
         for (Item item : inventory.keySet()) {
-            if (item instanceof Usable) System.out.println(item.getName());
+            if (item instanceof HPPotion) {
+                System.out.printf("%d: ", counter);
+                System.out.printf("%s ", item.getName());
+                System.out.println(inventory.get(item));
+
+                counter++;
+            }
+            if (item instanceof Tome) {
+                System.out.printf("%d: ", counter);
+                System.out.printf("%s ", item.getName());
+                System.out.println(inventory.get(item));
+                counter++;
+
+            }
+        }
+        if (counter == 1) {
+            System.out.println("You don't have any usable items. Press any key to continue.");
         }
     }
 
-    void use(String itemName) {
+    public void printEquipables() {
+        int counter = 1;
+        for (Item item : inventory.keySet()) {
+            if (item instanceof Weapon) {
+                System.out.printf("%d: ", counter);
+                System.out.printf("%s ", item.toString());
+                System.out.println(inventory.get(item));
 
+                counter++;
+            }
+            if (item instanceof Vest) {
+                System.out.printf("%d: ", counter);
+                System.out.printf("%s ", item.toString());
+                System.out.println(inventory.get(item));
+
+                counter++;
+            }
+            if (item instanceof Helmet) {
+                System.out.printf("%d: ", counter);
+                System.out.printf("%s ", item.toString());
+                System.out.println(inventory.get(item));
+
+                counter++;
+            }
+        }
+        if (counter == 1) {
+            System.out.println("You don't have any equipable items. Press any key to continue.");
+        }
     }
 
-    public void level() {
+    public void useUsables(int number) {
+        int counter = 1;
+        for (Item item : inventory.keySet()) {
+            if (item instanceof HPPotion) {
+                if (number == counter) {
+                    use(item);
+                    break;
+                }
+                counter++;
+            }
+            if (item instanceof Tome) {
+                if (number == counter) {
+                    use(item);
+                    break;
+                }
+                counter++;
 
+            }
+        }
     }
+
+    public void equipEquipables(int number) {
+        int counter = 1;
+        for (Item item : inventory.keySet()) {
+            if (item instanceof Weapon) {
+                if (number == counter) {
+                    equip(item);
+                    break;
+                }
+                counter++;
+            }
+            if (item instanceof Vest) {
+                if (number == counter) {
+                    equip(item);
+                    break;
+                }
+
+                counter++;
+            }
+            if (item instanceof Helmet) {
+                if (number == counter) {
+                    equip(item);
+                    break;
+                }
+
+                counter++;
+            }
+        }
+    }
+
+
+    public void use(Item usable) {
+        if (usable instanceof HPPotion) {
+            if (inventory.containsKey(usable)) {
+                changeCurrentHP(((HPPotion) usable).getValue());
+                System.out.printf("You have recovered %d HP\n", ((HPPotion) usable).getValue());
+                System.out.printf("Current HP: %d/%d\n", currentHP, maxHP);
+                inventory.put(usable, inventory.get(usable) - 1);
+            }
+            if (inventory.get(usable) == 0) {
+                inventory.remove(usable);
+            }
+        } else if (usable instanceof Tome) {
+            if (inventory.containsKey(usable)) {
+                xp += ((Tome) usable).getValue();
+                System.out.printf("You have gained %d XP\n", ((Tome) usable).getValue());
+                inventory.put(usable, inventory.get(usable) - 1);
+            }
+            if (inventory.get(usable) == 0) {
+                inventory.remove(usable);
+            }
+        }
+    }
+
+
+    public void equip(Item item) {
+        if (item instanceof Weapon) {
+            addToInventory(weapon);
+            weapon = (Weapon) item;
+
+        }
+        if (item instanceof Helmet) {
+            addToInventory(helmet);
+            helmet = (Helmet) item;
+        }
+        if (item instanceof Vest) {
+            addToInventory(vest);
+            vest = (Vest) item;
+        }
+    }
+
+    public abstract void level();
 
     public void takeDamage(int damage) {
-        currentHP -= damage-defence;
+        currentHP -= (defence>damage)?1:damage-defence;
     }
 
     public int attack() {
         return damage;
+    }
+
+    public ArrayList<Skill> getAllSkills() {
+        return allSkills;
     }
 
     private void generateAllSkills() {

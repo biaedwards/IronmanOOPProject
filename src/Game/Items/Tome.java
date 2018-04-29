@@ -5,11 +5,11 @@ import Game.Hero.Hero;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Tome extends Item implements Usable {
+public class Tome extends Item {
     private int value;
-    private ArrayList<String> names;
+    private ArrayList<String> names = new ArrayList<>();
 
-    Tome() {
+    public Tome() {
         generateRandomTome();
     }
 
@@ -33,10 +33,5 @@ public class Tome extends Item implements Usable {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    @Override
-    public void use(Hero hero) {
-        hero.setXp(hero.getXp() + value);
     }
 }

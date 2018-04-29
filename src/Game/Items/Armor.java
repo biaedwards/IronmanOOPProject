@@ -4,7 +4,7 @@ import Game.Hero.Hero;
 
 import java.util.ArrayList;
 
-public abstract class Armor extends Item implements Equippable {
+public abstract class Armor extends Item {
     int defence;
     ArrayList<String> firstPart = new ArrayList<>();
     ArrayList<String> secondPart = new ArrayList<>();

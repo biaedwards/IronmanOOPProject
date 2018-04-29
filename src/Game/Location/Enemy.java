@@ -1,10 +1,8 @@
 package Game.Location;
 
 import Game.Attack;
-import Game.Items.Helmet;
-import Game.Items.Item;
-import Game.Items.Vest;
-import Game.Items.Weapon;
+import Game.Hero.Hero;
+import Game.Items.*;
 import Game.Stat;
 
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ public class Enemy implements Attack {
     private int XP;
     private double coefficient;
     private Stat stat;
+    private Item usable;
 
     private ArrayList<String> allNames = new ArrayList<>();
 
@@ -30,17 +29,22 @@ public class Enemy implements Attack {
         this.name = getRandomName();
         maxHP = HP_DEFAULT;
         currentHP = maxHP;
-        this.damage =(int)(getRandomDamage() * coefficient);
+        this.damage = (int) (getRandomDamage() * coefficient);
         this.gold = (int) (damage * 10 * coefficient);
         this.item = getRandomItem();
+        usable = generateRandomUsable();
         this.XP = (int) (damage * 2 * coefficient);
         Stat stat;
 
     }
 
-    public Item dropItem() {
-        System.out.printf("%s dropped item: %s\n", getName(), getItem().getName());
-        return item;
+    public void dropReward(Hero hero) {
+        System.out.printf("%s dropped: Item: %s\n", getName(), getItem().getName());
+        System.out.printf("%s, %d gold and you gained %d XP\n", usable.getName(), gold, XP);
+        hero.addToInventory(item);
+        hero.addToInventory(usable);
+        hero.setXp(XP);
+        hero.setGold(gold);
     }
 
     public double getDamage() {
@@ -123,7 +127,7 @@ public class Enemy implements Attack {
     }
 
     private String getRandomName() {
-        int index = ThreadLocalRandom.current().nextInt(0,allNames.size());
+        int index = ThreadLocalRandom.current().nextInt(0, allNames.size());
         name = allNames.get(index);
         return name;
     }
@@ -147,8 +151,28 @@ public class Enemy implements Attack {
         }
         return item;
     }
-    public void takeDamage(int damage){
-        currentHP-=damage;
+
+    private Item generateRandomUsable() {
+        int index = ThreadLocalRandom.current().nextInt(0, 2);
+        Item usable;
+        switch (index) {
+            case 0:
+                usable = new HPPotion();
+                break;
+            case 1:
+                usable = new Tome();
+                break;
+            default:
+                usable = null;
+                break;
+
+        }
+        return usable;
+
+    }
+
+    public void takeDamage(int damage) {
+        currentHP -= damage;
     }
 }
 

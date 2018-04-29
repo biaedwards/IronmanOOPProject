@@ -5,13 +5,18 @@ import Game.Hero.Hero;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class HPPotion extends Item implements Usable {
+public class HPPotion extends Item {
     private int value;
     private ArrayList<String> names = new ArrayList<>();
 
-    HPPotion() {
+    public HPPotion() {
         generateRandomPotion();
 
+    }
+    public HPPotion(String name, int value){
+        setName(name);
+        setValue(value);
+        setCost(0);
     }
 
     private void generateRandomPotion() {
@@ -36,8 +41,5 @@ public class HPPotion extends Item implements Usable {
         this.value = value;
     }
 
-    @Override
-    public void use(Hero hero) {
-        hero.changeCurrentHP(value);
-    }
+
 }

@@ -6,7 +6,7 @@ import Game.PlayerType;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Weapon extends Item implements Equippable {
+public class Weapon extends Item  {
     private PlayerType type;
     private int damage;
     private ArrayList<String> firstPart = new ArrayList<>();
@@ -93,10 +93,4 @@ public class Weapon extends Item implements Equippable {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-
-    @Override
-    public void equip(Hero hero) {
-        hero.setWeapon(this);
-    }
-
 }

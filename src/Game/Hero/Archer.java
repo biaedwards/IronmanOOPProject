@@ -27,9 +27,6 @@ public class Archer extends Hero {
         this.setWeapon(new Weapon("Default", 0, 20, getType()));
         this.setHelmet(new Helmet("Default", 0, 5, 3));
         this.setVest(new Vest("Default", 0, 5, 15));
-        addToInventory(getWeapon());
-        addToInventory(getHelmet());
-        addToInventory(getVest());
 
     }
 
