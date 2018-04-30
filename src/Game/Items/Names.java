@@ -1,5 +1,8 @@
 package Game.Items;
 
+import Game.PlayerType;
+import Game.Skill;
+
 import java.util.ArrayList;
 
 public class Names {
@@ -9,6 +12,7 @@ public class Names {
     static ArrayList<String> weaponFirstPart;
     static ArrayList<String> weaponSecondPart;
     static ArrayList<String> weaponThirdPart;
+    public static ArrayList<Skill> allSkills;
 
     public Names(){
         armorFirstPart = new ArrayList<>();
@@ -17,6 +21,7 @@ public class Names {
         weaponFirstPart = new ArrayList<>();
         weaponSecondPart = new ArrayList<>();
         weaponThirdPart = new ArrayList<>();
+        allSkills = new ArrayList<>();
 
 
         armorFirstPart.add("Paper");
@@ -109,5 +114,18 @@ public class Names {
         weaponThirdPart.add("Beasts");
         weaponThirdPart.add("The Dark Ones");
         weaponThirdPart.add("The Gods");
+
+        allSkills.add(new Skill(PlayerType.MAGE, "Fireball", 5, true));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Stab", 5, true));
+        allSkills.add( new Skill(PlayerType.ARCHER, "Ice Arrow", 5, true));
+        allSkills.add(new Skill(PlayerType.MAGE, "Blizzard", 15, true));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Pulverize", 10, true));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Volley", 10, true));
+        allSkills.add(new Skill(PlayerType.MAGE, "Meteor Strike", 30, true));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Rain of arrows", 20, true));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Shockwave", 20, true));
+        allSkills.add(new Skill(PlayerType.MAGE, "Armageddon", 200, false));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Headshot", 100, true));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Earthquake", 150, false));
     }
 }
