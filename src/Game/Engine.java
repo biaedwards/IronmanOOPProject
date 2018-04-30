@@ -7,6 +7,8 @@ import Game.Items.HPPotion;
 import Game.Items.Names;
 import Game.Location.Difficulty;
 import Game.Location.Dungeon;
+import Game.Location.Shop.Shop;
+import Game.Location.Town;
 import javafx.scene.shape.Arc;
 
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class Engine {
     private HashSet<Hero> heroes = new HashSet<>();
     private Hero currentHero;
     private Dungeon currentDungeon;
+    private Town currentTown;
     private int attack;
     private boolean specialUsed;
     private Scanner in = new Scanner(System.in);
@@ -39,6 +42,7 @@ public class Engine {
         currentHero.addToInventory(potion);
         currentHero.addToInventory(potion);
         visitDungeon(Difficulty.FIRST);
+
     }
 
     private PlayerType getHeroTypes(int number) {
@@ -141,6 +145,7 @@ public class Engine {
         currentHero.setXp(currentDungeon.getXP());
         currentHero.setGold(currentDungeon.getGold());
         System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
+        visitLocation();
     }
 
     private void combatMenu(Enemy enemy) {
@@ -245,6 +250,30 @@ public class Engine {
 
 
         }
+    }
+
+    private void visitLocation() {
+        System.out.println("1. Visit the town");
+        System.out.println("2. Visit a dungeon");
+        switch (in.nextInt()) {
+            case 1: visitTown();
+            break;
+        }
+
+    }
+
+    private void visitTown() {
+        currentTown = new Town();
+        int counter = 1;
+        for (Shop shop : currentTown.getShops()) {
+            System.out.printf("%d: %s\n", counter, shop.getName());
+            counter++;
+        }
+        counter = in.nextInt();
+        currentTown.getShops().get(counter-1).printInventory();
+
+
+
     }
 
     private void showMyInventory() {
