@@ -39,5 +39,10 @@ public class HPPotion extends Item implements Usable{
         this.value = value;
     }
 
+    @Override
+    public String toString(){
+        return String.format("%s - %d HP | Cost: %d",getName(),getValue(),getCost());
+    }
+
 
 }

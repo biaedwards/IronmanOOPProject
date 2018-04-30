@@ -34,7 +34,7 @@ public class Enemy extends Entity {
   }
 
   public void showStats() {
-    System.out.printf("HP: %d \nDamage: %d \nGold reward: %d \nXP reward: %d \nItem reward: %s\n\n", currentHP, damage, gold, xp, item.toString());
+    System.out.printf("HP: %d \nDamage: %d \nGold reward: %d \nXP reward: %d \nItem reward:???\n\n", currentHP, damage, gold, xp);
   }
 
   public void dropReward(Hero hero) {

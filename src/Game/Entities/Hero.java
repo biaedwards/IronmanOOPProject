@@ -211,7 +211,7 @@ public abstract class Hero extends Entity {
         System.out.println("Here are your items with the quantities available in your invontory. Pick one by pressing a number. ");
         for (Item item : inventory.keySet()) {
             if (!(item instanceof Usable)) continue;
-            System.out.printf("%d: %s - quantity %d ", counter++, item.getName(), inventory.get(item));
+            System.out.printf("%d: %s - quantity %d \n", counter++, item.getName(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any usable items. Press any key to continue.");
@@ -325,10 +325,24 @@ public abstract class Hero extends Entity {
         } else {
             gold -= item.getCost();
             addToInventory(item);
+            System.out.printf("You successfully bought %s\n",item.toString());
+            System.out.printf("Remaining gold: %d\n",getGold());
         }
     }
-    public void sellItem(){
-        showMyInventory();
+
+    public void sellItem(int x) {
+        int counter = 1;
+        for (Item item : inventory.keySet()) {
+            if (counter == x) {
+                inventory.remove(item);
+                System.out.printf("You sold %s and gained %d gold\n",item.getName(),item.getCost());
+                gold += item.getCost();
+                break;
+            }
+            counter++;
+
+        }
+
 
     }
 
@@ -339,10 +353,11 @@ public abstract class Hero extends Entity {
     public int attack() {
         return getDamage();
     }
-    private void showMyInventory() {
+
+    public void showMyInventory() {
         int counter = 1;
-        for (Item item:inventory.keySet()) {
-            System.out.printf("%d: %s - %d\n",counter++,item.toString(),inventory.get(item));
+        for (Item item : inventory.keySet()) {
+            System.out.printf("%d: %s - %d\n", counter++, item.toString(), inventory.get(item));
 
         }
     }

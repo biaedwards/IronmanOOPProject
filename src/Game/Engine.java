@@ -4,6 +4,7 @@ import Game.*;
 import Game.Entities.*;
 import Game.Exceptions.NoSuchHero;
 import Game.Items.HPPotion;
+import Game.Items.Item;
 import Game.Items.Names;
 import Game.Location.Difficulty;
 import Game.Location.Dungeon;
@@ -104,7 +105,7 @@ public class Engine {
             enemy.showStats();
 
             while (true) {
-                attack=0;
+                attack = 0;
                 ArrayList<Skill> unusedSkills = new ArrayList<>();
                 unusedSkills.addAll(currentHero.getSkills());
                 combatMenu(enemy, unusedSkills);
@@ -142,7 +143,7 @@ public class Engine {
     }
 
     private void combatMenu(Enemy enemy, ArrayList<Skill> unusedSkills) {
-        System.out.println("\nMake your choice by pressing a number. \n1: Attack \n2: Cast skill\n3: Cast class skill");
+        System.out.println("\nMake your choice by pressing a number. \n1: Attack \n2: Cast skill\n3: Cast class skill\n");
         switch (in.nextInt()) {
             case 1:
                 attack = currentHero.attack();
@@ -159,8 +160,8 @@ public class Engine {
                     System.out.printf("%d: %s\n", x++, skill.toString());
                 }
                 x = in.nextInt();
-                attack = currentHero.castSkill(unusedSkills.get(x-1));
-                unusedSkills.remove(x-1);
+                attack = currentHero.castSkill(unusedSkills.get(x - 1));
+                unusedSkills.remove(x - 1);
                 return;
             case 3:
                 if (!specialUsed) {
@@ -246,28 +247,87 @@ public class Engine {
         }
     }
 
-    private void visitLocation() {
+    private void visitLocation() throws InterruptedException {
         System.out.println("1. Visit the town");
         System.out.println("2. Visit a dungeon");
         switch (in.nextInt()) {
-            case 1: visitTown();
-            break;
+            case 1:
+                visitTown();
+            case 2:
+                createDungeon();
+                break;
         }
 
     }
 
-    private void visitTown() {
+    private void visitTown() throws InterruptedException {
         currentTown = new Town();
-        int counter = 1;
-        for (Shop shop : currentTown.getShops()) {
-            System.out.printf("%d: %s\n", counter, shop.getName());
-            counter++;
+        boolean inTown = true;
+        while (inTown) {
+            int counter = 1;
+            int newCounter = 1;
+            for (Shop shop : currentTown.getShops()) {
+                System.out.printf("%d: %s\n", counter, shop.getName());
+                counter++;
+            }
+            System.out.println("5: Sell your items");
+            System.out.println("6: Leave town");
+            counter = in.nextInt();
+            if (counter == 5) {
+                while (true) {
+                    currentHero.showMyInventory();
+                    System.out.println("Press any other key to go back.");
+                    counter = in.nextInt();
+                    currentHero.sellItem(counter);
+                    System.out.println("1. Sell another item");
+                    System.out.println("2. Return to town");
+                    counter = in.nextInt();
+                    if (counter == 2) {
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+                continue;
+
+            }
+            if (counter == 6) {
+                break;
+            }
+            if (counter >= 1 && counter <= 4) {
+                currentTown.getShops().get(counter - 1).printInventory();
+                counter = in.nextInt();
+                for (Item item : currentTown.getShops().get(newCounter - 1).getInventory()) {
+                    if (counter == newCounter) {
+                        currentHero.buyItem(item);
+                        break;
+                    }
+                    newCounter++;
+
+
+                }
+            }
         }
-        counter = in.nextInt();
-        currentTown.getShops().get(counter-1).printInventory();
+        System.out.println();
+    }
 
+    public void createDungeon() throws InterruptedException {
+        System.out.println("Choose which difficulty of dungeon to visit");
+        System.out.println("1. Easy");
+        System.out.println("2. Medium");
+        System.out.println("3. Hard");
+        switch (in.nextInt()) {
+            case 1:
+                visitDungeon(Difficulty.EASY);
+                break;
+            case 2:
+                visitDungeon(Difficulty.MEDIUM);
+                break;
+            case 3:
+                visitDungeon(Difficulty.HARD);
+                break;
 
-
+        }
     }
 
     private void showMyInventory() {

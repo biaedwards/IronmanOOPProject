@@ -27,7 +27,7 @@ public class Tome extends Item implements Usable{
 
     @Override
     public String toString(){
-        return String.format("%s. Cost: %d", getName(), getCost());
+        return String.format("%s - %d XP | Cost: %d",getName(),getValue(),getCost());
     }
 
     public int getValue() {
@@ -37,4 +37,5 @@ public class Tome extends Item implements Usable{
     public void setValue(int value) {
         this.value = value;
     }
+
 }
