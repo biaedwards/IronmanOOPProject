@@ -1,7 +1,5 @@
 package Game.Items;
 
-import Game.Hero.Hero;
-
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -1,15 +1,12 @@
 package Game;
 
+import Game.*;
+import Game.Entities.*;
 import Game.Exceptions.NoSuchHero;
-import Game.Hero.Archer;
-import Game.Hero.Hero;
-import Game.Hero.Mage;
-import Game.Hero.Warrior;
 import Game.Items.HPPotion;
 import Game.Items.Names;
 import Game.Location.Difficulty;
 import Game.Location.Dungeon;
-import Game.Location.Enemy;
 import javafx.scene.shape.Arc;
 
 import java.util.HashSet;

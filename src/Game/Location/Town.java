@@ -7,8 +7,6 @@ import java.util.HashSet;
 public class Town {
 
 
-
-
   private HashSet<Shop> shops = new HashSet<>();
 
   public Town() {

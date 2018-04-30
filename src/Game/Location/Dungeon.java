@@ -1,5 +1,7 @@
 package Game.Location;
 
+import Game.Entities.Enemy;
+
 import java.util.ArrayList;
 
 public class Dungeon {

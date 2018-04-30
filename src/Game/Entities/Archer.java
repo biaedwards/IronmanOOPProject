@@ -1,10 +1,11 @@
-package Game.Hero;
+package Game.Entities;
 
 
+import Game.Entities.Hero;
 import Game.Items.Helmet;
 import Game.Items.Vest;
 import Game.Items.Weapon;
-import Game.Location.Enemy;
+import Game.Entities.Enemy;
 import Game.PlayerType;
 import Game.Stat;
 

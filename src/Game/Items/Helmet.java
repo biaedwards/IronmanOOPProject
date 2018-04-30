@@ -1,6 +1,6 @@
 package Game.Items;
 
-import Game.Hero.Hero;
+import Game.Entities.Hero;
 
 import java.util.concurrent.ThreadLocalRandom;
 

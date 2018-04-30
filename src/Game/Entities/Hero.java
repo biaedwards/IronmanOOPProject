@@ -1,29 +1,21 @@
-package Game.Hero;
+package Game.Entities;
 
-import Game.Attack;
+import Game.*;
 import Game.Items.*;
-import Game.PlayerType;
-import Game.Skill;
-import Game.Stat;
+import Game.Entities.Entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public abstract class Hero implements Attack{
+public abstract class Hero extends Entity {
     private PlayerType type;
-    private int maxHP;
-    private int currentHP;
-    private double xp;
     private int level;
     private int defence;
     private int stat;
-    private int gold;
-    private int damage;
+
     private double xpUntilNextlevel;
 
     private Stat primaryStat;
-    private String name;
     private Weapon weapon;
     private Helmet helmet;
     private Vest vest;

@@ -1,5 +1,6 @@
-package Game.Hero;
+package Game.Entities;
 
+import Game.Entities.Hero;
 import Game.Items.Helmet;
 import Game.Items.Vest;
 import Game.Items.Weapon;
