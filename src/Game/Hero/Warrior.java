@@ -6,6 +6,8 @@ import Game.Items.Weapon;
 import Game.PlayerType;
 import Game.Stat;
 
+import static Game.Items.Names.allSkills;
+
 public class Warrior extends Hero {
 
     public Warrior(String name) {
@@ -13,7 +15,7 @@ public class Warrior extends Hero {
         setType(PlayerType.WARRIOR);
         setPrimaryStat(Stat.STRENGTH);
         createDefaultInventory();
-        learnSkill(getAllSkills().get(1));
+        learnSkill(allSkills.get(1));
     }
 
     @Override
@@ -21,6 +23,7 @@ public class Warrior extends Hero {
         return String.format("%s, Level %d Warrior", getName(), getLevel());
     }
 
+    @Override
     public void createDefaultInventory() {
         this.setWeapon(new Weapon("Default", 0, 20, this.getType()));
         this.setHelmet(new Helmet("Default", 0, 5, 0));

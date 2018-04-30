@@ -1,12 +1,11 @@
 package Game.Items;
 
 import Game.Hero.Hero;
-import Game.PlayerType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static Game.Items.ItemNames.armorFirstPart;
-import static Game.Items.ItemNames.armorSecondPart;
+import static Game.Items.Names.armorFirstPart;
+import static Game.Items.Names.armorSecondPart;
 
 public class Helmet extends Armor {
     int statBonus;
@@ -40,7 +39,7 @@ public class Helmet extends Armor {
 
     @Override
     public String toString() {
-        return String.format("%s. Stat bonus %d. Defence %d. Cost %d.\n", this.getName(), statBonus, getDefence(), getCost());
+        return String.format("%s. Stat bonus %d. Defence %d. Cost %d.", this.getName(), statBonus, getDefence(), getCost());
     }
 
     public int getStatBonus() {

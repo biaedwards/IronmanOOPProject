@@ -30,12 +30,9 @@ public abstract class Hero implements Attack{
 
     private HashMap<Item, Integer> inventory;
     private HashSet<Skill> skills;
-    private ArrayList<Skill> allSkills = new ArrayList<>();
-
 
     Hero(String name) {
         setName(name);
-        generateAllSkills();
         maxHP = 100;
         currentHP = maxHP;
         xp = 0;
@@ -48,7 +45,7 @@ public abstract class Hero implements Attack{
         inventory = new HashMap<>();
     }
 
-    public abstract void createDefaultInventory();
+    abstract void createDefaultInventory();
 
     public PlayerType getType() {
         return type;
@@ -192,10 +189,6 @@ public abstract class Hero implements Attack{
         return skills;
     }
 
-    public void setSkills(HashSet<Skill> skills) {
-        this.skills = skills;
-    }
-
     void learnSkill(Skill skill) {
         skills.add(skill);
     }
@@ -264,8 +257,6 @@ public abstract class Hero implements Attack{
             }
         }
 
-
-
     public void use(Item usable) {
         if (usable instanceof HPPotion) {
             if (inventory.containsKey(usable)) {
@@ -288,7 +279,6 @@ public abstract class Hero implements Attack{
             }
         }
     }
-
 
     public void equip(Item item) {
         if (item instanceof Weapon) {
@@ -324,38 +314,5 @@ public abstract class Hero implements Attack{
 
     public int attack() {
         return damage;
-    }
-
-    public ArrayList<Skill> getAllSkills() {
-        return allSkills;
-    }
-
-    private void generateAllSkills() {
-        Skill fireball = new Skill(PlayerType.MAGE, "Fireball", 5, true);
-        Skill stab = new Skill(PlayerType.WARRIOR, "Stab", 5, true);
-        Skill icearrow = new Skill(PlayerType.ARCHER, "Ice Arrow", 5, true);
-        Skill blizzard = new Skill(PlayerType.MAGE, "Blizzard", 15, true);
-        Skill pulverize = new Skill(PlayerType.WARRIOR, "Pulverize", 10, true);
-        Skill volley = new Skill(PlayerType.ARCHER, "Volley", 10, true);
-        Skill meteorstrike = new Skill(PlayerType.MAGE, "Meteor Strike", 30, true);
-        Skill rainofarrows = new Skill(PlayerType.ARCHER, "Rain of arrows", 20, true);
-        Skill shockwave = new Skill(PlayerType.WARRIOR, "Shockwave", 20, true);
-        Skill armageddon = new Skill(PlayerType.MAGE, "Armageddon", 200, false);
-        Skill headshot = new Skill(PlayerType.ARCHER, "Headshot", 100, true);
-        Skill earthquake = new Skill(PlayerType.WARRIOR, "Earthquake", 150, false);
-        allSkills.add(fireball);
-        allSkills.add(stab);
-        allSkills.add(icearrow);
-        allSkills.add(blizzard);
-        allSkills.add(pulverize);
-        allSkills.add(volley);
-        allSkills.add(meteorstrike);
-        allSkills.add(rainofarrows);
-        allSkills.add(shockwave);
-        allSkills.add(armageddon);
-        allSkills.add(headshot);
-        allSkills.add(earthquake);
-
-
     }
 }

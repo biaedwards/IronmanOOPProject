@@ -6,6 +6,8 @@ import Game.Items.Weapon;
 import Game.PlayerType;
 import Game.Stat;
 
+import static Game.Items.Names.allSkills;
+
 public class Mage extends Hero {
 
 
@@ -14,7 +16,7 @@ public class Mage extends Hero {
         setType(PlayerType.MAGE);
         setPrimaryStat(Stat.INTELLIGENCE);
         createDefaultInventory();
-        learnSkill(getAllSkills().get(0));
+        learnSkill(allSkills.get(0));
     }
 
     @Override
@@ -24,6 +26,7 @@ public class Mage extends Hero {
         this.setVest(new Vest("Default", 0, 5, 0));
     }
 
+    @Override
     public String toString() {
         return String.format("%s, Level %d Mage", this.getName(), this.getLevel());
     }

@@ -1,12 +1,11 @@
 package Game.Items;
 
 import Game.Hero.Hero;
-import Game.PlayerType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static Game.Items.ItemNames.armorFirstPart;
-import static Game.Items.ItemNames.armorSecondPart;
+import static Game.Items.Names.armorFirstPart;
+import static Game.Items.Names.armorSecondPart;
 
 public class Vest extends Armor {
     int HPBonus;
@@ -24,7 +23,6 @@ public class Vest extends Armor {
     }
 
     public void generateRandomVest() {
-
         int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
         int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
         String result = armorFirstPart.get(firstIndex) + " Vest of " + armorSecondPart.get(secondIndex);
@@ -39,7 +37,7 @@ public class Vest extends Armor {
 
     @Override
     public String toString() {
-        return String.format("%s. HP Bonus %d. Defence %d. Cost %d. \n", getName(), HPBonus, defence, getCost());
+        return String.format("%s. HP Bonus %d. Defence %d. Cost %d.", getName(), HPBonus, defence, getCost());
     }
 
     public int getHPBonus() {
