@@ -5,6 +5,9 @@ import Game.PlayerType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static Game.Items.ItemNames.armorFirstPart;
+import static Game.Items.ItemNames.armorSecondPart;
+
 public class Helmet extends Armor {
     int statBonus;
 
@@ -21,31 +24,10 @@ public class Helmet extends Armor {
     }
 
     public void generateRandomHelmet() {
-        firstPart.add("Paper");
-        firstPart.add("Cloth");
-        firstPart.add("Leather");
-        firstPart.add("Wooden");
-        firstPart.add("Chain");
-        firstPart.add("Copper");
-        firstPart.add("Steel");
-        firstPart.add("Silver");
-        firstPart.add("Gold");
-        firstPart.add("Titanium");
-        firstPart.add("Diamond");
-        firstPart.add("Epic");
-        firstPart.add("Godly");
-        firstPart.add("Legendary");
 
-        secondPart.add("Weaklings");
-        secondPart.add("Juniours");
-        secondPart.add("Nobles");
-        secondPart.add("Barons");
-        secondPart.add("Warlords");
-        secondPart.add("Demigods");
-
-        int firstIndex = ThreadLocalRandom.current().nextInt(0, firstPart.size());
-        int secondIndex = ThreadLocalRandom.current().nextInt(0, secondPart.size());
-        String result = firstPart.get(firstIndex) + " Helmet of " + secondPart.get(secondIndex);
+        int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
+        int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
+        String result = armorFirstPart.get(firstIndex) + " Helmet of " + armorSecondPart.get(secondIndex);
         this.setName(result);
         int stat = firstIndex + secondIndex * 2 + 1;
         int defence = (int) (firstIndex * 1.5 + secondIndex * 3 + 2);

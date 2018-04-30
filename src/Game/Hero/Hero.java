@@ -225,7 +225,7 @@ public abstract class Hero implements Attack{
         int counter = 1;
         for (Item item : inventory.keySet()) {
             if(!(item instanceof Equipable)) continue;
-                System.out.printf("%d: %s - quantity ", counter++, item.toString(), inventory.get(item));
+                System.out.printf("%d: %s", counter++, item.toString(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any equipable items. Press any key to continue.");
