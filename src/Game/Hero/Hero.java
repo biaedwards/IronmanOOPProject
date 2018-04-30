@@ -31,8 +31,6 @@ public abstract class Hero implements Attack{
     private HashMap<Item, Integer> inventory;
     private HashSet<Skill> skills;
 
-
-
     Hero(String name) {
         setName(name);
         maxHP = 100;
@@ -47,7 +45,7 @@ public abstract class Hero implements Attack{
         inventory = new HashMap<>();
     }
 
-    public abstract void createDefaultInventory();
+    abstract void createDefaultInventory();
 
     public PlayerType getType() {
         return type;

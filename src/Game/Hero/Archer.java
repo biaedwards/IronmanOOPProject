@@ -8,6 +8,8 @@ import Game.Location.Enemy;
 import Game.PlayerType;
 import Game.Stat;
 
+import static Game.Items.Names.allSkills;
+
 public class Archer extends Hero {
 
     public Archer(String name) {
@@ -15,14 +17,16 @@ public class Archer extends Hero {
         setType(PlayerType.ARCHER);
         setPrimaryStat(Stat.AGILITY);
         createDefaultInventory();
-        learnSkill(getAllSkills().get(2));
+        learnSkill(allSkills.get(2));
     }
 
 
+    @Override
     public String toString() {
         return String.format("%s, Level %d Archer", this.getName(), this.getLevel());
     }
 
+    @Override
     public void createDefaultInventory() {
         this.setWeapon(new Weapon("Default", 0, 20, getType()));
         this.setHelmet(new Helmet("Default", 0, 5, 3));
