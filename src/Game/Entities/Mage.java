@@ -5,6 +5,7 @@ import Game.Items.Helmet;
 import Game.Items.Vest;
 import Game.Items.Weapon;
 import Game.PlayerType;
+import Game.Skill;
 import Game.Stat;
 
 import static Game.Items.Names.allSkills;
@@ -17,7 +18,6 @@ public class Mage extends Hero {
         setType(PlayerType.MAGE);
         setPrimaryStat(Stat.INTELLIGENCE);
         createDefaultInventory();
-        learnSkill(allSkills.get(0));
     }
 
     @Override
@@ -40,6 +40,7 @@ public class Mage extends Hero {
             setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
             setMaxHP(getMaxHP() + 10);
             setStat(getStat() + 3);
+            super.level();
         }
     }
 

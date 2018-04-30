@@ -9,8 +9,10 @@ public class Skill {
     private boolean usesWeapon;
     private int level;
 
+
     public Skill(PlayerType type, String name, int damage, boolean usesWeapon, int level) {
         this.type = type;
+
         this.name = name;
         this.damage = damage;
         this.usesWeapon = usesWeapon;
@@ -38,8 +40,8 @@ public class Skill {
         return usesWeapon;
     }
 
-
-
-
+    public int getLevel() {
+        return level;
+    }
 }
 

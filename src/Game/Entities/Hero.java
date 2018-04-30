@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import static Game.Items.Names.allSkills;
+
 public abstract class Hero extends Entity {
     private PlayerType type;
     private int level;
@@ -36,6 +38,11 @@ public abstract class Hero extends Entity {
         xpUntilNextlevel = 1000;
         skills = new ArrayList<>();
         inventory = new HashMap<>();
+    }
+
+    public String statsToString(){
+        return String.format("HP: %d\nXP: %d\nLevel: %d\nXP until next level: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
+                currentHP, xp, level,xpUntilNextlevel,defence,damage,gold,weapon.toString(),helmet.toString(),vest.toString());
     }
 
     abstract void createDefaultInventory();
@@ -182,8 +189,13 @@ public abstract class Hero extends Entity {
         return skills;
     }
 
-    void learnSkill(Skill skill) {
-        skills.add(skill);
+    void learnSkill() {
+        for(Skill aSkill:allSkills){
+            if(aSkill.getType()!=type||aSkill.getLevel()!=level) continue;
+            skills.add(aSkill);
+            System.out.printf("Congratulations! You leveled up and learned a new skill %s!!!", aSkill.toString());
+            return;
+        }
     }
 
     public int castSkill(Skill skill) {
@@ -299,7 +311,15 @@ public abstract class Hero extends Entity {
         }
     }
 
-    public abstract void level();
+    public void level(){
+        if(level%2==0){
+            learnSkill();
+        }
+        else{
+            System.out.println("Congratulations! You leveled up.");
+        }
+        System.out.printf("Here are your updated stats:\n%s",statsToString());
+    };
 
     public void takeDamage(int damage) {
         currentHP -= (defence>damage)?1:damage-defence;

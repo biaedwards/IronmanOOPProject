@@ -18,7 +18,6 @@ public class Archer extends Hero {
         setType(PlayerType.ARCHER);
         setPrimaryStat(Stat.AGILITY);
         createDefaultInventory();
-        learnSkill(allSkills.get(2));
     }
 
 
@@ -43,6 +42,7 @@ public class Archer extends Hero {
             setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
             setMaxHP(getMaxHP() + 15);
             setStat(getStat() + 5);
+            super.level();
         }
     }
 

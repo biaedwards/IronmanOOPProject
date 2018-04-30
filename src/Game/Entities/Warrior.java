@@ -16,7 +16,6 @@ public class Warrior extends Hero {
         setType(PlayerType.WARRIOR);
         setPrimaryStat(Stat.STRENGTH);
         createDefaultInventory();
-        learnSkill(allSkills.get(1));
     }
 
     @Override
@@ -40,6 +39,7 @@ public class Warrior extends Hero {
             setMaxHP(getMaxHP() + 25);
             setDefence(getDefence() + 1);
             setStat(getStat() + 3);
+            super.level();
         }
     }
 

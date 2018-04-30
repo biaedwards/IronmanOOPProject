@@ -87,17 +87,7 @@ public class Engine {
     }
 
     private void showMyStats() throws InterruptedException {
-        System.out.println("HP: " + currentHero.getCurrentHP());
-        System.out.println("XP: " + currentHero.getXp());
-        System.out.println("Level: " + currentHero.getLevel());
-        System.out.println("XP until next level: " + currentHero.getXpUntilNextlevel());
-        System.out.println("Defence: " + currentHero.getDefence());
-        System.out.println("Damage: " + currentHero.getDamage());
-        System.out.println("Gold: " + currentHero.getGold());
-        System.out.println("Weapon: " + currentHero.getWeapon().toString());
-        System.out.println("Helmet: " + currentHero.getHelmet().toString());
-        System.out.println("Vest: " + currentHero.getVest().toString());
-        System.out.println();
+        System.out.println(currentHero.statsToString());
         //Thread.sleep(3000);
     }
 
