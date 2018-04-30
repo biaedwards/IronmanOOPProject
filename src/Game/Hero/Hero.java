@@ -64,6 +64,7 @@ public abstract class Hero implements Attack {
 
     public void setXp(double xp) {
         this.xp += xp;
+        level();
     }
 
     public int getMaxHP() {

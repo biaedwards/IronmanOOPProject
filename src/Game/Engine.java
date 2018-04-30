@@ -188,6 +188,7 @@ public class Engine {
                 case 1:
                     currentHero.printUsables();
                     currentHero.useUsables(in.nextInt());
+                    currentHero.level();
                     break;
                 case 2:
                     currentHero.printEquipables();
