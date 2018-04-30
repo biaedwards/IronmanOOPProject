@@ -25,6 +25,7 @@ public class ItemNames {
         armorFirstPart.add("Godly");
         armorFirstPart.add("Legendary");
 
+
         armorSecondPart.add("Weaklings");
         armorSecondPart.add("Juniours");
         armorSecondPart.add("Nobles");
