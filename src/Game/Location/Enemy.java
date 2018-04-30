@@ -8,6 +8,8 @@ import Game.Stat;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static Game.Items.Names.enemiesNames;
+
 public class Enemy implements Attack {
 
     private int maxHP;
@@ -25,7 +27,6 @@ public class Enemy implements Attack {
     private ArrayList<String> allNames = new ArrayList<>();
 
     public Enemy(double coefficient) {
-        generateNames();
         this.name = getRandomName();
         maxHP = HP_DEFAULT;
         currentHP = maxHP;
@@ -87,52 +88,13 @@ public class Enemy implements Attack {
         return ThreadLocalRandom.current().nextInt(10, 50);
     }
 
-    private void generateNames() {
-        allNames.add("Adrian");
-        allNames.add("Borislav");
-        allNames.add("Dido");
-        allNames.add("Drago");
-        allNames.add("Edward");
-        allNames.add("Elizar");
-        allNames.add("Kiril");
-        allNames.add("Krasimir");
-        allNames.add("MariaONE");
-        allNames.add("MariaTWO");
-        allNames.add("MartinONE");
-        allNames.add("MartinTwo");
-        allNames.add("RadoONE");
-        allNames.add("RadoTWO");
-        allNames.add("Oxana");
-        allNames.add("Nasko");
-        allNames.add("Sasho");
-        allNames.add("Danail");
-        allNames.add("Irina");
-        allNames.add("Doncho");
-        allNames.add("Georgi");
-        allNames.add("Ivan");
-        allNames.add("Ivelin");
-        allNames.add("Ivo");
-        allNames.add("Krisi");
-        allNames.add("Lu");
-        allNames.add("Penyo");
-        allNames.add("Pepi");
-        allNames.add("Pesho");
-        allNames.add("Rosi");
-        allNames.add("Steven");
-        allNames.add("Maya");
-        allNames.add("Viktor");
-        allNames.add("Yana");
-        allNames.add("Yani");
-        allNames.add("Yasen");
-    }
-
     public int attack() {
         return damage;
     }
 
     private String getRandomName() {
-        int index = ThreadLocalRandom.current().nextInt(0, allNames.size());
-        name = allNames.get(index);
+        int index = ThreadLocalRandom.current().nextInt(0, enemiesNames.size());
+        name = enemiesNames.get(index);
         return name;
     }
 

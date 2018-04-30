@@ -1,10 +1,13 @@
 package Game.Items;
 
-import Game.Hero.Hero;
 import Game.PlayerType;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static Game.Items.Names.weaponFirstPart;
+import static Game.Items.Names.weaponSecondPart;
+import static Game.Items.Names.weaponThirdPart;
 
 public class Weapon extends Item implements Equipable  {
     private PlayerType type;
@@ -24,41 +27,11 @@ public class Weapon extends Item implements Equipable  {
     }
 
     public void generateRandomWeapon() {
-        firstPart.add("Wooden");
-        firstPart.add("Copper");
-        firstPart.add("Silver");
-        firstPart.add("Golden");
-        firstPart.add("Platinum");
-        firstPart.add("Frozen");
-        firstPart.add("Burning");
-        firstPart.add("Frostfire");
-        firstPart.add("Epic");
-        firstPart.add("Legendary");
-        firstPart.add("Unholy");
-        firstPart.add("Divine");
-        firstPart.add("Otherworldly");
-        firstPart.add("Absurd");
 
-        secondPart.add(" Sword of ");
-        secondPart.add(" Bow of ");
-        secondPart.add(" Staff of ");
-
-        thirdPart.add("Weaklings");
-        thirdPart.add("Newbies");
-        thirdPart.add("Recruits");
-        thirdPart.add("Proteges");
-        thirdPart.add("Nobles");
-        thirdPart.add("Masters");
-        thirdPart.add("Archangels");
-        thirdPart.add("Demigods");
-        thirdPart.add("Beasts");
-        thirdPart.add("The Dark Ones");
-        thirdPart.add("The Gods");
-
-        int firstIndex = ThreadLocalRandom.current().nextInt(0, firstPart.size());
-        int secondIndex = ThreadLocalRandom.current().nextInt(0, secondPart.size());
-        int thirdIndex = ThreadLocalRandom.current().nextInt(0, thirdPart.size());
-        String result = firstPart.get(firstIndex) + secondPart.get(secondIndex) + thirdPart.get(thirdIndex);
+        int firstIndex = ThreadLocalRandom.current().nextInt(0, weaponFirstPart.size());
+        int secondIndex = ThreadLocalRandom.current().nextInt(0, weaponSecondPart.size());
+        int thirdIndex = ThreadLocalRandom.current().nextInt(0, weaponThirdPart.size());
+        String result = weaponFirstPart.get(firstIndex) + weaponSecondPart.get(secondIndex) + weaponThirdPart.get(thirdIndex);
         setName(result);
         if (secondIndex == 0) {
             setType(PlayerType.WARRIOR);
@@ -75,7 +48,7 @@ public class Weapon extends Item implements Equipable  {
 
     @Override
     public String toString() {
-        return String.format("%s. Damage %d. Cost %d.\n", getName(), getDamage(), getCost());
+        return String.format("%s. Damage %d. Cost %d.", getName(), getDamage(), getCost());
     }
 
     public PlayerType getType() {

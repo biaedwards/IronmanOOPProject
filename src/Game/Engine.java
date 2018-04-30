@@ -6,7 +6,7 @@ import Game.Hero.Hero;
 import Game.Hero.Mage;
 import Game.Hero.Warrior;
 import Game.Items.HPPotion;
-import Game.Items.ItemNames;
+import Game.Items.Names;
 import Game.Location.Difficulty;
 import Game.Location.Dungeon;
 import Game.Location.Enemy;
@@ -24,7 +24,7 @@ public class Engine {
     private Scanner in = new Scanner(System.in);
 
     Engine() throws InterruptedException {
-        new ItemNames();
+        new Names();
         start();
     }
 
