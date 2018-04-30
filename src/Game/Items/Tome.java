@@ -25,6 +25,11 @@ public class Tome extends Item implements Usable{
 
     }
 
+    @Override
+    public String toString(){
+        return String.format("%s. Cost: %d", getName(), getCost());
+    }
+
     public int getValue() {
         return value;
     }

@@ -11,6 +11,7 @@ import Game.Location.Shop.Shop;
 import Game.Location.Town;
 import javafx.scene.shape.Arc;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -42,7 +43,6 @@ public class Engine {
         currentHero.addToInventory(potion);
         currentHero.addToInventory(potion);
         visitDungeon(Difficulty.FIRST);
-
     }
 
     private PlayerType getHeroTypes(int number) {
@@ -104,8 +104,10 @@ public class Engine {
             enemy.showStats();
 
             while (true) {
-                attack = 0;
-                combatMenu(enemy);
+                attack=0;
+                ArrayList<Skill> unusedSkills = new ArrayList<>();
+                unusedSkills.addAll(currentHero.getSkills());
+                combatMenu(enemy, unusedSkills);
                 enemy.takeDamage(attack);
                 System.out.printf("You dealt %d damage to the enemy\n\n", attack);
                 if (enemy.getCurrentHP() <= 0) {
@@ -139,7 +141,7 @@ public class Engine {
         visitLocation();
     }
 
-    private void combatMenu(Enemy enemy) {
+    private void combatMenu(Enemy enemy, ArrayList<Skill> unusedSkills) {
         System.out.println("\nMake your choice by pressing a number. \n1: Attack \n2: Cast skill\n3: Cast class skill");
         switch (in.nextInt()) {
             case 1:
@@ -151,13 +153,14 @@ public class Engine {
                     attack = currentHero.attack();
                     return;
                 }
-                System.out.println("Choose one of your skills to use this time by pressing a number.");
+                System.out.println("Choose one of your skills to use this time by pressing a number. WARNING: You can only use a skill once in a battle.");
                 int x = 1;
-                for (Skill skill : currentHero.getSkills()) {
+                for (Skill skill : unusedSkills) {
                     System.out.printf("%d: %s\n", x++, skill.toString());
                 }
                 x = in.nextInt();
-                attack = currentHero.castSkill(currentHero.getSkills().get(x - 1));
+                attack = currentHero.castSkill(unusedSkills.get(x-1));
+                unusedSkills.remove(x-1);
                 return;
             case 3:
                 if (!specialUsed) {
@@ -262,12 +265,12 @@ public class Engine {
         }
         counter = in.nextInt();
         currentTown.getShops().get(counter-1).printInventory();
-        currentHero.sellItem();
-
 
 
 
     }
 
-
+    private void showMyInventory() {
+        currentHero.getInventory().entrySet().forEach(System.out::println);
+    }
 }
