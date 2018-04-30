@@ -58,7 +58,7 @@ public class Helmet extends Armor {
 
     @Override
     public String toString() {
-        return String.format("%s. Stat bonus %d. Defence %d. Cost %d.", this.getName(), statBonus, getDefence(), getCost());
+        return String.format("%s. Stat bonus %d. Defence %d. Cost %d.\n", this.getName(), statBonus, getDefence(), getCost());
     }
 
     public int getStatBonus() {

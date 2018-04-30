@@ -4,7 +4,7 @@ import Game.Hero.Hero;
 
 import java.util.ArrayList;
 
-public abstract class Armor extends Item {
+public abstract class Armor extends Item implements Equipable {
     int defence;
     ArrayList<String> firstPart = new ArrayList<>();
     ArrayList<String> secondPart = new ArrayList<>();
@@ -22,12 +22,6 @@ public abstract class Armor extends Item {
 
     public void generateRandomName() {
 
-    }
-
-
-    @Override
-    public String toString() {
-        return String.format("Armor %s. Defence %d. Cost %d.", getName(), defence, getCost());
     }
 
 

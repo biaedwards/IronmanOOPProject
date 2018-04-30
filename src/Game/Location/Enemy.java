@@ -38,9 +38,13 @@ public class Enemy implements Attack {
 
     }
 
+    public void showStats() {
+        System.out.printf("HP: %d \nDamage: %d \nGold reward: %d \nXP reward: %d \nItem reward: %s\n\n", currentHP, damage, gold, XP, item.toString());
+    }
+
     public void dropReward(Hero hero) {
-        System.out.printf("%s dropped: Item: %s\n", getName(), getItem().getName());
-        System.out.printf("%s, %d gold and you gained %d XP\n", usable.getName(), gold, XP);
+        System.out.printf("%s dropped: Item: %s\n", getName(), getItem().toString());
+        System.out.printf("%s, %d gold and you gained %d XP\n\n", usable.getName(), gold, XP);
         hero.addToInventory(item);
         hero.addToInventory(usable);
         hero.setXp(XP);

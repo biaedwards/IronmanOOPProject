@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public abstract class Hero implements Attack {
+public abstract class Hero implements Attack{
     private PlayerType type;
     private int maxHP;
     private int currentHP;
@@ -201,7 +201,7 @@ public abstract class Hero implements Attack {
     }
 
     public int castSkill(Skill skill) {
-        if (skill.isUsesWeapon()) {
+        if (skill.usesWeapon()) {
             return (skill.getDamage() + getDamage());
         } else {
             return skill.getDamage();
@@ -211,21 +211,10 @@ public abstract class Hero implements Attack {
 
     public void printUsables() {
         int counter = 1;
+        System.out.println("Here are your items with the quantities available in your invontory. Pick one by pressing a number. ");
         for (Item item : inventory.keySet()) {
-            if (item instanceof HPPotion) {
-                System.out.printf("%d: ", counter);
-                System.out.printf("%s ", item.getName());
-                System.out.println(inventory.get(item));
-
-                counter++;
-            }
-            if (item instanceof Tome) {
-                System.out.printf("%d: ", counter);
-                System.out.printf("%s ", item.getName());
-                System.out.println(inventory.get(item));
-                counter++;
-
-            }
+            if(!(item instanceof Usable)) continue;
+                System.out.printf("%d: %s - quantity %d ", counter++, item.getName(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any usable items. Press any key to continue.");
@@ -235,27 +224,8 @@ public abstract class Hero implements Attack {
     public void printEquipables() {
         int counter = 1;
         for (Item item : inventory.keySet()) {
-            if (item instanceof Weapon) {
-                System.out.printf("%d: ", counter);
-                System.out.printf("%s ", item.toString());
-                System.out.println(inventory.get(item));
-
-                counter++;
-            }
-            if (item instanceof Vest) {
-                System.out.printf("%d: ", counter);
-                System.out.printf("%s ", item.toString());
-                System.out.println(inventory.get(item));
-
-                counter++;
-            }
-            if (item instanceof Helmet) {
-                System.out.printf("%d: ", counter);
-                System.out.printf("%s ", item.toString());
-                System.out.println(inventory.get(item));
-
-                counter++;
-            }
+            if(!(item instanceof Equipable)) continue;
+                System.out.printf("%d: %s - quantity ", counter++, item.toString(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any equipable items. Press any key to continue.");
@@ -278,7 +248,6 @@ public abstract class Hero implements Attack {
                     break;
                 }
                 counter++;
-
             }
         }
     }
@@ -286,31 +255,16 @@ public abstract class Hero implements Attack {
     public void equipEquipables(int number) {
         int counter = 1;
         for (Item item : inventory.keySet()) {
-            if (item instanceof Weapon) {
+            if(!(item instanceof Equipable)) continue;
                 if (number == counter) {
                     equip(item);
+                    inventory.remove(item);
                     break;
                 }
-                counter++;
-            }
-            if (item instanceof Vest) {
-                if (number == counter) {
-                    equip(item);
-                    break;
-                }
-
-                counter++;
-            }
-            if (item instanceof Helmet) {
-                if (number == counter) {
-                    equip(item);
-                    break;
-                }
-
                 counter++;
             }
         }
-    }
+
 
 
     public void use(Item usable) {

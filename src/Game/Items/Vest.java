@@ -58,7 +58,7 @@ public class Vest extends Armor {
 
     @Override
     public String toString() {
-        return String.format("%s. HP Bonus %d. Defence %d. Cost %d.", getName(), HPBonus, defence, getCost());
+        return String.format("%s. HP Bonus %d. Defence %d. Cost %d. \n", getName(), HPBonus, defence, getCost());
     }
 
     public int getHPBonus() {

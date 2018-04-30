@@ -5,7 +5,7 @@ import Game.Hero.Hero;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class HPPotion extends Item {
+public class HPPotion extends Item implements Usable{
     private int value;
     private ArrayList<String> names = new ArrayList<>();
 

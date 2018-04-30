@@ -6,7 +6,7 @@ import Game.PlayerType;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Weapon extends Item  {
+public class Weapon extends Item implements Equipable  {
     private PlayerType type;
     private int damage;
     private ArrayList<String> firstPart = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Weapon extends Item  {
 
     @Override
     public String toString() {
-        return String.format("%s. Damage %d. Cost %d.", getName(), getDamage(), getCost());
+        return String.format("%s. Damage %d. Cost %d.\n", getName(), getDamage(), getCost());
     }
 
     public PlayerType getType() {

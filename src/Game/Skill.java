@@ -15,6 +15,11 @@ public class Skill {
         setUsesWeapon(usesWeapon);
     }
 
+    @Override
+    public String toString(){
+        return String.format("%s with damage %d", name, damage);
+    }
+
     public PlayerType getType() {
         return type;
     }
@@ -39,7 +44,7 @@ public class Skill {
         this.damage = damage;
     }
 
-    public boolean isUsesWeapon() {
+    public boolean usesWeapon() {
         return usesWeapon;
     }
 
