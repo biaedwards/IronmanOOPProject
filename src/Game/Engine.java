@@ -104,6 +104,7 @@ public class Engine {
             enemy.showStats();
 
             while (true) {
+                attack = 0;
                 combatMenu(enemy);
                 enemy.takeDamage(attack);
                 System.out.printf("You dealt %d damage to the enemy\n\n", attack);
@@ -261,12 +262,12 @@ public class Engine {
         }
         counter = in.nextInt();
         currentTown.getShops().get(counter-1).printInventory();
+        currentHero.sellItem();
+
 
 
 
     }
 
-    private void showMyInventory() {
-        currentHero.getInventory().entrySet().forEach(System.out::println);
-    }
+
 }

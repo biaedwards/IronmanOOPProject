@@ -15,7 +15,6 @@ public abstract class Hero extends Entity {
     private int level;
     private int defence;
     private int stat;
-
     private double xpUntilNextlevel;
 
     private Stat primaryStat;
@@ -40,9 +39,9 @@ public abstract class Hero extends Entity {
         inventory = new HashMap<>();
     }
 
-    public String statsToString(){
-        return String.format("HP: %d\nXP: %d\nLevel: %d\nXP until next level: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
-                currentHP, xp, level,xpUntilNextlevel,defence,damage,gold,weapon.toString(),helmet.toString(),vest.toString());
+    public String statsToString() {
+        return String.format("HP: %d\nXP: %d\nLevel: %d\nXP until next level: %f\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
+                currentHP, xp, level, xpUntilNextlevel, defence, damage, gold, weapon.toString(), helmet.toString(), vest.toString());
     }
 
     abstract void createDefaultInventory();
@@ -190,8 +189,8 @@ public abstract class Hero extends Entity {
     }
 
     void learnSkill() {
-        for(Skill aSkill:allSkills){
-            if(aSkill.getType()!=type||aSkill.getLevel()!=level) continue;
+        for (Skill aSkill : allSkills) {
+            if (aSkill.getType() != type || aSkill.getLevel() != level) continue;
             skills.add(aSkill);
             System.out.printf("Congratulations! You leveled up and learned a new skill %s!!!", aSkill.toString());
             return;
@@ -211,8 +210,8 @@ public abstract class Hero extends Entity {
         int counter = 1;
         System.out.println("Here are your items with the quantities available in your invontory. Pick one by pressing a number. ");
         for (Item item : inventory.keySet()) {
-            if(!(item instanceof Usable)) continue;
-                System.out.printf("%d: %s - quantity %d ", counter++, item.getName(), inventory.get(item));
+            if (!(item instanceof Usable)) continue;
+            System.out.printf("%d: %s - quantity %d ", counter++, item.getName(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any usable items. Press any key to continue.");
@@ -222,8 +221,8 @@ public abstract class Hero extends Entity {
     public void printEquipables() {
         int counter = 1;
         for (Item item : inventory.keySet()) {
-            if(!(item instanceof Equipable)) continue;
-                System.out.printf("%d: %s", counter++, item.toString(), inventory.get(item));
+            if (!(item instanceof Equipable)) continue;
+            System.out.printf("%d: %s", counter++, item.toString(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any equipable items. Press any key to continue.");
@@ -253,14 +252,14 @@ public abstract class Hero extends Entity {
     public void equipEquipables(int number) {
         int counter = 1;
         for (Item item : inventory.keySet()) {
-            if(!(item instanceof Equipable)) continue;
-                if (number == counter) {
-                    equip(item);
-                    break;
-                }
-                counter++;
+            if (!(item instanceof Equipable)) continue;
+            if (number == counter) {
+                equip(item);
+                break;
             }
+            counter++;
         }
+    }
 
     public void use(Item usable) {
         if (usable instanceof HPPotion) {
@@ -294,38 +293,57 @@ public abstract class Hero extends Entity {
 
         }
         if (item instanceof Helmet) {
-            stat-=helmet.getStatBonus();
+            stat -= helmet.getStatBonus();
             addToInventory(helmet);
             helmet = (Helmet) item;
-            stat+=helmet.getStatBonus();
+            stat += helmet.getStatBonus();
             inventory.remove(item);
 
         }
         if (item instanceof Vest) {
-            maxHP-=vest.getHPBonus();
+            maxHP -= vest.getHPBonus();
             addToInventory(vest);
             vest = (Vest) item;
-            maxHP+=vest.getHPBonus();
+            maxHP += vest.getHPBonus();
             inventory.remove(item);
 
         }
     }
 
-    public void level(){
-        if(level%2==0){
+    public void level() {
+        if (level % 2 == 0) {
             learnSkill();
-        }
-        else{
+        } else {
             System.out.println("Congratulations! You leveled up.");
         }
-        System.out.printf("Here are your updated stats:\n%s",statsToString());
-    };
+        System.out.printf("Here are your updated stats:\n%s", statsToString());
+    }
+
+    public void buyItem(Item item) {
+        if (item.getCost() > gold) {
+            System.out.println("You cannot afford this item");
+        } else {
+            gold -= item.getCost();
+            addToInventory(item);
+        }
+    }
+    public void sellItem(){
+        showMyInventory();
+
+    }
 
     public void takeDamage(int damage) {
-        currentHP -= (defence>damage)?1:damage-defence;
+        currentHP -= (defence > damage) ? 1 : damage - defence;
     }
 
     public int attack() {
-        return damage;
+        return getDamage();
+    }
+    private void showMyInventory() {
+        int counter = 1;
+        for (Item item:inventory.keySet()) {
+            System.out.printf("%d: %s - %d\n",counter++,item.toString(),inventory.get(item));
+
+        }
     }
 }
