@@ -4,6 +4,7 @@ import Game.*;
 import Game.Items.*;
 import Game.Entities.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -21,7 +22,7 @@ public abstract class Hero extends Entity {
     private Vest vest;
 
     private HashMap<Item, Integer> inventory;
-    private HashSet<Skill> skills;
+    private ArrayList<Skill> skills;
 
     Hero(String name) {
         setName(name);
@@ -33,7 +34,7 @@ public abstract class Hero extends Entity {
         stat = 1;
         gold = 0;
         xpUntilNextlevel = 1000;
-        skills = new HashSet<>();
+        skills = new ArrayList<>();
         inventory = new HashMap<>();
     }
 
@@ -177,7 +178,7 @@ public abstract class Hero extends Entity {
         return inventory;
     }
 
-    public HashSet<Skill> getSkills() {
+    public ArrayList<Skill> getSkills() {
         return skills;
     }
 

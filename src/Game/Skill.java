@@ -7,12 +7,14 @@ public class Skill {
     private String name;
     private int damage;
     private boolean usesWeapon;
+    private int level;
 
-    public Skill(PlayerType type, String name, int damage, boolean usesWeapon) {
-        setType(type);
-        setName(name);
-        setDamage(damage);
-        setUsesWeapon(usesWeapon);
+    public Skill(PlayerType type, String name, int damage, boolean usesWeapon, int level) {
+        this.type = type;
+        this.name = name;
+        this.damage = damage;
+        this.usesWeapon = usesWeapon;
+        this.level = level;
     }
 
     @Override
@@ -24,33 +26,19 @@ public class Skill {
         return type;
     }
 
-    public void setType(PlayerType type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
     public boolean usesWeapon() {
         return usesWeapon;
     }
 
-    public void setUsesWeapon(boolean usesWeapon) {
-        this.usesWeapon = usesWeapon;
-    }
+
 
 
 }

@@ -161,7 +161,7 @@ public class Engine {
                     System.out.printf("%d: %s\n", x++, skill.toString());
                 }
                 x = in.nextInt();
-                attack = currentHero.castSkill(currentHero.getAllSkills().get(x - 1));
+                attack = currentHero.castSkill(currentHero.getSkills().get(x - 1));
                 return;
             case 3:
                 if (!specialUsed) {
