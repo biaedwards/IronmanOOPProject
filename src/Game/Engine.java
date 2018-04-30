@@ -10,6 +10,7 @@ import Game.Items.ItemNames;
 import Game.Location.Difficulty;
 import Game.Location.Dungeon;
 import Game.Location.Enemy;
+import javafx.scene.shape.Arc;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class Engine {
     private Hero currentHero;
     private Dungeon currentDungeon;
     private int attack;
+    private boolean specialUsed;
     private Scanner in = new Scanner(System.in);
 
     Engine() throws InterruptedException {
@@ -36,7 +38,7 @@ public class Engine {
         System.out.println(firstHeroAdded);
         showMyStats();
         System.out.println(firstDungeon);
-        HPPotion potion = new HPPotion("Small potion (starter)",50);
+        HPPotion potion = new HPPotion("Small potion (starter)", 50);
         currentHero.addToInventory(potion);
         currentHero.addToInventory(potion);
         visitDungeon(Difficulty.FIRST);
@@ -101,7 +103,8 @@ public class Engine {
     private void visitDungeon(Difficulty difficulty) throws InterruptedException {
         currentDungeon = new Dungeon(difficulty);
         for (Enemy enemy : currentDungeon.getEnemies()) {
-            if (currentHero.getCurrentHP()<=0) {
+            specialUsed = false;
+            if (currentHero.getCurrentHP() <= 0) {
                 System.out.println("You have died :(");
                 System.out.println("Game over");
                 return;
@@ -110,10 +113,10 @@ public class Engine {
             enemy.showStats();
 
             while (true) {
-                combatMenu();
+                combatMenu(enemy);
                 enemy.takeDamage(attack);
                 System.out.printf("You dealt %d damage to the enemy\n\n", attack);
-                if (enemy.getCurrentHP()<=0) {
+                if (enemy.getCurrentHP() <= 0) {
                     System.out.println("You have killed the enemy!\n");
                     enemy.dropReward(currentHero);
                     currentHero.level();
@@ -124,8 +127,8 @@ public class Engine {
 
                 attack = enemy.attack();
                 currentHero.takeDamage(attack);
-                System.out.printf("The enemy dealt %d damage to you\n", (attack-currentHero.getDefence()));
-                if (currentHero.getCurrentHP()<=0) {
+                System.out.printf("The enemy dealt %d damage to you\n", (attack - currentHero.getDefence()));
+                if (currentHero.getCurrentHP() <= 0) {
                     System.out.println("You have died :(");
                     System.out.println("Game over");
 
@@ -140,28 +143,81 @@ public class Engine {
         System.out.println("You have CLEARED the Dungeon!!");
         currentHero.setXp(currentDungeon.getXP());
         currentHero.setGold(currentDungeon.getGold());
-        System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(),currentDungeon.getXP());
+        System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
     }
 
-    private void combatMenu() {
-        System.out.println("\n Make your choice by pressing a number. \n 1: Attack \n 2: Cast skill");
+    private void combatMenu(Enemy enemy) {
+        System.out.println("\nMake your choice by pressing a number. \n1: Attack \n2: Cast skill\n3: Cast class skill");
         switch (in.nextInt()) {
             case 1:
                 attack = currentHero.attack();
                 return;
             case 2:
-                if(currentHero.getSkills().isEmpty()) {
+                if (currentHero.getSkills().isEmpty()) {
                     System.out.println("You have no learned skill, so you will have to attack this time.");
                     attack = currentHero.attack();
                     return;
                 }
                 System.out.println("Choose one of your skills to use this time by pressing a number.");
-                int x=1;
+                int x = 1;
                 for (Skill skill : currentHero.getSkills()) {
                     System.out.printf("%d: %s\n", x++, skill.toString());
                 }
-                x=in.nextInt();
-                attack = currentHero.castSkill(currentHero.getAllSkills().get(x-1));
+                x = in.nextInt();
+                attack = currentHero.castSkill(currentHero.getAllSkills().get(x - 1));
+                return;
+            case 3:
+                if (!specialUsed) {
+                    if (currentHero.getType() == PlayerType.ARCHER) {
+                        System.out.printf("1. Attempt to execute the enemy\n");
+                        System.out.printf("2. Focus\n");
+                        switch (in.nextInt()) {
+                            case 1:
+                                ((Archer) currentHero).execute(enemy);
+                                specialUsed = true;
+                                break;
+                            case 2:
+                                ((Archer) currentHero).focus();
+                                specialUsed = true;
+
+                                break;
+                        }
+                    }
+                    if (currentHero.getType() == PlayerType.MAGE) {
+                        System.out.printf("1. Defensive spell\n");
+                        System.out.printf("2. Multicast\n");
+                        switch (in.nextInt()) {
+                            case 1:
+                                ((Mage) currentHero).spell();
+                                specialUsed = true;
+
+                                break;
+                            case 2:
+                                ((Mage) currentHero).multicast();
+                                specialUsed = true;
+
+                                break;
+                        }
+                    }
+                    if (currentHero.getType() == PlayerType.WARRIOR) {
+                        System.out.printf("1. Buff\n");
+                        System.out.printf("2. Bash the enemy\n");
+                        switch (in.nextInt()) {
+                            case 1:
+                                ((Warrior) currentHero).buff();
+                                specialUsed = true;
+
+                                break;
+                            case 2:
+                                ((Warrior) currentHero).bash();
+                                specialUsed = true;
+                                break;
+                        }
+                    }
+                } else {
+                    System.out.println("You have already used your class skill");
+                }
+
         }
 
 
@@ -186,7 +242,7 @@ public class Engine {
                     showMyStats();
                     break;
                 default:
-                    inMenu=false;
+                    inMenu = false;
                     break;
             }
 

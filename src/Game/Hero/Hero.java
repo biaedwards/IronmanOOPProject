@@ -299,14 +299,18 @@ public abstract class Hero implements Attack{
 
         }
         if (item instanceof Helmet) {
+            stat-=helmet.getStatBonus();
             addToInventory(helmet);
             helmet = (Helmet) item;
+            stat+=helmet.getStatBonus();
             inventory.remove(item);
 
         }
         if (item instanceof Vest) {
+            maxHP-=vest.getHPBonus();
             addToInventory(vest);
             vest = (Vest) item;
+            maxHP+=vest.getHPBonus();
             inventory.remove(item);
 
         }

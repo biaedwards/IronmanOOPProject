@@ -20,8 +20,8 @@ public class Mage extends Hero {
     @Override
     public void createDefaultInventory() {
         this.setWeapon(new Weapon("Default", 0, 20, super.getType()));
-        this.setHelmet(new Helmet("Default", 0, 5, 3));
-        this.setVest(new Vest("Default", 0, 5, 15));
+        this.setHelmet(new Helmet("Default", 0, 5, 0));
+        this.setVest(new Vest("Default", 0, 5, 0));
     }
 
     public String toString() {
