@@ -258,7 +258,6 @@ public abstract class Hero implements Attack{
             if(!(item instanceof Equipable)) continue;
                 if (number == counter) {
                     equip(item);
-                    inventory.remove(item);
                     break;
                 }
                 counter++;
@@ -295,15 +294,21 @@ public abstract class Hero implements Attack{
         if (item instanceof Weapon) {
             addToInventory(weapon);
             weapon = (Weapon) item;
+            inventory.remove(item);
+
 
         }
         if (item instanceof Helmet) {
             addToInventory(helmet);
             helmet = (Helmet) item;
+            inventory.remove(item);
+
         }
         if (item instanceof Vest) {
             addToInventory(vest);
             vest = (Vest) item;
+            inventory.remove(item);
+
         }
     }
 
