@@ -3,7 +3,6 @@ package Game;
 import Game.*;
 import Game.Entities.*;
 import Game.Exceptions.InvalidInputException;
-import Game.Exceptions.NoSuchHero;
 import Game.Items.HPPotion;
 import Game.Items.Item;
 import Game.Items.Names;
@@ -11,16 +10,14 @@ import Game.Location.Difficulty;
 import Game.Location.Dungeon;
 import Game.Location.Shop.Shop;
 import Game.Location.Town;
-import javafx.scene.shape.Arc;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 
 import static Game.Message.*;
 
 public class Engine {
-    private HashSet<Hero> heroes = new HashSet<>();
+    private ArrayList<Hero> heroes = new ArrayList<>();
     private Hero currentHero;
     private Dungeon currentDungeon;
     private Town currentTown;
@@ -29,17 +26,18 @@ public class Engine {
     private boolean multicastUsed;
     private Scanner in = new Scanner(System.in);
 
-    Engine() throws InterruptedException {
+    Engine()  {
         new Names();
+        System.out.println(startMessage);
         start();
     }
 
-    private void start() throws InterruptedException {
-        System.out.println(startMessage);
+    private void start()  {
+        System.out.println(newHero);
         String name = in.nextLine();
         System.out.println(chooseHeroType);
         addHero(name, getHeroTypes(validateInput(in.nextLine(), 3)));
-        System.out.println(firstHeroAdded);
+        System.out.println(heroAdded);
         showMyStats();
         System.out.println(firstDungeon);
         HPPotion potion = new HPPotion("Small potion (starter)", 50);
@@ -75,25 +73,29 @@ public class Engine {
     }
 
     private void showMyHeroes() {
-        heroes.forEach(System.out::println);
-    }
-
-    private void chooseCurrentHero(String name) {
-        for (Hero hero : heroes) {
-            if (hero.getName().equals(name)) {
-                currentHero = hero;
-                System.out.printf("Hero is set to %s", hero);
-                return;
-            }
+        int counter = 1;
+        System.out.println("Here are your heroes to choose from.");
+        for(Hero hero:heroes){
+            System.out.printf("%d: %s", counter++, hero.toString());
         }
     }
 
-    private void showMyStats() throws InterruptedException {
-        System.out.println(currentHero.statsToString());
-        //Thread.sleep(3000);
+    private void chooseCurrentHero(int number) {
+        int counter = 1;
+        for (Hero hero : heroes) {
+            if(counter==number){
+                currentHero = hero;
+                return;
+            }
+            counter++;
+        }
     }
 
-    private void visitDungeon(Difficulty difficulty) throws InterruptedException {
+    private void showMyStats() {
+        System.out.println(currentHero.statsToString());
+    }
+
+    private void visitDungeon(Difficulty difficulty){
         currentDungeon = new Dungeon(difficulty);
         for (Enemy enemy : currentDungeon.getEnemies()) {
             ArrayList<Skill> unusedSkills = new ArrayList<>();
@@ -102,7 +104,24 @@ public class Engine {
             if (currentHero.getCurrentHP() <= 0) {
                 System.out.println("You have died :(");
                 System.out.println("Game over");
-                return;
+                System.out.println("Press a number depending on what you want to do next.");
+                System.out.println("1: Quit the game.");
+                System.out.println("2: Continue playing with another hero.");
+                switch(validateInput(in.nextLine(), 2)){
+                    case 1: return;
+                    case 2:  showMyHeroes();
+                        System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.", heroes.size()+1);
+                        int choice = validateInput(in.nextLine(), heroes.size()+1);
+                        if(choice==heroes.size()+1){
+                            start();
+                        }
+                        else{
+                            chooseCurrentHero(choice);
+                            System.out.println("Great! Now choose what to do next.");
+                            visitLocation();
+                        }
+                        break;
+                }
             }
             System.out.printf("You explore the Dungeon and stumble upon %s with stats:\n\n", enemy.getName());
             enemy.showStats();
@@ -146,7 +165,7 @@ public class Engine {
         System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
         currentHero.setXp(currentDungeon.getXP());
         currentHero.setGold(currentDungeon.getGold());
-
+        System.out.println("Choose what to do next by pressing a number.");
         visitLocation();
     }
 
@@ -174,6 +193,11 @@ public class Engine {
                 do {
                     if (currentHero.getSkills().isEmpty()) {
                         System.out.println("You have no learned skill, so you will have to attack this time.");
+                        attack = currentHero.attack();
+                        return;
+                    }
+                    if(unusedSkills.isEmpty()){
+                        System.out.println("You have used all of your skills in this battle, so you will have to attack this time.");
                         attack = currentHero.attack();
                         return;
                     }
@@ -253,7 +277,7 @@ public class Engine {
 
     }
 
-    private void betweenFightMenu() throws InterruptedException {
+    private void betweenFightMenu(){
         boolean inMenu = true;
         while (inMenu) {
             System.out.println("Choose your next move by pressing a number. \n1. Use an item.\n2. Equip a new item.\n3. Continue to fight. ");
@@ -279,7 +303,7 @@ public class Engine {
         }
     }
 
-    private void visitLocation() throws InterruptedException {
+    private void visitLocation()  {
         System.out.println("1. Visit the town");
         System.out.println("2. Visit a dungeon");
         switch (validateInput(in.nextLine(), 2)) {
@@ -292,7 +316,7 @@ public class Engine {
 
     }
 
-    private void visitTown() throws InterruptedException {
+    private void visitTown()  {
         currentTown = new Town();
         System.out.println("You have visited a nearby town and recovered your HP");
         currentHero.changeCurrentHP(9999);
@@ -308,7 +332,8 @@ public class Engine {
             System.out.println("7: Equip items");
             System.out.println("8: Use items");
             System.out.println("9: Leave town and go to dungeon");
-            counter = validateInput(in.nextLine(), 9);
+            System.out.println("10: Change your hero");
+            counter = validateInput(in.nextLine(), 10);
             if (counter == 5) {
                 while (true) {
                     System.out.println("Here are your items with their quantities indicated at the end of each line. Choose which one to sell by pressing the corresponding number.");
@@ -340,7 +365,20 @@ public class Engine {
                 currentHero.useUsables(validateInput(in.nextLine(), currentHero.getUsables().size()));
             } else if (counter == 9) {
                 break;
-            } else if (counter < 5) {
+            }else if(counter==10){
+                showMyHeroes();
+                System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.", heroes.size()+1);
+                int choice = validateInput(in.nextLine(), heroes.size()+1);
+                if(choice==heroes.size()+1){
+                    start();
+                }
+                else{
+                    chooseCurrentHero(choice);
+                    System.out.println("Great! Now choose what to do next.");
+                    visitLocation();
+                }
+            }
+            else if (counter < 5) {
                 currentTown.getShops().get(counter - 1).printInventory();
                 System.out.printf("Gold: %d\n", currentHero.getGold());
                 int shopIndex = counter;
@@ -358,7 +396,7 @@ public class Engine {
         System.out.println();
     }
 
-    public void createDungeon() throws InterruptedException {
+    public void createDungeon() {
         System.out.println("Choose which difficulty of dungeon to visit");
         System.out.println("1. Easy");
         System.out.println("2. Medium");
