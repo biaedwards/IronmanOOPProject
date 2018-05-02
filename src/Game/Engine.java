@@ -26,6 +26,7 @@ public class Engine {
     private Town currentTown;
     private int attack;
     private boolean specialUsed;
+    private boolean multicastUsed;
     private Scanner in = new Scanner(System.in);
 
     Engine() throws InterruptedException {
@@ -169,19 +170,28 @@ public class Engine {
                 attack = currentHero.attack();
                 return;
             case 2:
-                if (currentHero.getSkills().isEmpty()) {
-                    System.out.println("You have no learned skill, so you will have to attack this time.");
-                    attack = currentHero.attack();
-                    return;
-                }
-                System.out.println("Choose one of your skills to use this time by pressing a number. WARNING: You can only use a skill once in a battle.");
-                int x = 1;
-                for (Skill skill : unusedSkills) {
-                    System.out.printf("%d: %s\n", x++, skill.toString());
-                }
-                x = validateInput(in.nextLine(), unusedSkills.size());
-                attack = currentHero.castSkill(unusedSkills.get(x - 1));
-                unusedSkills.remove(x - 1);
+                int counter = 0;
+                do {
+                    if (currentHero.getSkills().isEmpty()) {
+                        System.out.println("You have no learned skill, so you will have to attack this time.");
+                        attack = currentHero.attack();
+                        return;
+                    }
+                    System.out.println("Choose one of your skills to use this time by pressing a number. WARNING: You can only use a skill once in a battle.");
+                    int x = 1;
+                    for (Skill skill : unusedSkills) {
+                        System.out.printf("%d: %s\n", x++, skill.toString());
+                    }
+                    x = validateInput(in.nextLine(), unusedSkills.size());
+                    attack += currentHero.castSkill(unusedSkills.get(x - 1));
+                    if (!multicastUsed) {
+                        unusedSkills.remove(x - 1);
+                    }
+                    if (counter == 1) {
+                        multicastUsed = false;
+                    }
+                    counter++;
+                } while (multicastUsed);
                 return;
             case 3:
                 if (!specialUsed) {
@@ -195,6 +205,7 @@ public class Engine {
                                 break;
                             case 2:
                                 ((Archer) currentHero).focus();
+                                attack = currentHero.attack();
                                 specialUsed = true;
 
                                 break;
@@ -212,6 +223,7 @@ public class Engine {
                             case 2:
                                 ((Mage) currentHero).multicast();
                                 specialUsed = true;
+                                multicastUsed = true;
 
                                 break;
                         }
@@ -222,6 +234,7 @@ public class Engine {
                         switch (validateInput(in.nextLine(), 2)) {
                             case 1:
                                 ((Warrior) currentHero).buff();
+                                attack = currentHero.attack();
                                 specialUsed = true;
 
                                 break;
@@ -327,14 +340,14 @@ public class Engine {
                 currentHero.useUsables(validateInput(in.nextLine(), currentHero.getUsables().size()));
             } else if (counter == 9) {
                 break;
-            } else if (counter<5) {
+            } else if (counter < 5) {
                 currentTown.getShops().get(counter - 1).printInventory();
                 System.out.printf("Gold: %d\n", currentHero.getGold());
                 int shopIndex = counter;
-                counter = validateInput(in.nextLine(),currentTown.getShops().get(shopIndex - 1).getInventory().size());
+                counter = validateInput(in.nextLine(), currentTown.getShops().get(shopIndex - 1).getInventory().size());
                 int newCounter = 1;
                 for (Item item : currentTown.getShops().get(shopIndex - 1).getInventory()) {
-                    if (newCounter==counter) {
+                    if (newCounter == counter) {
                         currentHero.buyItem(item);
                         break;
                     }
