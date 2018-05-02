@@ -17,38 +17,38 @@ public class Dungeon {
 
         switch (difficulty) {
             case EASY:
-                coefficient = 0.8;
+                coefficient = 1;
                 enemiesNumbers = 4;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
-                gold = 100;
-                XP = 50;
+                gold = 1500;
+                XP = 1000;
                 break;
             case MEDIUM:
-                coefficient = 1.0;
+                coefficient = 1.5;
                 enemiesNumbers = 6;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 
-                gold = 300;
-                XP = 200;
+                gold = 2500;
+                XP = 2000;
                 break;
             case HARD:
-                coefficient = 1.2;
-                enemiesNumbers = 10;
+                coefficient = 2;
+                enemiesNumbers = 8;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 
-                gold = 500;
-                XP = 300;
+                gold = 4000;
+                XP = 5000;
                 break;
             case FIRST:
-                coefficient = 0.5;
+                coefficient = 0.25;
                 enemiesNumbers = 2;
-                gold = 100;
-                XP = 100;
+                gold = 1000;
+                XP = 500;
                 System.out.printf("You will face %d enemies.\n\n\n", enemiesNumbers);
                 break;
 
             default:
-                coefficient = 1.0;
+                coefficient = 0.5;
                 enemiesNumbers = 10;
                 gold = 100;
                 XP = 100;

@@ -37,7 +37,7 @@ public class Mage extends Hero {
         if (xp >= getXpUntilNextlevel()) {
             setLevel(getLevel() + 1);
             setXp(-getXpUntilNextlevel());
-            setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
+            setXpUntilNextlevel((int)(getXpUntilNextlevel() * 1.25));
             setMaxHP(getMaxHP() + 10);
             setStat(getStat() + 3);
             super.level();

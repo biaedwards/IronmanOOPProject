@@ -35,7 +35,7 @@ public class Warrior extends Hero {
         if (xp >= getXpUntilNextlevel()) {
             setLevel(getLevel() + 1);
             setXp(-getXpUntilNextlevel());
-            setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
+            setXpUntilNextlevel((int)(getXpUntilNextlevel() * 1.5));
             setMaxHP(getMaxHP() + 25);
             setDefence(getDefence() + 1);
             setStat(getStat() + 3);
@@ -50,8 +50,9 @@ public class Warrior extends Hero {
 
     }
 
-    public int bash() {
+    public void bash(Enemy enemy) {
         System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n", attack() + 10);
-        return attack() + 10;
+        enemy.takeDamage(attack() + 10);
+        enemy.setBashed(true);
     }
 }

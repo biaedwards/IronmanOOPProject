@@ -109,8 +109,10 @@ public class Engine {
                 ArrayList<Skill> unusedSkills = new ArrayList<>();
                 unusedSkills.addAll(currentHero.getSkills());
                 combatMenu(enemy, unusedSkills);
-                enemy.takeDamage(attack);
-                System.out.printf("You dealt %d damage to the enemy\n\n", attack);
+                if (attack != 0) {
+                    enemy.takeDamage(attack);
+                    System.out.printf("You dealt %d damage to the enemy\n\n", attack);
+                }
                 if (enemy.getCurrentHP() <= 0) {
                     System.out.println("You have killed the enemy!\n");
                     enemy.dropReward(currentHero);
@@ -119,10 +121,14 @@ public class Engine {
 
                 }
                 System.out.printf("The enemy has %d/%d HP remaining\n", enemy.getCurrentHP(), enemy.getMaxHP());
+                if (enemy.isBashed()) {
+                    enemy.setBashed(false);
+                    continue;
+                }
 
                 attack = enemy.attack();
                 currentHero.takeDamage(attack);
-                System.out.printf("The enemy dealt %d damage to you\n", (attack - currentHero.getDefence()));
+                System.out.printf("The enemy dealt %d damage to you\n", (attack - currentHero.getDefence())>0?attack - currentHero.getDefence():1);
                 if (currentHero.getCurrentHP() <= 0) {
                     System.out.println("You have died :(");
                     System.out.println("Game over");
@@ -136,9 +142,10 @@ public class Engine {
             betweenFightMenu();
         }
         System.out.println("You have CLEARED the Dungeon!!");
+        System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
         currentHero.setXp(currentDungeon.getXP());
         currentHero.setGold(currentDungeon.getGold());
-        System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
+
         visitLocation();
     }
 
@@ -206,7 +213,7 @@ public class Engine {
 
                                 break;
                             case 2:
-                                ((Warrior) currentHero).bash();
+                                ((Warrior) currentHero).bash(enemy);
                                 specialUsed = true;
                                 break;
                         }
@@ -229,7 +236,6 @@ public class Engine {
                     System.out.println("Here are your usable items. Pick one by pressing a number.");
                     currentHero.printUsables();
                     currentHero.useUsables(in.nextInt());
-                    currentHero.level();
                     break;
                 case 2:
                     System.out.println("Here are your equipable items. Pick one by pressing a number.");
@@ -262,6 +268,8 @@ public class Engine {
 
     private void visitTown() throws InterruptedException {
         currentTown = new Town();
+        System.out.println("You have visited a nearby town and recovered your HP");
+        currentHero.changeCurrentHP(9999);
         boolean inTown = true;
         while (inTown) {
             int counter = 1;
@@ -271,7 +279,10 @@ public class Engine {
                 counter++;
             }
             System.out.println("5: Sell your items");
-            System.out.println("6: Leave town");
+            System.out.println("6: Show stats");
+            System.out.println("7: Equip items");
+            System.out.println("8: Use items");
+            System.out.println("9: Leave town");
             counter = in.nextInt();
             if (counter == 5) {
                 while (true) {
@@ -279,6 +290,7 @@ public class Engine {
                     System.out.println("Press any other key to go back.");
                     counter = in.nextInt();
                     currentHero.sellItem(counter);
+                    System.out.printf("Gold: %d\n", currentHero.getGold());
                     System.out.println("1. Sell another item");
                     System.out.println("2. Return to town");
                     counter = in.nextInt();
@@ -292,12 +304,30 @@ public class Engine {
 
             }
             if (counter == 6) {
+                showMyStats();
+            }
+            if (counter == 7) {
+                System.out.println("Here are your equipable items. Pick one by pressing a number.");
+                currentHero.printEquipables();
+                currentHero.equipEquipables(in.nextInt());
+                System.out.println("Your stats have changed. Here is what they look like now.");
+                showMyStats();
+            }
+            if (counter == 8) {
+                System.out.println("Here are your usable items. Pick one by pressing a number.");
+                currentHero.printUsables();
+                currentHero.useUsables(in.nextInt());
+
+            }
+            if (counter == 9) {
                 break;
             }
             if (counter >= 1 && counter <= 4) {
                 currentTown.getShops().get(counter - 1).printInventory();
+                System.out.printf("Gold: %d\n", currentHero.getGold());
+                int shopIndex = counter;
                 counter = in.nextInt();
-                for (Item item : currentTown.getShops().get(newCounter - 1).getInventory()) {
+                for (Item item : currentTown.getShops().get(shopIndex - 1).getInventory()) {
                     if (counter == newCounter) {
                         currentHero.buyItem(item);
                         break;

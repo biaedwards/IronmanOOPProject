@@ -15,7 +15,7 @@ public abstract class Hero extends Entity {
     private int level;
     private int defence;
     private int stat;
-    private double xpUntilNextlevel;
+    private int xpUntilNextlevel;
 
     private Stat primaryStat;
     private Weapon weapon;
@@ -27,7 +27,7 @@ public abstract class Hero extends Entity {
 
     Hero(String name) {
         setName(name);
-        maxHP = 100;
+        maxHP = 150;
         currentHP = maxHP;
         xp = 0;
         level = 1;
@@ -40,8 +40,8 @@ public abstract class Hero extends Entity {
     }
 
     public String statsToString() {
-        return String.format("HP: %d\nXP: %d\nLevel: %d\nXP until next level: %f\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
-                currentHP, xp, level, xpUntilNextlevel, defence, damage, gold, weapon.toString(), helmet.toString(), vest.toString());
+        return String.format("HP: %d/%d\nXP: %d\nLevel: %d\nXP until next level: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
+                currentHP,maxHP, xp, level, xpUntilNextlevel, defence, damage, gold, weapon.toString(), helmet.toString(), vest.toString());
     }
 
     abstract void createDefaultInventory();
@@ -58,7 +58,7 @@ public abstract class Hero extends Entity {
         return xp;
     }
 
-    public void setXp(double xp) {
+    public void setXp(int xp) {
         this.xp += xp;
         level();
     }
@@ -80,11 +80,11 @@ public abstract class Hero extends Entity {
         currentHP = Math.min(currentHP, maxHP);
     }
 
-    public double getXpUntilNextlevel() {
+    public int getXpUntilNextlevel() {
         return xpUntilNextlevel;
     }
 
-    public void setXpUntilNextlevel(double xpUntilNextlevel) {
+    public void setXpUntilNextlevel(int xpUntilNextlevel) {
         this.xpUntilNextlevel = xpUntilNextlevel;
     }
 
@@ -222,7 +222,7 @@ public abstract class Hero extends Entity {
         int counter = 1;
         for (Item item : inventory.keySet()) {
             if (!(item instanceof Equipable)) continue;
-            System.out.printf("%d: %s", counter++, item.toString(), inventory.get(item));
+            System.out.printf("%d: %s\n", counter++, item.toString(), inventory.get(item));
         }
         if (counter == 1) {
             System.out.println("You don't have any equipable items. Press any key to continue.");
@@ -274,7 +274,7 @@ public abstract class Hero extends Entity {
             }
         } else if (usable instanceof Tome) {
             if (inventory.containsKey(usable)) {
-                xp += ((Tome) usable).getValue();
+                setXp(((Tome) usable).getValue());
                 System.out.printf("You have gained %d XP\n", ((Tome) usable).getValue());
                 inventory.put(usable, inventory.get(usable) - 1);
             }
@@ -335,7 +335,7 @@ public abstract class Hero extends Entity {
         for (Item item : inventory.keySet()) {
             if (counter == x) {
                 inventory.remove(item);
-                System.out.printf("You sold %s and gained %d gold\n",item.getName(),item.getCost());
+                System.out.printf("You sold %s and got %d gold\n",item.getName(),item.getCost());
                 gold += item.getCost();
                 break;
             }

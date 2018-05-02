@@ -39,20 +39,20 @@ public class Archer extends Hero {
         if (xp >= getXpUntilNextlevel()) {
             setLevel(getLevel() + 1);
             setXp(-getXpUntilNextlevel());
-            setXpUntilNextlevel(getXpUntilNextlevel() * 1.5);
+            setXpUntilNextlevel((int)(getXpUntilNextlevel() * 1.5));
             setMaxHP(getMaxHP() + 15);
             setStat(getStat() + 5);
             super.level();
         }
     }
 
-    public boolean execute(Enemy enemy) {
-        if (enemy.getCurrentHP() * 100 / enemy.getMaxHP() <= 15) {
+    public void execute(Enemy enemy) {
+        if (enemy.getCurrentHP() * 100 / enemy.getMaxHP() <= 25) {
             System.out.printf("You have executed %s!!!!\n", enemy.getName());
-            return true;
+            enemy.takeDamage(9999);
+
         } else {
             System.out.println("You failed the execution");
-            return false;
         }
 
     }
