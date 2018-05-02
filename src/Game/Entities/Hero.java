@@ -41,7 +41,7 @@ public abstract class Hero extends Entity {
 
     public String statsToString() {
         return String.format("HP: %d/%d\nXP: %d\nLevel: %d\nXP until next level: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
-                currentHP,maxHP, xp, level, xpUntilNextlevel, defence, damage, gold, weapon.toString(), helmet.toString(), vest.toString());
+                currentHP,maxHP, xp, level, xpUntilNextlevel, getDefence(), getDamage(), gold, weapon.toString(), helmet.toString(), vest.toString());
     }
 
     abstract void createDefaultInventory();
@@ -203,14 +203,30 @@ public abstract class Hero extends Entity {
         } else {
             return skill.getDamage();
         }
+    }
 
+    public ArrayList<Item> getUsables() {
+        ArrayList<Item> usables = new ArrayList<>();
+        for (Item item : inventory.keySet()) {
+            if (!(item instanceof Usable)) continue;
+            usables.add(item);
+        }
+        return usables;
+    }
+
+    public ArrayList<Item> getEquipables() {
+        ArrayList<Item> equipables = new ArrayList<>();
+        for (Item item : inventory.keySet()) {
+            if (!(item instanceof Equipable)) continue;
+            equipables.add(item);
+        }
+        return equipables;
     }
 
     public void printUsables() {
         int counter = 1;
         System.out.println("Here are your items with the quantities available in your invontory. Pick one by pressing a number. ");
-        for (Item item : inventory.keySet()) {
-            if (!(item instanceof Usable)) continue;
+        for (Item item : getUsables()) {
             System.out.printf("%d: %s - quantity %d \n", counter++, item.getName(), inventory.get(item));
         }
         if (counter == 1) {
@@ -220,8 +236,7 @@ public abstract class Hero extends Entity {
 
     public void printEquipables() {
         int counter = 1;
-        for (Item item : inventory.keySet()) {
-            if (!(item instanceof Equipable)) continue;
+        for (Item item : getEquipables()) {
             System.out.printf("%d: %s\n", counter++, item.toString(), inventory.get(item));
         }
         if (counter == 1) {
@@ -231,28 +246,19 @@ public abstract class Hero extends Entity {
 
     public void useUsables(int number) {
         int counter = 1;
-        for (Item item : inventory.keySet()) {
-            if (item instanceof HPPotion) {
-                if (number == counter) {
-                    use(item);
-                    break;
-                }
-                counter++;
+        for (Item item : getUsables()) {
+            if (number == counter) {
+                use(item);
+                break;
             }
-            if (item instanceof Tome) {
-                if (number == counter) {
-                    use(item);
-                    break;
-                }
-                counter++;
+            counter++;
             }
         }
-    }
+
 
     public void equipEquipables(int number) {
         int counter = 1;
-        for (Item item : inventory.keySet()) {
-            if (!(item instanceof Equipable)) continue;
+        for (Item item :getEquipables()) {
             if (number == counter) {
                 equip(item);
                 break;
