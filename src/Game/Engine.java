@@ -77,7 +77,7 @@ public class Engine {
         heroes.forEach(System.out::println);
     }
 
-    private void chooseCurrentHero(String name) throws NoSuchHero {
+    private void chooseCurrentHero(String name) {
         for (Hero hero : heroes) {
             if (hero.getName().equals(name)) {
                 currentHero = hero;
@@ -85,7 +85,6 @@ public class Engine {
                 return;
             }
         }
-        throw new NoSuchHero();
     }
 
     private void showMyStats() throws InterruptedException {
@@ -96,6 +95,8 @@ public class Engine {
     private void visitDungeon(Difficulty difficulty) throws InterruptedException {
         currentDungeon = new Dungeon(difficulty);
         for (Enemy enemy : currentDungeon.getEnemies()) {
+            ArrayList<Skill> unusedSkills = new ArrayList<>();
+            unusedSkills.addAll(currentHero.getSkills());
             specialUsed = false;
             if (currentHero.getCurrentHP() <= 0) {
                 System.out.println("You have died :(");
@@ -107,8 +108,6 @@ public class Engine {
 
             while (true) {
                 attack = 0;
-                ArrayList<Skill> unusedSkills = new ArrayList<>();
-                unusedSkills.addAll(currentHero.getSkills());
                 combatMenu(enemy, unusedSkills);
                 if (attack != 0) {
                     enemy.takeDamage(attack);
@@ -158,7 +157,7 @@ public class Engine {
             if (Integer.parseInt(input) > limit) throw new InvalidInputException();
             return Integer.parseInt(input);
         } catch (InvalidInputException e) {
-            System.out.println("Your input is invalid. Please write a valid input here.\n");
+            System.out.println("Your input is invalid. Please write a valid input here.");
             return validateInput(in.nextLine(), limit);
         }
     }
@@ -288,20 +287,21 @@ public class Engine {
         while (inTown) {
             int counter = 1;
             for (Shop shop : currentTown.getShops()) {
-                System.out.printf("%d: %s\n", counter, shop.getName());
+                System.out.printf("%d: Buy %s\n", counter, shop.getName());
                 counter++;
             }
             System.out.println("5: Sell your items");
             System.out.println("6: Show stats");
             System.out.println("7: Equip items");
             System.out.println("8: Use items");
-            System.out.println("9: Leave town");
+            System.out.println("9: Leave town and go to dungeon");
             counter = validateInput(in.nextLine(), 9);
             if (counter == 5) {
                 while (true) {
+                    System.out.println("Here are your items with their quantities indicated at the end of each line. Choose which one to sell by pressing the corresponding number.");
                     currentHero.showMyInventory();
                     int limit = currentHero.getInventory().size() + 1;
-                    System.out.printf("Press %d to go back.", limit);
+                    System.out.printf("Press %d to go back.\n", limit);
                     counter = validateInput(in.nextLine(), limit);
                     if (counter == limit) break;
                     currentHero.sellItem(counter);

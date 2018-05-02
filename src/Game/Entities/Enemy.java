@@ -40,8 +40,8 @@ public class Enemy extends Entity {
     }
 
     public void dropReward(Hero hero) {
-        System.out.printf("%s dropped:\n%s", getName(), getItem().toString());
-        System.out.printf("You alse received %s\n %d gold and gained %d XP.\n\n", usable.getName(), gold, xp);
+        System.out.printf("%s dropped:\n%s\n", getName(), getItem().toString());
+        System.out.printf("You alse received %s, %d gold and gained %d XP.\n\n", usable.getName(), gold, xp);
         hero.addToInventory(item);
         hero.addToInventory(usable);
         hero.setXp(xp);
