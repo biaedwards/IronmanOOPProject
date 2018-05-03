@@ -1,9 +1,9 @@
 package Game.Items;
 
-public abstract class Armor extends Item implements Equipable {
+abstract class Armor extends Item implements Equipable {
     private int defence;
 
-    public int getDefence() {
+     public int getDefence() {
         return defence;
     }
 

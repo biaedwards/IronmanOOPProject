@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import static Game.Message.*;
 
-public class Engine {
+ class Engine {
     private ArrayList<Hero> heroes = new ArrayList<>();
     private Hero currentHero;
     private Dungeon currentDungeon;
@@ -25,7 +25,7 @@ public class Engine {
     private boolean multicastUsed;
     private Scanner in = new Scanner(System.in);
 
-    Engine()  {
+  Engine()  {
         new Names();
         System.out.println(startMessage);
         start();
@@ -395,7 +395,7 @@ public class Engine {
         System.out.println();
     }
 
-    public void createDungeon() {
+    private void createDungeon() {
         System.out.println("Choose which difficulty of dungeon to visit");
         System.out.println("1. Easy");
         System.out.println("2. Medium");

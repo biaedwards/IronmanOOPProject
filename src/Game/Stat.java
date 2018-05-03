@@ -1,5 +1,5 @@
 package Game;
 
 public enum Stat {
-    AGILITY, INTELLIGENCE, STRENGTH
+  AGILITY, INTELLIGENCE, STRENGTH
 }

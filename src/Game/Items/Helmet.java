@@ -12,7 +12,7 @@ public class Helmet extends Armor {
         generateRandomEquipable();
     }
 
-    public Helmet(String name, int cost, int defence, int statBonus) {
+   public Helmet(String name, int cost, int defence, int statBonus) {
         setName(name);
         setCost(cost);
         setDefence(defence);

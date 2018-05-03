@@ -23,7 +23,7 @@ public class Shop implements PrintableInventory{
     }
 
 
-    void generateRandomItems(String item) {
+   private void generateRandomItems(String item) {
         switch (item) {
             case "Weapon":
                 for (int i = 0; i < 5; i++) {
