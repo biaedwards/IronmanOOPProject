@@ -1,14 +1,12 @@
 package Game.Items;
 
-import Game.Entities.Hero;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 import static Game.Items.Names.armorFirstPart;
 import static Game.Items.Names.armorSecondPart;
 
 public class Helmet extends Armor {
-    int statBonus;
+    private int statBonus;
 
     public Helmet() {
         generateRandomEquipable();
@@ -46,12 +44,7 @@ public class Helmet extends Armor {
         return statBonus;
     }
 
-    public void setStatBonus(int statBonus) {
+    private void setStatBonus(int statBonus) {
         this.statBonus = statBonus;
-    }
-
-    @Override
-    public void equip(Hero hero) {
-        hero.setHelmet(this);
     }
 }

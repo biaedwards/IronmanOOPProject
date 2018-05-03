@@ -2,7 +2,6 @@ package Game.Items;
 
 import Game.PlayerType;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static Game.Items.Names.weaponFirstPart;
@@ -12,9 +11,6 @@ import static Game.Items.Names.weaponThirdPart;
 public class Weapon extends Item implements Equipable  {
     private PlayerType type;
     private int damage;
-    private ArrayList<String> firstPart = new ArrayList<>();
-    private ArrayList<String> secondPart = new ArrayList<>();
-    private ArrayList<String> thirdPart = new ArrayList<>();
 
     public Weapon(String name, int cost, int damage, PlayerType type) {
         super(name, cost);
@@ -55,7 +51,7 @@ public class Weapon extends Item implements Equipable  {
         return type;
     }
 
-    public void setType(PlayerType type) {
+    private void setType(PlayerType type) {
         this.type = type;
     }
 
@@ -63,7 +59,7 @@ public class Weapon extends Item implements Equipable  {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    private void setDamage(int damage) {
         this.damage = damage;
     }
 }

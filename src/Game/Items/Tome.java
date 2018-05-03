@@ -34,7 +34,7 @@ public class Tome extends Item implements Usable{
         return value;
     }
 
-    public void setValue(int value) {
+    private void setValue(int value) {
         this.value = value;
     }
 

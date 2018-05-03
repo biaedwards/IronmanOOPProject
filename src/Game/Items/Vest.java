@@ -1,14 +1,12 @@
 package Game.Items;
 
-import Game.Entities.Hero;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 import static Game.Items.Names.armorFirstPart;
 import static Game.Items.Names.armorSecondPart;
 
 public class Vest extends Armor {
-    int HPBonus;
+    private int HPBonus;
 
     public Vest() {
         generateRandomEquipable();
@@ -19,7 +17,6 @@ public class Vest extends Armor {
         setCost(cost);
         setDefence(defence);
         setHPBonus(HPBonus);
-
     }
 
     public void generateRandomEquipable() {
@@ -37,19 +34,14 @@ public class Vest extends Armor {
 
     @Override
     public String toString() {
-        return String.format("%s. HP Bonus %d. Defence %d. Cost %d.", getName(), HPBonus, defence, getCost());
+        return String.format("%s. HP Bonus %d. Defence %d. Cost %d.", getName(), HPBonus, getDefence(), getCost());
     }
 
     public int getHPBonus() {
         return HPBonus;
     }
 
-    public void setHPBonus(int HPBonus) {
+    private void setHPBonus(int HPBonus) {
         this.HPBonus = HPBonus;
-    }
-
-    @Override
-    public void equip(Hero hero) {
-        hero.setVest(this);
     }
 }
