@@ -1,6 +1,5 @@
 package Game;
 
-import Game.*;
 import Game.Entities.*;
 import Game.Exceptions.InvalidInputException;
 import Game.Items.HPPotion;
@@ -337,7 +336,7 @@ public class Engine {
             if (counter == 5) {
                 while (true) {
                     System.out.println("Here are your items with their quantities indicated at the end of each line. Choose which one to sell by pressing the corresponding number.");
-                    currentHero.showMyInventory();
+                    currentHero.printInventory();
                     int limit = currentHero.getInventory().size() + 1;
                     System.out.printf("Press %d to go back.\n", limit);
                     counter = validateInput(in.nextLine(), limit);

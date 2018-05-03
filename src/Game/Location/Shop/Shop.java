@@ -1,11 +1,12 @@
 package Game.Location.Shop;
 
 import Game.Items.*;
+import Game.PrintableInventory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Shop {
+public class Shop implements PrintableInventory{
     private ArrayList<Item> inventory;
     private String name;
 
@@ -52,7 +53,6 @@ public class Shop {
     }
 
     public ArrayList<Item> getInventory() {
-
         return inventory;
     }
 

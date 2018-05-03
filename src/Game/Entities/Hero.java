@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 import static Game.Items.Names.allSkills;
 
-public abstract class Hero extends Entity {
+public abstract class Hero extends Entity implements PrintableInventory{
     private PlayerType type;
     private int level;
     private int defence;
@@ -360,7 +360,7 @@ public abstract class Hero extends Entity {
         return getDamage();
     }
 
-    public void showMyInventory() {
+    public void printInventory() {
         int counter = 1;
         for (Item item : inventory.keySet()) {
             System.out.printf("%d: %s - %d\n", counter++, item.toString(), inventory.get(item));

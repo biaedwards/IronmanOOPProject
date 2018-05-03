@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static Game.Items.Names.enemiesNames;
 
-public class Enemy extends Entity {
+public class Enemy extends Entity{
 
     private int maxHP;
     static final int HP_DEFAULT = 100;
