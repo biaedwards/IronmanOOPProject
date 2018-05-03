@@ -11,7 +11,7 @@ public class Vest extends Armor {
     int HPBonus;
 
     public Vest() {
-        generateRandomVest();
+        generateRandomEquipable();
     }
 
     public Vest(String name, int cost, int defence, int HPBonus) {
@@ -22,7 +22,7 @@ public class Vest extends Armor {
 
     }
 
-    public void generateRandomVest() {
+    public void generateRandomEquipable() {
         int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
         int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
         String result = armorFirstPart.get(firstIndex) + " Vest of " + armorSecondPart.get(secondIndex);

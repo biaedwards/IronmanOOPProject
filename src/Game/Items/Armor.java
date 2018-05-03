@@ -15,15 +15,9 @@ public abstract class Armor extends Item implements Equipable {
         setDefence(defence);
     }
 
-    Armor() {
+    Armor(){
 
     }
-
-
-    public void generateRandomName() {
-
-    }
-
 
     public int getDefence() {
         return defence;

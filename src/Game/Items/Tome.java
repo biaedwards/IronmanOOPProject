@@ -8,10 +8,10 @@ public class Tome extends Item implements Usable{
     private ArrayList<String> names = new ArrayList<>();
 
     public Tome() {
-        generateRandomTome();
+        generateRandom();
     }
 
-    private void generateRandomTome() {
+    public void generateRandom() {
         names.add("Small tome");
         names.add("Medium tome");
         names.add("Large tome");

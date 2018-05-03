@@ -2,9 +2,7 @@ package Game.Location;
 
 import Game.Location.Shop.Shop;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Town {
 

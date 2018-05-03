@@ -8,7 +8,7 @@ public class HPPotion extends Item implements Usable{
     private ArrayList<String> names = new ArrayList<>();
 
     public HPPotion() {
-        generateRandomPotion();
+        generateRandom();
 
     }
     public HPPotion(String name, int value){
@@ -17,7 +17,7 @@ public class HPPotion extends Item implements Usable{
         setCost(0);
     }
 
-    private void generateRandomPotion() {
+    public void generateRandom() {
         names.add("Small potion");
         names.add("Medium potion");
         names.add("Large potion");

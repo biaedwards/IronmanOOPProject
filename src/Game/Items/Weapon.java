@@ -23,10 +23,10 @@ public class Weapon extends Item implements Equipable  {
     }
 
     public Weapon() {
-        generateRandomWeapon();
+        generateRandomEquipable();
     }
 
-    public void generateRandomWeapon() {
+    public void generateRandomEquipable() {
 
         int firstIndex = ThreadLocalRandom.current().nextInt(0, weaponFirstPart.size());
         int secondIndex = ThreadLocalRandom.current().nextInt(0, weaponSecondPart.size());

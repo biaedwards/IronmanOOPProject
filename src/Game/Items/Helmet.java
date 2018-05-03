@@ -11,7 +11,7 @@ public class Helmet extends Armor {
     int statBonus;
 
     public Helmet() {
-        generateRandomHelmet();
+        generateRandomEquipable();
     }
 
     public Helmet(String name, int cost, int defence, int statBonus) {
@@ -22,7 +22,7 @@ public class Helmet extends Armor {
 
     }
 
-    public void generateRandomHelmet() {
+    public void generateRandomEquipable() {
 
         int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
         int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
