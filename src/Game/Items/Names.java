@@ -14,7 +14,7 @@ public class Names {
     static ArrayList<String> weaponThirdPart;
     public static ArrayList<Skill> allSkills;
 
-    public Names(){
+    public Names() {
         armorFirstPart = new ArrayList<>();
         armorSecondPart = new ArrayList<>();
         enemiesNames = new ArrayList<>();
@@ -115,17 +115,17 @@ public class Names {
         weaponThirdPart.add("The Dark Ones");
         weaponThirdPart.add("The Gods");
 
-        allSkills.add(new Skill(PlayerType.MAGE, "Fireball", 5, true,2));
-        allSkills.add(new Skill(PlayerType.WARRIOR, "Stab", 5, true,2));
-        allSkills.add( new Skill(PlayerType.ARCHER, "Ice Arrow", 5, true,2));
-        allSkills.add(new Skill(PlayerType.MAGE, "Blizzard", 15, true,4));
-        allSkills.add(new Skill(PlayerType.WARRIOR, "Pulverize", 10, true,4));
-        allSkills.add(new Skill(PlayerType.ARCHER, "Volley", 10, true,4));
-        allSkills.add(new Skill(PlayerType.MAGE, "Meteor Strike", 30, true,4));
-        allSkills.add(new Skill(PlayerType.ARCHER, "Rain of arrows", 20, true,4));
-        allSkills.add(new Skill(PlayerType.WARRIOR, "Shockwave", 20, true,6));
-        allSkills.add(new Skill(PlayerType.MAGE, "Armageddon", 200, false,6));
-        allSkills.add(new Skill(PlayerType.ARCHER, "Headshot", 100, true,6));
-        allSkills.add(new Skill(PlayerType.WARRIOR, "Earthquake", 150, false,6));
+        allSkills.add(new Skill(PlayerType.MAGE, "Fireball", 5, true, 2));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Stab", 5, true, 2));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Ice Arrow", 5, true, 2));
+        allSkills.add(new Skill(PlayerType.MAGE, "Blizzard", 15, true, 4));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Pulverize", 10, true, 4));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Volley", 10, true, 4));
+        allSkills.add(new Skill(PlayerType.MAGE, "Meteor Strike", 30, true, 4));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Rain of arrows", 20, true, 4));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Shockwave", 20, true, 6));
+        allSkills.add(new Skill(PlayerType.MAGE, "Armageddon", 200, false, 6));
+        allSkills.add(new Skill(PlayerType.ARCHER, "Headshot", 100, true, 6));
+        allSkills.add(new Skill(PlayerType.WARRIOR, "Earthquake", 150, false, 6));
     }
 }

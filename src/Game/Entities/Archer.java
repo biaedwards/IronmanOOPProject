@@ -46,6 +46,7 @@ public class Archer extends Hero {
         }
     }
 
+
     public void execute(Enemy enemy) {
         if (enemy.getCurrentHP() * 100 / enemy.getMaxHP() <= 25) {
             System.out.printf("You have executed %s!!!!\n", enemy.getName());

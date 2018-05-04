@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 import static Game.Items.Names.allSkills;
 
-public abstract class Hero extends Entity implements PrintableInventory{
+public abstract class Hero extends Entity implements PrintableInventory {
     private PlayerType type;
     private int level;
     private int defence;
@@ -40,8 +40,8 @@ public abstract class Hero extends Entity implements PrintableInventory{
     }
 
     public String statsToString() {
-        return String.format("HP: %d/%d\nXP: %d\nLevel: %d\nXP until next level: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
-                currentHP,maxHP, xp, level, xpUntilNextlevel, getDefence(), getDamage(), gold, weapon.toString(), helmet.toString(), vest.toString());
+        return String.format("HP: %d/%d\nXP: %d/%d\nLevel: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
+                currentHP, maxHP, xp, xpUntilNextlevel, level, getDefence(), getDamage(), gold, weapon.toString(), helmet.toString(), vest.toString());
     }
 
     abstract void createDefaultInventory();
@@ -252,13 +252,13 @@ public abstract class Hero extends Entity implements PrintableInventory{
                 break;
             }
             counter++;
-            }
         }
+    }
 
 
     public void equipEquipables(int number) {
         int counter = 1;
-        for (Item item :getEquipables()) {
+        for (Item item : getEquipables()) {
             if (number == counter) {
                 equip(item);
                 break;
@@ -292,9 +292,21 @@ public abstract class Hero extends Entity implements PrintableInventory{
 
     public void equip(Item item) {
         if (item instanceof Weapon) {
-            addToInventory(weapon);
-            weapon = (Weapon) item;
-            inventory.remove(item);
+            if (this instanceof Archer && ((Weapon) item).getType() == PlayerType.ARCHER) {
+                addToInventory(weapon);
+                weapon = (Weapon) item;
+                inventory.remove(item);
+            } else if (this instanceof Warrior && ((Weapon) item).getType() == PlayerType.WARRIOR) {
+                addToInventory(weapon);
+                weapon = (Weapon) item;
+                inventory.remove(item);
+            } else if (this instanceof Mage && ((Weapon) item).getType() == PlayerType.MAGE) {
+                addToInventory(weapon);
+                weapon = (Weapon) item;
+                inventory.remove(item);
+            } else {
+                System.out.println("You cannot equip this weapon!");
+            }
 
 
         }
@@ -322,6 +334,7 @@ public abstract class Hero extends Entity implements PrintableInventory{
         } else {
             System.out.println("Congratulations! You leveled up.");
         }
+        currentHP = maxHP;
         System.out.printf("Here are your updated stats:\n%s", statsToString());
     }
 
@@ -331,8 +344,8 @@ public abstract class Hero extends Entity implements PrintableInventory{
         } else {
             gold -= item.getCost();
             addToInventory(item);
-            System.out.printf("You successfully bought %s\n",item.toString());
-            System.out.printf("Remaining gold: %d\n",getGold());
+            System.out.printf("You successfully bought %s\n", item.toString());
+            System.out.printf("Remaining gold: %d\n", getGold());
         }
     }
 
@@ -341,7 +354,7 @@ public abstract class Hero extends Entity implements PrintableInventory{
         for (Item item : inventory.keySet()) {
             if (counter == x) {
                 inventory.remove(item);
-                System.out.printf("You sold %s and got %d gold\n",item.getName(),item.getCost());
+                System.out.printf("You sold %s and got %d gold\n", item.getName(), item.getCost());
                 gold += item.getCost();
                 break;
             }

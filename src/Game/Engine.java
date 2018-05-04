@@ -75,7 +75,7 @@ import static Game.Message.*;
         int counter = 1;
         System.out.println("Here are your heroes to choose from.");
         for(Hero hero:heroes){
-            System.out.printf("%d: %s", counter++, hero.toString());
+            System.out.printf("%d: %s\n", counter++, hero.toString());
         }
     }
 
@@ -366,7 +366,7 @@ import static Game.Message.*;
                 break;
             }else if(counter==10){
                 showMyHeroes();
-                System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.", heroes.size()+1);
+                System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.\n", heroes.size()+1);
                 int choice = validateInput(in.nextLine(), heroes.size()+1);
                 if(choice==heroes.size()+1){
                     start();
