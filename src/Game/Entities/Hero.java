@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 import static Game.Items.Names.allSkills;
 
-public abstract class Hero extends Entity implements PrintableInventory {
+public abstract class Hero extends Entity implements PrintableInventory, Skills {
     private PlayerType type;
     private int level;
     private int defence;
@@ -188,7 +188,8 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return skills;
     }
 
-    void learnSkill() {
+    @Override
+    public void learnSkill() {
         for (Skill aSkill : allSkills) {
             if (aSkill.getType() != type || aSkill.getLevel() != level) continue;
             skills.add(aSkill);
@@ -197,6 +198,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         }
     }
 
+    @Override
     public int castSkill(Skill skill) {
         if (skill.usesWeapon()) {
             return (skill.getDamage() + getDamage());
