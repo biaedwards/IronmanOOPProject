@@ -50,7 +50,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return type;
     }
 
-    public void setType(PlayerType type) {
+    void setType(PlayerType type) {
         this.type = type;
     }
 
@@ -67,7 +67,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return maxHP;
     }
 
-    public void setMaxHP(int hp) {
+    void setMaxHP(int hp) {
         this.maxHP = hp;
     }
 
@@ -80,11 +80,11 @@ public abstract class Hero extends Entity implements PrintableInventory {
         currentHP = Math.min(currentHP, maxHP);
     }
 
-    public int getXpUntilNextlevel() {
+    int getXpUntilNextlevel() {
         return xpUntilNextlevel;
     }
 
-    public void setXpUntilNextlevel(int xpUntilNextlevel) {
+    void setXpUntilNextlevel(int xpUntilNextlevel) {
         this.xpUntilNextlevel = xpUntilNextlevel;
     }
 
@@ -92,12 +92,12 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return primaryStat;
     }
 
-    public void setPrimaryStat(Stat primaryStat) {
+    void setPrimaryStat(Stat primaryStat) {
         this.primaryStat = primaryStat;
 
     }
 
-    public int getDamage() {
+    private int getDamage() {
         damage = stat + weapon.getDamage();
         return damage;
     }
@@ -111,7 +111,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return helmet;
     }
 
-    public void setHelmet(Helmet helmet) {
+    void setHelmet(Helmet helmet) {
         this.helmet = helmet;
     }
 
@@ -119,7 +119,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return vest;
     }
 
-    public void setVest(Vest vest) {
+    void setVest(Vest vest) {
         this.vest = vest;
     }
 
@@ -131,11 +131,11 @@ public abstract class Hero extends Entity implements PrintableInventory {
         }
     }
 
-    public int getLevel() {
+    int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    void setLevel(int level) {
         this.level = level;
     }
 
@@ -144,15 +144,15 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return defence;
     }
 
-    public void setDefence(int defence) {
+    void setDefence(int defence) {
         this.defence = defence;
     }
 
-    public int getStat() {
+    int getStat() {
         return stat;
     }
 
-    public void setStat(int stat) {
+    void setStat(int stat) {
         this.stat = stat;
     }
 
@@ -168,7 +168,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         return weapon;
     }
 
-    public void setWeapon(Weapon weapon) {
+    void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
@@ -267,7 +267,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         }
     }
 
-    public void use(Item usable) {
+    private void use(Item usable) {
         if (usable instanceof HPPotion) {
             if (inventory.containsKey(usable)) {
                 changeCurrentHP(((HPPotion) usable).getValue());
@@ -290,7 +290,7 @@ public abstract class Hero extends Entity implements PrintableInventory {
         }
     }
 
-    public void equip(Item item) {
+    private void equip(Item item) {
         if (item instanceof Weapon) {
             if (this instanceof Archer && ((Weapon) item).getType() == PlayerType.ARCHER) {
                 addToInventory(weapon);
