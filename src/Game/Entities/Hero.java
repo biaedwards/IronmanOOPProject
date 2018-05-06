@@ -54,7 +54,7 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
         this.type = type;
     }
 
-    public double getXp() {
+    private double getXp() {
         return xp;
     }
 
@@ -102,7 +102,7 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
         return damage;
     }
 
-    public void setDamage(int damage) {
+    private void setDamage(int damage) {
         this.damage = damage;
     }
 

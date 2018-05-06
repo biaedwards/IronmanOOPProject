@@ -9,17 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import static Game.Items.Names.enemiesNames;
 
 public class Enemy extends Entity {
-
-  private int maxHP;
   private static final int HP_DEFAULT = 100;
+  private int maxHP;
   private Item item;
-  private double coefficient;
-  private Stat stat;
   private Item usable;
   private boolean isBashed = false;
 
 
-  private ArrayList<String> allNames = new ArrayList<>();
+
 
   public Enemy(double coefficient) {
 
