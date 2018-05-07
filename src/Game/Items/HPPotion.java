@@ -44,5 +44,18 @@ public class HPPotion extends Item implements Usable{
         return String.format("%s - %d HP | Cost: %d",getName(),getValue(),getCost());
     }
 
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + getCost();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.hashCode()==this.hashCode())
+            return true;
+        else return false;
+    }
 
 }

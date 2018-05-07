@@ -50,4 +50,17 @@ public class Vest extends Armor implements Equipable {
     public int getLevelRequirement() {
         return levelRequirement;
     }
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + getCost();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.hashCode()==this.hashCode())
+            return true;
+        else return false;
+    }
 }

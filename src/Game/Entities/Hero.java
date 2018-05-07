@@ -368,8 +368,13 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
         int counter = 1;
         for (Item item : inventory.keySet()) {
             if (counter == x) {
-                inventory.remove(item);
-                System.out.printf("You sold %s and got %d gold\n", item.getName(), item.getCost());
+               if(inventory.get(item) >1){
+                   inventory.put(item, inventory.get(item) - 1);
+               }
+               else {
+                   inventory.remove(item);
+               }
+               System.out.printf("You sold %s and got %d gold\n", item.getName(), item.getCost());
                 gold += item.getCost();
                 break;
             }
