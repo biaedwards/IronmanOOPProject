@@ -25,16 +25,16 @@ public class Warrior extends Hero {
 
     @Override
     public void createDefaultInventory() {
-        this.setWeapon(new Weapon("Default", 0, 20, this.getType()));
-        this.setHelmet(new Helmet("Default", 0, 5, 0));
-        this.setVest(new Vest("Default", 0, 5, 0));
+        this.setWeapon(new Weapon("Default sword", 0, 20, this.getType()));
+        this.setHelmet(new Helmet("Default helmet", 0, 5, 0));
+        this.setVest(new Vest("Default vest", 0, 5, 0));
     }
 
     @Override
     public void level() {
         if (xp >= getXpUntilNextlevel()) {
             setLevel(getLevel() + 1);
-            setXp(-getXpUntilNextlevel());
+            xp-=getXpUntilNextlevel();
             setXpUntilNextlevel((int)(getXpUntilNextlevel() * 1.5));
             setMaxHP(getMaxHP() + 25);
             setDefence(getDefence() + 1);

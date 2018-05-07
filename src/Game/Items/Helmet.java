@@ -5,14 +5,15 @@ import java.util.concurrent.ThreadLocalRandom;
 import static Game.Items.Names.armorFirstPart;
 import static Game.Items.Names.armorSecondPart;
 
-public class Helmet extends Armor {
+public class Helmet extends Armor implements Equipable {
     private int statBonus;
+    private int levelRequirement;
 
     public Helmet() {
         generateRandomEquipable();
     }
 
-   public Helmet(String name, int cost, int defence, int statBonus) {
+    public Helmet(String name, int cost, int defence, int statBonus) {
         setName(name);
         setCost(cost);
         setDefence(defence);
@@ -28,16 +29,21 @@ public class Helmet extends Armor {
         this.setName(result);
         int stat = firstIndex + secondIndex * 2 + 1;
         int defence = (int) (firstIndex * 1.5 + secondIndex * 3 + 2);
+        levelRequirement = (int) ((firstIndex + secondIndex) / 1.5);
         this.setDefence(defence);
         this.setStatBonus(stat);
-        int cost = stat * 30 + defence * 50;
+        int cost = stat * 30 + defence * 60;
         this.setCost(cost);
     }
 
 
     @Override
     public String toString() {
-        return String.format("%s. Stat bonus %d. Defence %d. Cost %d.", this.getName(), statBonus, getDefence(), getCost());
+        return String.format("%s. Stat bonus %d. Defence %d. Level requirement %d. Cost %d.", this.getName(), statBonus, getDefence(), levelRequirement, getCost());
+    }
+
+    public int getLevelRequirement() {
+        return levelRequirement;
     }
 
     public int getStatBonus() {

@@ -21,18 +21,18 @@ public class Dungeon {
                 enemiesNumbers = 4;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
                 gold = 1500;
-                XP = 1000;
+                XP = 2000;
                 break;
             case MEDIUM:
-                coefficient = 1.5;
+                coefficient = 2;
                 enemiesNumbers = 6;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 
                 gold = 2500;
-                XP = 2000;
+                XP = 3000;
                 break;
             case HARD:
-                coefficient = 2;
+                coefficient = 3;
                 enemiesNumbers = 8;
                 System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 

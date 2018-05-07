@@ -135,7 +135,6 @@ import static Game.Message.*;
                 if (enemy.getCurrentHP() <= 0) {
                     System.out.println("You have killed the enemy!\n");
                     enemy.dropReward(currentHero);
-                    currentHero.level();
                     break;
 
                 }

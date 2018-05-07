@@ -28,9 +28,9 @@ public class Archer extends Hero {
 
     @Override
     public void createDefaultInventory() {
-        this.setWeapon(new Weapon("Default", 0, 20, getType()));
-        this.setHelmet(new Helmet("Default", 0, 5, 0));
-        this.setVest(new Vest("Default", 0, 5, 0));
+        this.setWeapon(new Weapon("Default bow", 0, 20, getType()));
+        this.setHelmet(new Helmet("Default helmet", 0, 5, 0));
+        this.setVest(new Vest("Default vest", 0, 5, 0));
 
     }
 
@@ -38,7 +38,7 @@ public class Archer extends Hero {
     public void level() {
         if (xp >= getXpUntilNextlevel()) {
             setLevel(getLevel() + 1);
-            setXp(-getXpUntilNextlevel());
+            xp-=getXpUntilNextlevel();
             setXpUntilNextlevel((int)(getXpUntilNextlevel() * 1.5));
             setMaxHP(getMaxHP() + 15);
             setStat(getStat() + 5);

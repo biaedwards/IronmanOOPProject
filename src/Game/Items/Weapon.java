@@ -8,9 +8,10 @@ import static Game.Items.Names.weaponFirstPart;
 import static Game.Items.Names.weaponSecondPart;
 import static Game.Items.Names.weaponThirdPart;
 
-public class Weapon extends Item implements Equipable  {
+public class Weapon extends Item implements Equipable {
     private PlayerType type;
     private int damage;
+    private int levelRequirement;
 
     public Weapon(String name, int cost, int damage, PlayerType type) {
         super(name, cost);
@@ -36,15 +37,16 @@ public class Weapon extends Item implements Equipable  {
         } else if (secondIndex == 2) {
             setType(PlayerType.MAGE);
         }
-        int damage = firstIndex * 5 + secondIndex * 4 + 5;
+        int damage = firstIndex * 6 + thirdIndex * 4 + 5;
+        levelRequirement = (int) ((firstIndex + thirdIndex) / 1.5);
         setDamage(damage);
-        int cost = damage * 25;
+        int cost = damage * 35;
         setCost(cost);
     }
 
     @Override
     public String toString() {
-        return String.format("%s. Damage %d. Cost %d.", getName(), getDamage(), getCost());
+        return String.format("%s. Damage %d. Level requirement %d. Cost %d.", getName(), getDamage(), levelRequirement, getCost());
     }
 
     public PlayerType getType() {
@@ -61,5 +63,9 @@ public class Weapon extends Item implements Equipable  {
 
     private void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public int getLevelRequirement() {
+        return levelRequirement;
     }
 }

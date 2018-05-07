@@ -294,38 +294,50 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
 
     private void equip(Item item) {
         if (item instanceof Weapon) {
-            if (this instanceof Archer && ((Weapon) item).getType() == PlayerType.ARCHER) {
-                addToInventory(weapon);
-                weapon = (Weapon) item;
-                inventory.remove(item);
-            } else if (this instanceof Warrior && ((Weapon) item).getType() == PlayerType.WARRIOR) {
-                addToInventory(weapon);
-                weapon = (Weapon) item;
-                inventory.remove(item);
-            } else if (this instanceof Mage && ((Weapon) item).getType() == PlayerType.MAGE) {
-                addToInventory(weapon);
-                weapon = (Weapon) item;
-                inventory.remove(item);
+            if (((Weapon) item).getLevelRequirement() <= level) {
+                if (this instanceof Archer && ((Weapon) item).getType() == PlayerType.ARCHER) {
+                    addToInventory(weapon);
+                    weapon = (Weapon) item;
+                    inventory.remove(item);
+                } else if (this instanceof Warrior && ((Weapon) item).getType() == PlayerType.WARRIOR) {
+                    addToInventory(weapon);
+                    weapon = (Weapon) item;
+                    inventory.remove(item);
+                } else if (this instanceof Mage && ((Weapon) item).getType() == PlayerType.MAGE) {
+                    addToInventory(weapon);
+                    weapon = (Weapon) item;
+                    inventory.remove(item);
+                } else {
+                    System.out.println("You cannot equip this weapon!");
+                }
             } else {
-                System.out.println("You cannot equip this weapon!");
+                System.out.println("Your level is too low to equip this item.");
             }
 
 
         }
         if (item instanceof Helmet) {
-            stat -= helmet.getStatBonus();
-            addToInventory(helmet);
-            helmet = (Helmet) item;
-            stat += helmet.getStatBonus();
-            inventory.remove(item);
+            if (((Helmet) item).getLevelRequirement() <= level) {
+                stat -= helmet.getStatBonus();
+                addToInventory(helmet);
+                helmet = (Helmet) item;
+                stat += helmet.getStatBonus();
+                inventory.remove(item);
+            } else {
+                System.out.println("Your level is too low to equip this item.");
+            }
 
         }
         if (item instanceof Vest) {
-            maxHP -= vest.getHPBonus();
-            addToInventory(vest);
-            vest = (Vest) item;
-            maxHP += vest.getHPBonus();
-            inventory.remove(item);
+            if (((Vest) item).getLevelRequirement() <= level) {
+                maxHP -= vest.getHPBonus();
+                addToInventory(vest);
+                vest = (Vest) item;
+                maxHP += vest.getHPBonus();
+                inventory.remove(item);
+            } else {
+                System.out.println("Your level is too low to equip this item.");
+            }
 
         }
     }
@@ -338,6 +350,7 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
         }
         currentHP = maxHP;
         System.out.printf("Here are your updated stats:\n%s", statsToString());
+        level();
     }
 
     public void buyItem(Item item) {
