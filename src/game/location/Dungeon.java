@@ -1,6 +1,6 @@
-package Game.Location;
+package game.location;
 
-import Game.Entities.Enemy;
+import game.entities.Enemy;
 
 import java.util.ArrayList;
 

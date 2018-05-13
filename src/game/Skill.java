@@ -1,6 +1,4 @@
-package Game;
-
-import java.util.ArrayList;
+package game;
 
 public class Skill {
   private PlayerType type;
@@ -12,24 +10,14 @@ public class Skill {
 
   public Skill(PlayerType type, String name, int damage, boolean usesWeapon, int level) {
     this.type = type;
-
     this.name = name;
     this.damage = damage;
     this.usesWeapon = usesWeapon;
     this.level = level;
   }
 
-  @Override
-  public String toString() {
-    return String.format("%s with damage %d", name, damage);
-  }
-
   public PlayerType getType() {
     return type;
-  }
-
-  String getName() {
-    return name;
   }
 
   public int getDamage() {
@@ -43,5 +31,15 @@ public class Skill {
   public int getLevel() {
     return level;
   }
+
+  @Override
+  public String toString() {
+    return String.format("%s with damage %d", name, damage);
+  }
+
+  String getName() {
+    return name;
+  }
+
 }
 

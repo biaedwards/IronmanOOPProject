@@ -1,31 +1,31 @@
-package Game.Items;
+package game.items;
 
 public abstract class Item {
-    private int cost;
-    private String name;
+  private int cost;
+  private String name;
 
-    Item(String name, int cost) {
-        this.name = name;
-        this.cost = cost;
-    }
+  Item(String name, int cost) {
+    this.name = name;
+    this.cost = cost;
+  }
 
-    Item() {
+  Item() {
+  }
 
-    }
+  public String getName() {
+    return name;
+  }
 
-     public int getCost() {
-        return cost;
-    }
+  public int getCost() {
+    return cost;
+  }
 
-     void setCost(int cost) {
-        this.cost = cost;
-    }
+  void setName(String name) {
+    this.name = name;
+  }
 
-    public String getName() {
-        return name;
-    }
+  void setCost(int cost) {
+    this.cost = cost;
+  }
 
-     void setName(String name) {
-        this.name = name;
-    }
 }

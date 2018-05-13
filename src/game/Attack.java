@@ -1,7 +1,9 @@
-package Game;
+package game;
 
 public interface Attack {
-    public int attack();
-    public void takeDamage(int damage);
+
+  int attack();
+
+  void takeDamage(int damage);
 
 }

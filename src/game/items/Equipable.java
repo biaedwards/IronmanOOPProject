@@ -1,5 +1,6 @@
-package Game.Items;
+package game.items;
 
 public interface Equipable {
-    void generateRandomEquipable();
+
+  void generateRandomEquipable();
 }

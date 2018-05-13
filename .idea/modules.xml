@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IronmanOOPProject.iml" filepath="$PROJECT_DIR$/IronmanOOPProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IronmanOOPLocalRework.iml" filepath="$PROJECT_DIR$/IronmanOOPLocalRework.iml" />
     </modules>
   </component>
 </project>

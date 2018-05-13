@@ -1,5 +1,6 @@
-package Game;
+package game;
 
 public interface PrintableInventory {
-    void printInventory();
+
+  void printInventory();
 }

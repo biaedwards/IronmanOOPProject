@@ -1,9 +1,10 @@
-package Game.Entities;
+package game.entities;
 
-import Game.Skill;
+import game.Skill;
 
 public interface Skills {
 
   void learnSkill();
+
   int castSkill(Skill skill);
 }

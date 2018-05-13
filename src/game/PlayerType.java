@@ -1,5 +1,5 @@
-package Game;
+package game;
 
- public enum PlayerType {
-    WARRIOR, ARCHER, MAGE
+public enum PlayerType {
+  WARRIOR, ARCHER, MAGE
 }

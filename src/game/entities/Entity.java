@@ -1,9 +1,8 @@
-package Game.Entities;
+package game.entities;
 
-import Game.Attack;
-import Game.Items.Item;
+import game.Attack;
 
-public abstract class Entity implements Attack {
+abstract class Entity implements Attack {
 
   String name;
   int maxHP;
@@ -11,6 +10,5 @@ public abstract class Entity implements Attack {
   int damage;
   int gold;
   int xp;
-
 
 }

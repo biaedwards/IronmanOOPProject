@@ -1,10 +1,9 @@
-package Game.Location.Shop;
+package game.location.Shop;
 
-import Game.Items.*;
-import Game.PrintableInventory;
+import game.items.*;
+import game.PrintableInventory;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Shop implements PrintableInventory{
     private ArrayList<Item> inventory;

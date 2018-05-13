@@ -1,9 +1,4 @@
-package Game;
-
-import Game.Engine;
-import Game.Items.*;
-
-import java.util.Scanner;
+package game;
 
 public class Main {
     public static void main(String[] args) {

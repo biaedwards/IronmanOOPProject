@@ -1,6 +1,6 @@
-package Game.Location;
+package game.location;
 
-import Game.Location.Shop.Shop;
+import game.location.Shop.Shop;
 
 import java.util.ArrayList;
 
