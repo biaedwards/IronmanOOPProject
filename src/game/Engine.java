@@ -298,7 +298,6 @@ class Engine {
     switch (validateInput(in.nextLine(), 2)) {
       case 1:
         visitTown();
-        break;
       case 2:
         createDungeon();
         break;
