@@ -6,13 +6,14 @@ import game.Skill;
 import java.util.ArrayList;
 
 public class Names {
+  public static ArrayList<String> enemiesNames;
+  public static ArrayList<Skill> allSkills;
   static ArrayList<String> armorFirstPart;
   static ArrayList<String> armorSecondPart;
-  public static ArrayList<String> enemiesNames;
   static ArrayList<String> weaponFirstPart;
   static ArrayList<String> weaponSecondPart;
   static ArrayList<String> weaponThirdPart;
-  public static ArrayList<Skill> allSkills;
+
 
   public Names() {
     armorFirstPart = new ArrayList<>();

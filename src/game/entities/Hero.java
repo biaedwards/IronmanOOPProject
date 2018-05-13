@@ -219,6 +219,10 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  public int getCurrentHP() {
+    return currentHP;
+  }
+
   @Override
   public int castSkill(Skill skill) {
     if (skill.usesWeapon()) {
@@ -246,10 +250,6 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
 
   void setMaxHP(int hp) {
     this.maxHP = hp;
-  }
-
-  public int getCurrentHP() {
-    return currentHP;
   }
 
   void setWeapon(Weapon weapon) {
