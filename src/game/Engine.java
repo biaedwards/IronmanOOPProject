@@ -9,7 +9,7 @@ import game.items.Item;
 import game.items.Names;
 import game.location.Difficulty;
 import game.location.Dungeon;
-import game.location.Shop.Shop;
+import game.location.shop.Shop;
 import game.location.Town;
 
 import java.util.ArrayList;
