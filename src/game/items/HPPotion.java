@@ -49,7 +49,11 @@ public class HPPotion extends Item implements Usable {
 
   @Override
   public boolean equals(Object obj) {
-    return obj.hashCode() == this.hashCode();
+    if (obj.hashCode() == this.hashCode()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private void setValue(int value) {

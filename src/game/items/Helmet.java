@@ -58,8 +58,13 @@ public class Helmet extends Armor implements Equipable {
 
   @Override
   public boolean equals(Object obj) {
-    return obj.hashCode() == this.hashCode();
+    if (obj.hashCode() == this.hashCode()) {
+      return true;
+    } else {
+      return false;
+    }
   }
+
 
   private void setStatBonus(int statBonus) {
     this.statBonus = statBonus;
