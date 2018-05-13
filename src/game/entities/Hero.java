@@ -15,8 +15,6 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
   private int defence;
   private int stat;
   private int xpUntilNextlevel;
-
-  private Stat primaryStat;
   private Weapon weapon;
   private Helmet helmet;
   private Vest vest;
@@ -285,7 +283,7 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
   }
 
   void setPrimaryStat(Stat primaryStat) {
-    this.primaryStat = primaryStat;
+    Stat primaryStat1 = primaryStat;
   }
 
   void setHelmet(Helmet helmet) {
