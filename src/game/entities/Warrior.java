@@ -9,6 +9,9 @@ import game.items.Weapon;
 
 public class Warrior extends Hero {
 
+  /**
+   * Public constructor with String name parameter.
+   * */
   public Warrior(String name) {
     super(name);
     setType(PlayerType.WARRIOR);
@@ -16,14 +19,22 @@ public class Warrior extends Hero {
     createDefaultInventory();
   }
 
+  /**
+   * Special class method for Hero Type Warrior.
+   * */
   public void buff() {
     setDefence(getDefence() + 1);
-    changeCurrentHP(20);
+    changeCurrentHp(20);
     System.out.println("You have buffed yourself and received +1 defence and +20 HP");
   }
 
+  /**
+   * Special class method for Hero Type Warrior. This method is making
+   * more damage than buff to the enemy.
+   * */
   public void bash(Enemy enemy) {
-    System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n", attack() + 10);
+    System.out.printf("You bashed the enemy, dealing %d damage and made it skip a turn\n",
+        attack() + 10);
     enemy.takeDamage(attack() + 10);
     enemy.setBashed(true);
   }
@@ -46,7 +57,7 @@ public class Warrior extends Hero {
       setLevel(getLevel() + 1);
       xp -= getXpUntilNextlevel();
       setXpUntilNextlevel((int) (getXpUntilNextlevel() * 1.5));
-      setMaxHP(getMaxHP() + 25);
+      setMaxHp(getMaxHp() + 25);
       setDefence(getDefence() + 1);
       setStat(getStat() + 3);
       super.level();

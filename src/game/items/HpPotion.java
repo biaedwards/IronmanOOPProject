@@ -3,20 +3,26 @@ package game.items;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class HPPotion extends Item implements Usable {
+public class HpPotion extends Item implements Usable {
   private int value;
   private ArrayList<String> names = new ArrayList<>();
 
-  public HPPotion() {
+  public HpPotion() {
     generateRandom();
   }
 
-  public HPPotion(String name, int value) {
+  /**
+   * Public constructor with String name and int value parameters.
+   * */
+  public HpPotion(String name, int value) {
     setName(name);
     setValue(value);
     setCost(0);
   }
 
+  /**
+   * Method for random generation of HpPotion.
+   * */
   public void generateRandom() {
     names.add("Small potion");
     names.add("Medium potion");

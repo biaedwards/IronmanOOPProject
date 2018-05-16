@@ -7,7 +7,10 @@ public class Skill {
   private boolean usesWeapon;
   private int level;
 
-
+  /**
+   * Public constructor with PlayerType type, String name, int damage,
+   * boolean useWeapon and int level parameter.
+   */
   public Skill(PlayerType type, String name, int damage, boolean usesWeapon, int level) {
     this.type = type;
     this.name = name;

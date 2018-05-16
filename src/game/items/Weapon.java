@@ -13,6 +13,10 @@ public class Weapon extends Item implements Equipable {
   private int damage;
   private int levelRequirement;
 
+  /**
+   * Public constructor with String name, int cost, int damage
+   * and PlayerType type parameters.
+   * */
   public Weapon(String name, int cost, int damage, PlayerType type) {
     super(name, cost);
     this.damage = damage;
@@ -23,12 +27,15 @@ public class Weapon extends Item implements Equipable {
     generateRandomEquipable();
   }
 
+  /**
+   * Method for random generating equipable item.
+   * */
   public void generateRandomEquipable() {
-
     int firstIndex = ThreadLocalRandom.current().nextInt(0, weaponFirstPart.size());
     int secondIndex = ThreadLocalRandom.current().nextInt(0, weaponSecondPart.size());
     int thirdIndex = ThreadLocalRandom.current().nextInt(0, weaponThirdPart.size());
-    String result = weaponFirstPart.get(firstIndex) + weaponSecondPart.get(secondIndex) + weaponThirdPart.get(thirdIndex);
+    String result = weaponFirstPart.get(firstIndex) + weaponSecondPart.get(secondIndex)
+        + weaponThirdPart.get(thirdIndex);
     setName(result);
     if (secondIndex == 0) {
       setType(PlayerType.WARRIOR);
@@ -58,7 +65,8 @@ public class Weapon extends Item implements Equipable {
 
   @Override
   public String toString() {
-    return String.format("%s. Damage %d. Level requirement %d. Cost %d.", getName(), getDamage(), levelRequirement, getCost());
+    return String.format("%s. Damage %d. Level requirement %d. Cost %d.",
+      getName(), getDamage(), levelRequirement, getCost());
   }
 
   @Override

@@ -9,6 +9,9 @@ import game.items.Weapon;
 
 public class Mage extends Hero {
 
+  /**
+   * Public constructor with String name parameter.
+   * */
   public Mage(String name) {
     super(name);
     setType(PlayerType.MAGE);
@@ -16,10 +19,14 @@ public class Mage extends Hero {
     createDefaultInventory();
   }
 
+  /**
+   * Special class method for Hero Type Mage.
+   * */
   public void spell() {
-    changeCurrentHP(30);
+    changeCurrentHp(30);
     setStat(getStat() + 1);
-    System.out.println("You cast a defensive spell which increases your HP by 30 and your primary stat by 1");
+    System.out.println("You cast a defensive spell which increases your "
+        + "HP by 30 and your primary stat by 1");
   }
 
   public void multicast() {
@@ -44,7 +51,7 @@ public class Mage extends Hero {
       setLevel(getLevel() + 1);
       xp -= getXpUntilNextlevel();
       setXpUntilNextlevel((int) (getXpUntilNextlevel() * 1.25));
-      setMaxHP(getMaxHP() + 10);
+      setMaxHp(getMaxHp() + 10);
       setStat(getStat() + 3);
       super.level();
     }

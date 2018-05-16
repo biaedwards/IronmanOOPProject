@@ -3,14 +3,19 @@ package game.entities;
 import static game.items.Names.enemiesNames;
 
 import game.Stat;
-import game.items.*;
-import java.util.concurrent.ThreadLocalRandom;
+import game.items.Helmet;
+import game.items.HpPotion;
+import game.items.Item;
+import game.items.Tome;
+import game.items.Vest;
+import game.items.Weapon;
 
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Enemy extends Entity {
   private static final int HP_DEFAULT = 100;
-  private int maxHP;
+  private int maxHp;
   private Item item;
   private Item usable;
   private boolean isBashed = false;
@@ -21,27 +26,31 @@ public class Enemy extends Entity {
   public Enemy(double coefficient) {
 
     this.name = getRandomName();
-    maxHP = (int) (HP_DEFAULT + 100 * coefficient + ThreadLocalRandom.current().nextInt(1, 30));
-    currentHP = maxHP;
-    this.damage = (int) (getRandomDamage() * coefficient) + ThreadLocalRandom.current().nextInt(1, 15);
-    this.gold = (int) ((damage * 10 + maxHP * 5) * coefficient);
+    maxHp = (int) (HP_DEFAULT + 100 * coefficient + ThreadLocalRandom.current().nextInt(1, 30));
+    currentHp = maxHp;
+    this.damage = (int) (getRandomDamage() * coefficient)
+        + ThreadLocalRandom.current().nextInt(1, 15);
+    this.gold = (int) ((damage * 10 + maxHp * 5) * coefficient);
     this.item = getRandomItem();
     usable = generateRandomUsable();
-    this.xp = (int) ((damage * 15 + maxHP * 5) * coefficient);
+    this.xp = (int) ((damage * 15 + maxHp * 5) * coefficient);
     Stat stat;
 
   }
 
   public void showStats() {
-    System.out.printf("HP: %d \nDamage: %d \nGold reward: %d \nXP reward: %d \nItem reward:???\n\n", currentHP, damage, gold, xp);
+    System.out.printf("HP: %d \nDamage: %d \nGold reward: %d \nXP reward: %d \nItem reward:???\n\n",
+        currentHp, damage, gold, xp);
   }
+
   /**
    * Method that assign all the bonuses our Hero receive after killing an Enemy.
-   * */
+   */
 
   public void dropReward(Hero hero) {
     System.out.printf("%s dropped:\n%s\n", getName(), getItem().toString());
-    System.out.printf("You alse received %s, %d gold and gained %d XP.\n\n", usable.getName(), gold, xp);
+    System.out.printf("You alse received %s, %d gold and gained %d XP.\n\n",
+        usable.getName(), gold, xp);
     hero.addToInventory(item);
     hero.addToInventory(usable);
     hero.setXp(xp);
@@ -49,20 +58,20 @@ public class Enemy extends Entity {
   }
 
 
-  public int getMaxHP() {
-    return maxHP;
+  public int getMaxHp() {
+    return maxHp;
   }
 
   public void takeDamage(int damage) {
-    currentHP -= damage;
+    currentHp -= damage;
   }
 
   public String getName() {
     return name;
   }
 
-  public int getCurrentHP() {
-    return currentHP;
+  public int getCurrentHp() {
+    return currentHp;
   }
 
   public boolean isBashed() {
@@ -115,7 +124,7 @@ public class Enemy extends Entity {
     Item usable;
     switch (index) {
       case 0:
-        usable = new HPPotion();
+        usable = new HpPotion();
         break;
       case 1:
         usable = new Tome();

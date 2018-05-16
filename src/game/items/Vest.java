@@ -6,20 +6,27 @@ import static game.items.Names.armorSecondPart;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Vest extends Armor implements Equipable {
-  private int HPBonus;
+  private int hpBonus;
   private int levelRequirement;
 
   public Vest() {
     generateRandomEquipable();
   }
 
-  public Vest(String name, int cost, int defence, int HPBonus) {
+  /**
+   * Public constructor with String name, int cost, int defence
+   * and int hpBonus parameters.
+   * */
+  public Vest(String name, int cost, int defence, int hpBonus) {
     setName(name);
     setCost(cost);
     setDefence(defence);
-    setHPBonus(HPBonus);
+    setHpBonus(hpBonus);
   }
 
+  /**
+   * Method for generating random equipable item.
+   * */
   public void generateRandomEquipable() {
     int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
     int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
@@ -29,13 +36,13 @@ public class Vest extends Armor implements Equipable {
     int defence = firstIndex * 4 + secondIndex * 3 + 3;
     levelRequirement = (int) ((firstIndex + secondIndex) / 1.5);
     this.setDefence(defence);
-    this.setHPBonus(stat);
+    this.setHpBonus(stat);
     int cost = stat * 30 + defence * 60;
     this.setCost(cost);
   }
 
-  public int getHPBonus() {
-    return HPBonus;
+  public int getHpBonus() {
+    return hpBonus;
   }
 
   public int getLevelRequirement() {
@@ -44,7 +51,8 @@ public class Vest extends Armor implements Equipable {
 
   @Override
   public String toString() {
-    return String.format("%s. HP Bonus %d. Defence %d. Level Requirement %d Cost %d.", getName(), HPBonus, getDefence(), levelRequirement, getCost());
+    return String.format("%s. HP Bonus %d. Defence %d. Level Requirement %d Cost %d.",
+      getName(), hpBonus, getDefence(), levelRequirement, getCost());
   }
 
   @Override
@@ -63,7 +71,7 @@ public class Vest extends Armor implements Equipable {
     }
   }
 
-  private void setHPBonus(int HPBonus) {
-    this.HPBonus = HPBonus;
+  private void setHpBonus(int hpBonus) {
+    this.hpBonus = hpBonus;
   }
 }

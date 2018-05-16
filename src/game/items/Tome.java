@@ -11,6 +11,9 @@ public class Tome extends Item implements Usable {
     generateRandom();
   }
 
+  /**
+   * Method generating random Tome.
+   * */
   public void generateRandom() {
     names.add("Small tome");
     names.add("Medium tome");

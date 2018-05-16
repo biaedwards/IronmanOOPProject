@@ -9,10 +9,13 @@ public class Dungeon {
   private double coefficient;
   private int enemiesNumbers;
   private int gold;
-  private int XP;
+  private int xp;
 
   private ArrayList enemies = new ArrayList<>();
 
+  /**
+   * Public constructor for with Difficulty difficulty parameter.
+   * */
   public Dungeon(Difficulty difficulty) {
 
     switch (difficulty) {
@@ -21,7 +24,7 @@ public class Dungeon {
         enemiesNumbers = 4;
         System.out.printf("You will face %d enemies.\n", enemiesNumbers);
         gold = 1500;
-        XP = 2000;
+        xp = 2000;
         break;
       case MEDIUM:
         coefficient = 2;
@@ -29,7 +32,7 @@ public class Dungeon {
         System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 
         gold = 2500;
-        XP = 3000;
+        xp = 3000;
         break;
       case HARD:
         coefficient = 3;
@@ -37,13 +40,13 @@ public class Dungeon {
         System.out.printf("You will face %d enemies.\n", enemiesNumbers);
 
         gold = 4000;
-        XP = 5000;
+        xp = 5000;
         break;
       case FIRST:
         coefficient = 0.25;
         enemiesNumbers = 2;
         gold = 1000;
-        XP = 500;
+        xp = 500;
         System.out.printf("You will face %d enemies.\n\n\n", enemiesNumbers);
         break;
 
@@ -51,7 +54,7 @@ public class Dungeon {
         coefficient = 0.5;
         enemiesNumbers = 10;
         gold = 100;
-        XP = 100;
+        xp = 100;
         break;
     }
     enemies = generateEnemies();
@@ -61,8 +64,8 @@ public class Dungeon {
     return gold;
   }
 
-  public int getXP() {
-    return XP;
+  public int getXp() {
+    return xp;
   }
 
   public ArrayList<Enemy> getEnemies() {

@@ -14,7 +14,9 @@ public class Names {
   static ArrayList<String> weaponSecondPart;
   static ArrayList<String> weaponThirdPart;
 
-
+  /**
+   * Public constructor generating all the names in the game.
+   */
   public Names() {
     armorFirstPart = new ArrayList<>();
     armorSecondPart = new ArrayList<>();

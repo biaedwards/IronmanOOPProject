@@ -10,7 +10,7 @@ import game.items.Weapon;
 public class Archer extends Hero {
 
   /**
-   * Archer is one ot the Hero types.
+   * Archer is one of the Hero types.
    */
 
   public Archer(String name) {
@@ -40,7 +40,7 @@ public class Archer extends Hero {
       setLevel(getLevel() + 1);
       xp -= getXpUntilNextlevel();
       setXpUntilNextlevel((int) (getXpUntilNextlevel() * 1.5));
-      setMaxHP(getMaxHP() + 15);
+      setMaxHp(getMaxHp() + 15);
       setStat(getStat() + 5);
       super.level();
     }
@@ -50,7 +50,7 @@ public class Archer extends Hero {
    * This method is checking if the Enemy is still alive.
    */
   public void execute(Enemy enemy) {
-    if (enemy.getCurrentHP() * 100 / enemy.getMaxHP() <= 25) {
+    if (enemy.getCurrentHp() * 100 / enemy.getMaxHp() <= 25) {
       System.out.printf("You have executed %s!!!!\n", enemy.getName());
       enemy.takeDamage(9999);
 

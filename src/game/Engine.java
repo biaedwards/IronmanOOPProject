@@ -1,16 +1,25 @@
 package game;
 
-import static game.Message.*;
+import static game.Message.chooseHeroType;
+import static game.Message.firstDungeon;
+import static game.Message.heroAdded;
+import static game.Message.newHero;
+import static game.Message.startMessage;
 
-import game.entities.*;
+import game.entities.Archer;
+import game.entities.Enemy;
+import game.entities.Hero;
+import game.entities.Mage;
+import game.entities.Warrior;
+
 import game.exceptions.InvalidInputException;
-import game.items.HPPotion;
+import game.items.HpPotion;
 import game.items.Item;
 import game.items.Names;
 import game.location.Difficulty;
 import game.location.Dungeon;
-import game.location.shop.Shop;
 import game.location.Town;
+import game.location.shop.Shop;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -37,7 +46,7 @@ class Engine {
     System.out.println(heroAdded);
     showMyStats();
     System.out.println(firstDungeon);
-    HPPotion potion = new HPPotion("Small potion (starter)", 50);
+    HpPotion potion = new HpPotion("Small potion (starter)", 50);
     currentHero.addToInventory(potion);
     currentHero.addToInventory(potion);
     visitDungeon(Difficulty.FIRST);
@@ -97,7 +106,7 @@ class Engine {
     for (Enemy enemy : currentDungeon.getEnemies()) {
       ArrayList<Skill> unusedSkills = new ArrayList<>(currentHero.getSkills());
       specialUsed = false;
-      if (currentHero.getCurrentHP() <= 0) {
+      if (currentHero.getCurrentHp() <= 0) {
         System.out.println("You have died :(");
         System.out.println("game over");
         System.out.println("Press a number depending on what you want to do next.");
@@ -108,7 +117,8 @@ class Engine {
             return;
           case 2:
             showMyHeroes();
-            System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.", heroes.size() + 1);
+            System.out.printf("Press the corresponding number for your chosen hero or "
+                + "%d to add a new hero.", heroes.size() + 1);
             int choice = validateInput(in.nextLine(), heroes.size() + 1);
             if (choice == heroes.size() + 1) {
               start();
@@ -118,9 +128,12 @@ class Engine {
               visitLocation();
             }
             break;
+          default:
+            return;
         }
       }
-      System.out.printf("You explore the Dungeon and stumble upon %s with stats:\n\n", enemy.getName());
+      System.out.printf("You explore the Dungeon and stumble upon %s with stats:\n\n",
+          enemy.getName());
       enemy.showStats();
 
       while (true) {
@@ -130,13 +143,14 @@ class Engine {
           enemy.takeDamage(attack);
           System.out.printf("You dealt %d damage to the enemy\n\n", attack);
         }
-        if (enemy.getCurrentHP() <= 0) {
+        if (enemy.getCurrentHp() <= 0) {
           System.out.println("You have killed the enemy!\n");
           enemy.dropReward(currentHero);
           break;
 
         }
-        System.out.printf("The enemy has %d/%d HP remaining\n", enemy.getCurrentHP(), enemy.getMaxHP());
+        System.out.printf("The enemy has %d/%d HP remaining\n",
+            enemy.getCurrentHp(), enemy.getMaxHp());
         if (enemy.isBashed()) {
           enemy.setBashed(false);
           continue;
@@ -144,20 +158,23 @@ class Engine {
 
         attack = enemy.attack();
         currentHero.takeDamage(attack);
-        System.out.printf("The enemy dealt %d damage to you\n", (attack - currentHero.getDefence()) > 0 ? attack - currentHero.getDefence() : 1);
-        if (currentHero.getCurrentHP() <= 0) {
+        System.out.printf("The enemy dealt %d damage to you\n",
+            (attack - currentHero.getDefence()) > 0 ? attack - currentHero.getDefence() : 1);
+        if (currentHero.getCurrentHp() <= 0) {
           System.out.println("You have died :(");
           System.out.println("game over");
 
           return;
         }
-        System.out.printf("You have %d/%d HP remaining\n", currentHero.getCurrentHP(), currentHero.getMaxHP());
+        System.out.printf("You have %d/%d HP remaining\n",
+            currentHero.getCurrentHp(), currentHero.getMaxHp());
       }
       betweenFightMenu();
     }
     System.out.println("You have CLEARED the Dungeon!!");
-    System.out.printf("You received %d gold and gained %d XP\n", currentDungeon.getGold(), currentDungeon.getXP());
-    currentHero.setXp(currentDungeon.getXP());
+    System.out.printf("You received %d gold and gained %d XP\n",
+        currentDungeon.getGold(), currentDungeon.getXp());
+    currentHero.setXp(currentDungeon.getXp());
     currentHero.setGold(currentDungeon.getGold());
     System.out.println("Choose what to do next by pressing a number.");
     visitLocation();
@@ -181,7 +198,8 @@ class Engine {
   }
 
   private void combatMenu(Enemy enemy, ArrayList<Skill> unusedSkills) {
-    System.out.println("\nMake your choice by pressing a number. \n1: Attack \n2: Cast skill\n3: Cast class skill\n");
+    System.out.println("\nMake your choice by pressing a number. \n"
+        + "1: Attack \n2: Cast skill\n3: Cast class skill\n");
     switch (validateInput(in.nextLine(), 3)) {
       case 1:
         attack = currentHero.attack();
@@ -195,11 +213,13 @@ class Engine {
             return;
           }
           if (unusedSkills.isEmpty()) {
-            System.out.println("You have used all of your skills in this battle, so you will have to attack this time.");
+            System.out.println("You have used all of your skills in this battle, "
+                + "so you will have to attack this time.");
             attack = currentHero.attack();
             return;
           }
-          System.out.println("Choose one of your skills to use this time by pressing a number. WARNING: You can only use a skill once in a battle.");
+          System.out.println("Choose one of your skills to use this time by pressing a number. "
+              + "WARNING: You can only use a skill once in a battle.");
           int x = 1;
           for (Skill skill : unusedSkills) {
             System.out.printf("%d: %s\n", x++, skill.toString());
@@ -218,8 +238,8 @@ class Engine {
       case 3:
         if (!specialUsed) {
           if (currentHero.getType() == PlayerType.ARCHER) {
-            System.out.printf("1. Attempt to execute the enemy\n");
-            System.out.printf("2. Focus\n");
+            System.out.print("1. Attempt to execute the enemy\n");
+            System.out.print("2. Focus\n");
             switch (validateInput(in.nextLine(), 2)) {
               case 1:
                 ((Archer) currentHero).execute(enemy);
@@ -230,11 +250,15 @@ class Engine {
                 attack = currentHero.attack();
                 specialUsed = true;
                 break;
+              default:
+                ((Archer) currentHero).execute(enemy);
+                specialUsed = true;
+                break;
             }
           }
           if (currentHero.getType() == PlayerType.MAGE) {
-            System.out.printf("1. Defensive spell\n");
-            System.out.printf("2. Multicast\n");
+            System.out.print("1. Defensive spell\n");
+            System.out.print("2. Multicast\n");
             switch (validateInput(in.nextLine(), 2)) {
               case 1:
                 ((Mage) currentHero).spell();
@@ -245,11 +269,15 @@ class Engine {
                 specialUsed = true;
                 multicastUsed = true;
                 break;
+              default:
+                ((Mage) currentHero).spell();
+                specialUsed = true;
+                break;
             }
           }
           if (currentHero.getType() == PlayerType.WARRIOR) {
-            System.out.printf("1. Buff\n");
-            System.out.printf("2. Bash the enemy\n");
+            System.out.print("1. Buff\n");
+            System.out.print("2. Bash the enemy\n");
             switch (validateInput(in.nextLine(), 2)) {
               case 1:
                 ((Warrior) currentHero).buff();
@@ -260,18 +288,25 @@ class Engine {
                 ((Warrior) currentHero).bash(enemy);
                 specialUsed = true;
                 break;
+              default:
+                ((Warrior) currentHero).buff();
+                attack = currentHero.attack();
+                specialUsed = true;
+                break;
             }
           }
         } else {
           System.out.println("You have already used your class skill");
         }
+
     }
   }
 
   private void betweenFightMenu() {
     boolean inMenu = true;
     while (inMenu) {
-      System.out.println("Choose your next move by pressing a number. \n1. Use an item.\n2. Equip a new item.\n3. Continue to fight. ");
+      System.out.println("Choose your next move by pressing a number. \n"
+          + "1. Use an item.\n2. Equip a new item.\n3. Continue to fight. ");
       switch (validateInput(in.nextLine(), 3)) {
         case 1:
           System.out.println("Here are your usable items. Pick one by pressing a number.");
@@ -281,7 +316,8 @@ class Engine {
         case 2:
           System.out.println("Here are your equipable items. Pick one by pressing a number.");
           currentHero.printEquipables();
-          currentHero.equipEquipables(validateInput(in.nextLine(), currentHero.getEquipables().size()));
+          currentHero.equipEquipables(validateInput(in.nextLine(),
+              currentHero.getEquipables().size()));
           System.out.println("Your stats have changed. Here is what they look like now.");
           showMyStats();
           break;
@@ -298,8 +334,12 @@ class Engine {
     switch (validateInput(in.nextLine(), 2)) {
       case 1:
         visitTown();
+        break;
       case 2:
         createDungeon();
+        break;
+      default:
+        visitTown();
         break;
     }
   }
@@ -307,7 +347,7 @@ class Engine {
   private void visitTown() {
     Town currentTown = new Town();
     System.out.println("You have visited a nearby town and recovered your HP");
-    currentHero.changeCurrentHP(9999);
+    currentHero.changeCurrentHp(9999);
     boolean inTown = true;
     while (inTown) {
       int counter = 1;
@@ -324,7 +364,8 @@ class Engine {
       counter = validateInput(in.nextLine(), 10);
       if (counter == 5) {
         while (true) {
-          System.out.println("Here are your items with their quantities indicated at the end of each line. Choose which one to sell by pressing the corresponding number.");
+          System.out.println("Here are your items with their quantities indicated at the end"
+              + " of each line. Choose which one to sell by pressing the corresponding number.");
           currentHero.printInventory();
           int limit = currentHero.getInventory().size() + 1;
           System.out.printf("Press %d to go back.\n", limit);
@@ -346,7 +387,8 @@ class Engine {
       } else if (counter == 7) {
         System.out.println("Here are your equipable items. Pick one by pressing a number.");
         currentHero.printEquipables();
-        currentHero.equipEquipables(validateInput(in.nextLine(), currentHero.getEquipables().size()));
+        currentHero.equipEquipables(validateInput(in.nextLine(),
+            currentHero.getEquipables().size()));
         System.out.println("Your stats have changed. Here is what they look like now.");
         showMyStats();
       } else if (counter == 8) {
@@ -354,10 +396,12 @@ class Engine {
         currentHero.printUsables();
         currentHero.useUsables(validateInput(in.nextLine(), currentHero.getUsables().size()));
       } else if (counter == 9) {
-        break;
+        createDungeon();
       } else if (counter == 10) {
         showMyHeroes();
-        System.out.printf("Press the corresponding number for your chosen hero or %d to add a new hero.\n", heroes.size() + 1);
+        System.out.printf("Press the corresponding number for your "
+                + "chosen hero or %d to add a new hero.\n",
+            heroes.size() + 1);
         int choice = validateInput(in.nextLine(), heroes.size() + 1);
         if (choice == heroes.size() + 1) {
           start();
@@ -370,7 +414,8 @@ class Engine {
         currentTown.getShops().get(counter - 1).printInventory();
         System.out.printf("Gold: %d\n", currentHero.getGold());
         int shopIndex = counter;
-        counter = validateInput(in.nextLine(), currentTown.getShops().get(shopIndex - 1).getInventory().size());
+        counter = validateInput(in.nextLine(),
+            currentTown.getShops().get(shopIndex - 1).getInventory().size());
         int newCounter = 1;
         for (Item item : currentTown.getShops().get(shopIndex - 1).getInventory()) {
           if (newCounter == counter) {
@@ -399,7 +444,9 @@ class Engine {
       case 3:
         visitDungeon(Difficulty.HARD);
         break;
-
+      default:
+        visitDungeon(Difficulty.MEDIUM);
+        break;
     }
   }
 }

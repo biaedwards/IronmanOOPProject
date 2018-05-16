@@ -2,8 +2,18 @@ package game.entities;
 
 import static game.items.Names.allSkills;
 
-import game.*;
-import game.items.*;
+import game.PlayerType;
+import game.PrintableInventory;
+import game.Skill;
+import game.Stat;
+import game.items.Equipable;
+import game.items.Helmet;
+import game.items.HpPotion;
+import game.items.Item;
+import game.items.Tome;
+import game.items.Usable;
+import game.items.Vest;
+import game.items.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +34,8 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
 
   Hero(String name) {
     setName(name);
-    maxHP = 150;
-    currentHP = maxHP;
+    maxHp = 150;
+    currentHp = maxHp;
     xp = 0;
     level = 1;
     defence = 0;
@@ -38,19 +48,27 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
 
   abstract void createDefaultInventory();
 
+  /**
+   * This is method printing stats of our Hero.
+   */
   public String statsToString() {
-    return String.format("HP: %d/%d\nXP: %d/%d\nLevel: %d\nDefence: %d\nDamage: %d\nGold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
-      currentHP, maxHP, xp, xpUntilNextlevel, level, getDefence(), getDamage(), gold, weapon.toString(), helmet.toString(), vest.toString());
+    return String.format("HP: %d/%d\nXP: %d/%d\nLevel: %d\nDefence: %d\nDamage: %d\n"
+        + "Gold: %d\nWeapon: %s\nHelmet: %s\nVest: %s\n",
+      currentHp, maxHp, xp, xpUntilNextlevel, level, getDefence(), getDamage(),
+      gold, weapon.toString(), helmet.toString(), vest.toString());
   }
 
   public void takeDamage(int damage) {
-    currentHP -= (defence > damage) ? 1 : damage - defence;
+    currentHp -= (defence > damage) ? 1 : damage - defence;
   }
 
   public int attack() {
     return getDamage();
   }
 
+  /**
+   * Method to print the inventory of our Hero.
+   */
   public void printInventory() {
     int counter = 1;
     for (Item item : inventory.keySet()) {
@@ -67,15 +85,18 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     level();
   }
 
-  public int getMaxHP() {
-    return maxHP;
+  public int getMaxHp() {
+    return maxHp;
   }
 
-  public void changeCurrentHP(int hp) {
-    currentHP += hp;
-    currentHP = Math.min(currentHP, maxHP);
+  public void changeCurrentHp(int hp) {
+    currentHp += hp;
+    currentHp = Math.min(currentHp, maxHp);
   }
 
+  /**
+   * Method for adding an inventory.
+   */
   public void addToInventory(Item item) {
     if (inventory.containsKey(item)) {
       inventory.put(item, inventory.get(item) + 1);
@@ -113,6 +134,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     return skills;
   }
 
+  /**
+   * Method for getting all the usable items of our Hero.
+   */
   public ArrayList<Item> getUsables() {
     ArrayList<Item> usables = new ArrayList<>();
     for (Item item : inventory.keySet()) {
@@ -124,6 +148,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     return usables;
   }
 
+  /**
+   * Method for getting all the equipable items of our Hero.
+   */
   public ArrayList<Item> getEquipables() {
     ArrayList<Item> equipables = new ArrayList<>();
     for (Item item : inventory.keySet()) {
@@ -135,9 +162,13 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     return equipables;
   }
 
+  /**
+   * Method for printing all usable items.
+   */
   public void printUsables() {
     int counter = 1;
-    System.out.println("Here are your items with the quantities available in your invontory. Pick one by pressing a number. ");
+    System.out.println("Here are your items with the quantities available in your invontory. "
+        + "Pick one by pressing a number. ");
     for (Item item : getUsables()) {
       System.out.printf("%d: %s - quantity %d \n", counter++, item.getName(), inventory.get(item));
     }
@@ -146,6 +177,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  /**
+   * Method for printing all equipable items.
+   */
   public void printEquipables() {
     int counter = 1;
     for (Item item : getEquipables()) {
@@ -156,6 +190,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  /**
+   * Method for using usable item.
+   * */
   public void useUsables(int number) {
     int counter = 1;
     for (Item item : getUsables()) {
@@ -167,6 +204,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  /**
+   * Method for equip equipable item.
+   * */
   public void equipEquipables(int number) {
     int counter = 1;
     for (Item item : getEquipables()) {
@@ -178,17 +218,24 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  /**
+   * Method for adding skill on even level
+   * and also showing your level upgrade once you reach next level.
+   * */
   public void level() {
     if (level % 2 == 0) {
       learnSkill();
     } else {
       System.out.println("Congratulations! You leveled up.");
     }
-    currentHP = maxHP;
+    currentHp = maxHp;
     System.out.printf("Here are your updated stats:\n%s", statsToString());
     level();
   }
 
+  /**
+   * Method for buing an item.
+   * */
   public void buyItem(Item item) {
     if (item.getCost() > gold) {
       System.out.println("You cannot afford this item");
@@ -200,6 +247,9 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
+  /**
+   * Method for selling an item.
+   * */
   public void sellItem(int x) {
     int counter = 1;
     for (Item item : inventory.keySet()) {
@@ -217,8 +267,8 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
   }
 
-  public int getCurrentHP() {
-    return currentHP;
+  public int getCurrentHp() {
+    return currentHp;
   }
 
   @Override
@@ -237,7 +287,8 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
         continue;
       }
       skills.add(oneSkill);
-      System.out.printf("Congratulations! You leveled up and learned a new skill %s!!!", oneSkill.toString());
+      System.out.printf("Congratulations! You leveled up and learned a new skill %s!!!",
+          oneSkill.toString());
       return;
     }
   }
@@ -246,8 +297,8 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     this.type = type;
   }
 
-  void setMaxHP(int hp) {
-    this.maxHP = hp;
+  void setMaxHp(int hp) {
+    this.maxHp = hp;
   }
 
   void setWeapon(Weapon weapon) {
@@ -330,10 +381,10 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
     }
     if (item instanceof Vest) {
       if (((Vest) item).getLevelRequirement() <= level) {
-        maxHP -= vest.getHPBonus();
+        maxHp -= vest.getHpBonus();
         addToInventory(vest);
         vest = (Vest) item;
-        maxHP += vest.getHPBonus();
+        maxHp += vest.getHpBonus();
         inventory.remove(item);
       } else {
         System.out.println("Your level is too low to equip this item.");
@@ -348,11 +399,11 @@ public abstract class Hero extends Entity implements PrintableInventory, Skills 
   }
 
   private void use(Item usable) {
-    if (usable instanceof HPPotion) {
+    if (usable instanceof HpPotion) {
       if (inventory.containsKey(usable)) {
-        changeCurrentHP(((HPPotion) usable).getValue());
-        System.out.printf("You have recovered %d HP\n", ((HPPotion) usable).getValue());
-        System.out.printf("Current HP: %d/%d\n", currentHP, maxHP);
+        changeCurrentHp(((HpPotion) usable).getValue());
+        System.out.printf("You have recovered %d HP\n", ((HpPotion) usable).getValue());
+        System.out.printf("Current HP: %d/%d\n", currentHp, maxHp);
         inventory.put(usable, inventory.get(usable) - 1);
       }
       if (inventory.get(usable) == 0) {

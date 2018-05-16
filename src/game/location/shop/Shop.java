@@ -1,7 +1,12 @@
 package game.location.shop;
 
 import game.PrintableInventory;
-import game.items.*;
+
+import game.items.Helmet;
+import game.items.HpPotion;
+import game.items.Item;
+import game.items.Vest;
+import game.items.Weapon;
 
 import java.util.ArrayList;
 
@@ -9,7 +14,9 @@ public class Shop implements PrintableInventory {
   private ArrayList<Item> inventory;
   private String name;
 
-
+  /**
+   * Public constructor with String type parameter.
+   */
   public Shop(String type) {
     name = type + "s";
     inventory = new ArrayList<>();
@@ -25,6 +32,9 @@ public class Shop implements PrintableInventory {
     return inventory;
   }
 
+  /**
+   * Method for printing the inventory of the Shop.
+   * */
   public void printInventory() {
     int counter = 1;
     for (Item item : inventory) {
@@ -52,7 +62,7 @@ public class Shop implements PrintableInventory {
         break;
       case "Potion":
         for (int i = 0; i < 5; i++) {
-          inventory.add(new HPPotion());
+          inventory.add(new HpPotion());
         }
         break;
       default:

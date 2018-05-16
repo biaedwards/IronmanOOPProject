@@ -14,6 +14,10 @@ public class Helmet extends Armor implements Equipable {
     generateRandomEquipable();
   }
 
+  /**
+   * Public constructor with parameters: String name, int cost,
+   * int defence and int statBonus.
+   */
   public Helmet(String name, int cost, int defence, int statBonus) {
     setName(name);
     setCost(cost);
@@ -21,11 +25,15 @@ public class Helmet extends Armor implements Equipable {
     setStatBonus(statBonus);
   }
 
+  /**
+   * Method for generating random Equpable item.
+   */
   public void generateRandomEquipable() {
 
     int firstIndex = ThreadLocalRandom.current().nextInt(0, armorFirstPart.size());
     int secondIndex = ThreadLocalRandom.current().nextInt(0, armorSecondPart.size());
-    String result = armorFirstPart.get(firstIndex) + " Helmet of " + armorSecondPart.get(secondIndex);
+    String result = armorFirstPart.get(firstIndex)
+        + " Helmet of " + armorSecondPart.get(secondIndex);
     this.setName(result);
     int stat = firstIndex + secondIndex * 2 + 1;
     int defence = (int) (firstIndex * 1.5 + secondIndex * 3 + 2);
@@ -46,7 +54,8 @@ public class Helmet extends Armor implements Equipable {
 
   @Override
   public String toString() {
-    return String.format("%s. Stat bonus %d. Defence %d. Level requirement %d. Cost %d.", this.getName(), statBonus, getDefence(), levelRequirement, getCost());
+    return String.format("%s. Stat bonus %d. Defence %d. Level requirement %d. Cost %d.",
+        this.getName(), statBonus, getDefence(), levelRequirement, getCost());
   }
 
   @Override

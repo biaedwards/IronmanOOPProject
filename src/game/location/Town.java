@@ -9,6 +9,9 @@ public class Town {
 
   private ArrayList<Shop> shops;
 
+  /**
+   * Public constructor for creating town with 5 shops with selling different items.
+   * */
   public Town() {
     shops = new ArrayList<>();
     shops.add(new Shop("Weapon"));
