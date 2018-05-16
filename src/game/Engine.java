@@ -114,7 +114,7 @@ class Engine {
         System.out.println("2: Continue playing with another hero.");
         switch (validateInput(in.nextLine(), 2)) {
           case 1:
-            return;
+            System.exit(0);
           case 2:
             showMyHeroes();
             System.out.printf("Press the corresponding number for your chosen hero or "
